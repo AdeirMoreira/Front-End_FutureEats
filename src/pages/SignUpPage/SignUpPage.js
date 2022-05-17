@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
 import { FutureEats } from '../../globalState/Context'
+import { SignUpRequest } from '../../services/SignUp'
 
 export default function SignUpPage() {
   const params = useContext(FutureEats)
 
   const preventDefault = (e) => {
     e.preventDefault()
-    console.log(params.dataForm.personalData.form)
+    SignUpRequest(params.dataForm.personalData.form)
   }
 
   return (

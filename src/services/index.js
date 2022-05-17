@@ -3,13 +3,13 @@ import { baseURL } from "../constants/constants";
 
 export const getProfile = (setUser, token) => {
 
-    axios.get(`${baseURL}/profile`,{
-        headers:{
+    axios.get(`${baseURL}/profile`, {
+        headers: {
             auth: `${token}`
         }
-    }).then((res)=>{
+    }).then((res) => {
         setUser(res.data.user)
-    }).catch((err)=>{
+    }).catch((err) => {
         alert("vo vê e te aviso")
     })
 }
