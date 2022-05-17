@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { FutureEats } from '../../globalState/Context'
-import { getProfile } from '../../services/ProfilePage';
+import { getProfile } from '../../services';
 
 import { Button } from '@material-ui/core';
 
