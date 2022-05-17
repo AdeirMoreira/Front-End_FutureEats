@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseURL } from "../constants/constants";
+import { baseURL } from "../../constants/constants";
 
 export const getProfile = (setUser, token) => {
 
