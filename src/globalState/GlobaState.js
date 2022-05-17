@@ -1,9 +1,9 @@
-
-import React from "react";
+import React, { useState } from "react";
 import useForm from "../Hooks/useForm";
 import { FutureEats } from "./Context"; 
 
 export const GlobalState = (props) => {
+    const [user, setUser] = useState()
     const [rest, setRest] = useState([]);
     const dataForm = {
         loginData: useForm({email: "", password: ""}),
@@ -15,6 +15,8 @@ export const GlobalState = (props) => {
         dataForm,
         rest, 
         setRest,
+        user,
+        setUser,
     }
     
     return (
