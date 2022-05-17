@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FutureEats } from "./Context";
 
 
 
 export const GlobalState = (props) =>{
+
+    const [user, setUser] = useState()
+
     const params = { 
-        propiedade:"azul" 
+        user,
+        setUser,
     }
     return(
         <FutureEats.Provider value={params}>
