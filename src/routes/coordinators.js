@@ -1,3 +1,3 @@
 export const goToFeedPage = (navigate) => {
-    navigate('/cadastro')
+    navigate('/feed')
 }

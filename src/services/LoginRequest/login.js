@@ -7,7 +7,7 @@ export const login = (form, navigate) => {
     axios.post(`${baseURL}/login`, form)
     .then((response) => {
         localStorage.setItem("token", response.data.token);
-        // goToFeedPage(navigate);
+        goToFeedPage(navigate);
         console.log(response.data)
     })
     .catch((error) => {

@@ -24,7 +24,7 @@ const Router = () => {
                 <Route path="/perfil" element={<ProfilePage />} />
                 <Route path="/buscar-pedido" element={<SearchPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
-                <Route path='/cadastro/endereco' element={<SignUpPageAndress />}></Route>
+                <Route path='/cadastro/endereco' element={<SignUpPageAndress />} />
             </Routes>
         </BrowserRouter>
     )
