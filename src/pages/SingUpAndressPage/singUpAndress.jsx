@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { FutureEats } from "../../globalState/Context"
+import { SignUpRequestAndress } from "../../services/SignUp"
 
 
 export default function SignUpPageAndress() {
@@ -7,7 +8,7 @@ export default function SignUpPageAndress() {
 
     const preventDefault = (e) => {
         e.preventDefault()
-        console.log(params.dataForm.andressData.form)
+        SignUpRequestAndress(params.dataForm.andressData.form)
     }
 
     return (
@@ -54,7 +55,7 @@ export default function SignUpPageAndress() {
                         placeholder='Estado'
                         required />
                 </label>
-                <label htmlFor='Complemento'>Confirmar*
+                <label htmlFor='Complemento'>Complemento*
                     <input
                         id='complement'
                         name='complement' value={params.dataForm.andressData.form.complement}
