@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getRestaurants } from '../../services/FeedPage';
@@ -10,11 +10,25 @@ export default function FeedPage() {
 
   const params = useContext(FutureEats)
 
+  const [search,setSearch ] = useState("")
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+    console.log(search)
+  }
+
   useEffect(() => {
     getRestaurants(params.setRest, token)
   }, []);
-
-  const listRestaurants = params.rest && params.rest.map((restaurants) => {
+  
+  const listRestaurants = params.rest && params.rest.filter( (buscar) =>{
+    return (
+      buscar.name.toUpperCase().includes(search.toUpperCase())
+    )
+  
+  })
+  
+  .map((restaurants) => {
     return (
       <ListRestaurants key={restaurants.id}>
         <img src={restaurants.logoUrl} alt="Logo restaurante" />
@@ -23,14 +37,25 @@ export default function FeedPage() {
         <p>Frete R${restaurants.shipping}</p>
       </ListRestaurants>
     )
-  });
+  })
 
   return (
     <div>
+      <div>
+        <input
+        type="text"
+        value={search}
+        onChange={handleSearch}
+        placeholder='Buscar'
+        required
+        
+        />
+      </div>
       <h1>FeedPage</h1>
       <div>
         {listRestaurants}
       </div>
+
     </div>
   )
 };
