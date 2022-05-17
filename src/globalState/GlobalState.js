@@ -4,6 +4,7 @@ import { FutureEats } from "./Context";
 
 export const GlobalState = (props) => {
     const [user, setUser] = useState()
+    const [history, setHistory] = useState()
     const [rest, setRest] = useState([]);
     const dataForm = {
         loginData: useForm({email: "", password: ""}),
@@ -17,6 +18,8 @@ export const GlobalState = (props) => {
         setRest,
         user,
         setUser,
+        history,
+        setHistory,
     }
     
     return (

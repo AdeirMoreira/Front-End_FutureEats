@@ -1,36 +1,35 @@
 import React, { useContext, useEffect } from 'react'
-
 import { FutureEats } from '../../globalState/Context'
-import { getProfile } from '../../services';
+import { getProfile } from '../../services/ProfilePage';
 
 
-export default function MeuPerfil () {
-const token = localStorage.getItem('token');
+export default function MeuPerfil() {
+    const token = localStorage.getItem('token');
+    const params = useContext(FutureEats)
 
-const params = useContext(FutureEats)
-console.log(params)
+//  const ordersHistory = history && history.map((pedidos)=>(
+//     <div>
 
-useEffect(()=>{
-    getProfile(params.setUser, token)
-}, []);
+//     </div>
+//  )) 
 
 
-    // const infoPerfil = params.user && params.user.map((info)=>{
-    //     return(
-    //         <div key={info.id}>
-    //             <p>{info.name}</p>
-    //             <p>{info.email}</p>
-    //             <p>{info.email}</p>
-    //             <p>{info.cpf}</p>
-    //             <p>{info.address}</p>
-    //         </div>
-    //     )
-    // });
-  return (
-    <div>    
-        <h3>Meu Perfil</h3>
-        {/* {infoPerfil} */}
-    </div>
-  )
+    useEffect(() => {
+        getProfile(params.setUser, token)
+    }, []);
+
+    return (
+        <div>
+            {params.user &&
+                <div>
+                    <h3>Meu Perfil</h3>
+                    <p>{params.user.name}</p>
+                    <p>{params.user.email}</p>
+                    <p>{params.user.cpf}</p>
+                    <p>{params.user.address}</p>
+                </div>
+            }
+        </div>
+    )
 }
 
