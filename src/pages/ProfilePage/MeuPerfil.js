@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { getProfile } from '../../services/ProfilePage';
 
+import { Button } from '@material-ui/core';
+
 
 export default function MeuPerfil() {
     const token = localStorage.getItem('token');
@@ -27,6 +29,10 @@ export default function MeuPerfil() {
                     <p>{params.user.email}</p>
                     <p>{params.user.cpf}</p>
                     <p>{params.user.address}</p>
+                    <Button
+                    variant="contained"
+                    color="primary"
+                    >Eu sou lindo e maravilhoso</Button>
                 </div>
             }
         </div>
