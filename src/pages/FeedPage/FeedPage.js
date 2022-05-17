@@ -9,7 +9,6 @@ export default function FeedPage() {
   const token = localStorage.getItem('token');
 
   const params = useContext(FutureEats)
-  console.log(params);
 
   useEffect(() => {
     getRestaurants(params.setRest, token)
