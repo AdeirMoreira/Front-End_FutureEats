@@ -1,6 +1,6 @@
 import React from 'react';
 import Router  from './routes/Router';
-import { GlobalState } from './globaState/GlobalState';
+import { GlobalState } from './globalState/GlobaState';
 
 function App() {
   return (

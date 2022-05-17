@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FutureEats } from '../../globaState/Context'
+import { FutureEats } from '../../globalState/Context'
 
 export default function HomePage() {
   const propiedade2 = useContext(FutureEats)

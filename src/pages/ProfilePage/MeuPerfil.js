@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import { FutureEats } from '../../globaState/Context'
+import { FutureEats } from '../../globalState/Context'
 import { getProfile } from '../../services';
 
 
