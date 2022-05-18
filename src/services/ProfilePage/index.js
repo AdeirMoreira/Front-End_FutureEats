@@ -1,27 +1,21 @@
 import axios from "axios";
-import { baseURL } from "../../constants/constants";
+import { baseURL, headers } from "../../constants/constants";
 
-export const getProfile = (setUser, token) => {
+export const getProfile = (setUser) => {
 
-    axios.get(`${baseURL}/profile`, {
-        headers: {
-            auth: `${token}`
-        }
-    }).then((res) => {
+    axios.get(`${baseURL}/profile`,headers
+    ).then((res) => {
         setUser(res.data.user)
     }).catch((err)=>{
         alert("a net ta ruim, tente meia noite 👍")
     })
 }
 
-export const getOrdersHistory =(setHistory, token)=> {
-    axios.get(`${baseURL}/orders/history`, {
-        headers:{
-            auth: `${token}`
-        }
-    }).then((res)=>{
+export const getOrdersHistory =(setHistory)=> {
+    axios.get(`${baseURL}/orders/history`, headers
+    ).then((res)=>{
         setHistory(res.data)
-        // OLHAR ESSA PORRA DPS
+        console.log(res.data)
     }).catch((err)=>{
         console.log(err.response)
         alert("ve o index la do service")
