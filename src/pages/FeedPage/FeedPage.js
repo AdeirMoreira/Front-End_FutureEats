@@ -1,8 +1,9 @@
+import { Container } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants } from './styled';
+import { ListRestaurants,ContainerEntrega} from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer';
@@ -57,6 +58,14 @@ export default function FeedPage() {
   })
     .filter((buscar) => {
     return (
+      <ListRestaurants key={restaurants.id}>
+        <img src={restaurants.logoUrl} alt="Logo restaurante" />
+        <h3>{restaurants.name}</h3>
+        <ContainerEntrega>
+        <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
+        <p>Frete R${restaurants.shipping}</p>
+        </ContainerEntrega>
+      </ListRestaurants>
       buscar.name.toUpperCase().includes(search.toUpperCase())
     )
   })
