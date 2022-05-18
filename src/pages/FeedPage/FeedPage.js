@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getRestaurants } from '../../services/FeedPage';
 import { ListRestaurants } from './styled';
+import { goToRestDetails } from '../../routes/coordinators';
 
 export default function FeedPage() {
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
@@ -25,12 +27,11 @@ export default function FeedPage() {
     return (
       buscar.name.toUpperCase().includes(search.toUpperCase())
     )
-  
   })
   
   .map((restaurants) => {
     return (
-      <ListRestaurants key={restaurants.id}>
+      <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
         <img src={restaurants.logoUrl} alt="Logo restaurante" />
         <h3>{restaurants.name}</h3>
         <p>Tempo de entrega: {restaurants.deliveryTime}min</p>

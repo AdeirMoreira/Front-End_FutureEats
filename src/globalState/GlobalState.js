@@ -3,6 +3,7 @@ import useForm from "../Hooks/useForm";
 import { FutureEats } from "./Context"; 
 
 export const GlobalState = (props) => {
+    const [restDetail, setRestDetail] = useState()
     const [user, setUser] = useState()
     const [history, setHistory] = useState()
     const [rest, setRest] = useState([])
@@ -23,6 +24,8 @@ export const GlobalState = (props) => {
         setUser,
         history,
         setHistory,
+        restDetail,
+        setRestDetail,
     }
     
     return (
