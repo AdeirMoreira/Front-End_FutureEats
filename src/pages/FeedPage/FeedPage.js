@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants,ContainerEntrega} from './styled';
+import { ListRestaurants, ContainerEntrega } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer';
@@ -32,53 +32,70 @@ export default function FeedPage() {
     setValueCategory(newValue);
   };
 
- 
+
 
   const navList = params.rest
-  ?.filter((restaurant) => {
-    if (valueCategory === 0) {
-      return restaurant;
-    } else if (valueCategory === 1) {
-      return restaurant.category === "Hamburguer";
-    } else if (valueCategory === 2) {
-      return restaurant.category === "Asiática";
-    } else if (valueCategory === 3) {
-      return restaurant.category === "Árabe";
-    } else if (valueCategory === 4) {
-      return restaurant.category === "Mexicana";
-    } else if (valueCategory === 5) {
-      return restaurant.category === "Baiana";
-    } else if (valueCategory === 6) {
-      return restaurant.category === "Petiscos";
-    } else if (valueCategory === 7) {
-      return restaurant.category === "Sorvetes";
-    } else if (valueCategory === 8) {
-      return restaurant.category === "Carnes";
-    }
-  })
+    ?.filter((restaurant) => {
+      if (valueCategory === 0) {
+        return restaurant;
+      } else if (valueCategory === 1) {
+        return restaurant.category === "Hamburguer";
+      } else if (valueCategory === 2) {
+        return restaurant.category === "Asiática";
+      } else if (valueCategory === 3) {
+        return restaurant.category === "Árabe";
+      } else if (valueCategory === 4) {
+        return restaurant.category === "Mexicana";
+      } else if (valueCategory === 5) {
+        return restaurant.category === "Baiana";
+      } else if (valueCategory === 6) {
+        return restaurant.category === "Petiscos";
+      } else if (valueCategory === 7) {
+        return restaurant.category === "Sorvetes";
+      } else if (valueCategory === 8) {
+        return restaurant.category === "Carnes";
+      }
+    })
     .filter((buscar) => {
-    return (
-      <ListRestaurants key={restaurants.id}>
-        <img src={restaurants.logoUrl} alt="Logo restaurante" />
-        <h3>{restaurants.name}</h3>
-        <ContainerEntrega>
-        <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
-        <p>Frete R${restaurants.shipping}</p>
-        </ContainerEntrega>
-      </ListRestaurants>
-      buscar.name.toUpperCase().includes(search.toUpperCase())
-    )
-  })
+      return (
+        buscar.name.toUpperCase().includes(search.toUpperCase())
+      )
+    })
     .map((restaurants) => {
       return (
         <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
           <img src={restaurants.logoUrl} alt="Logo restaurante" />
           <h3>{restaurants.name}</h3>
-          <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
-          <p>Frete R${restaurants.shipping}</p>
+          <ContainerEntrega>
+            <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
+            <p>Frete R${restaurants.shipping}</p>
+          </ContainerEntrega>
         </ListRestaurants>
       )
     })
+  //   .filter((buscar) => {
+  //   return (
+  //     <ListRestaurants key={restaurants.id}>
+  //       <img src={restaurants.logoUrl} alt="Logo restaurante" />
+  //       <h3>{restaurants.name}</h3>
+  //       <ContainerEntrega>
+  //       <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
+  //       <p>Frete R${restaurants.shipping}</p>
+  //       </ContainerEntrega>
+  //     </ListRestaurants>
+  //     buscar.name.toUpperCase().includes(search.toUpperCase())
+  //   )
+  // })
+  //   .map((restaurants) => {
+  //     return (
+  //       <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
+  //         <img src={restaurants.logoUrl} alt="Logo restaurante" />
+  //         <h3>{restaurants.name}</h3>
+  //         <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
+  //         <p>Frete R${restaurants.shipping}</p>
+  //       </ListRestaurants>
+  //     )
+  //   })
 
   return (
     <div>
@@ -96,8 +113,8 @@ export default function FeedPage() {
         sx={{ maxWidth: { xs: 350, sm: 480 }, margin: "auto" }}
       >
         <Tabs
-        value={valueCategory}
-        onChange={handleChange}
+          value={valueCategory}
+          onChange={handleChange}
           variant="scrollable"
           scrollButtons="auto"
           allowScrollButtonsMobile
@@ -117,7 +134,7 @@ export default function FeedPage() {
       <div>
         {navList}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 };

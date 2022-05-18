@@ -33,20 +33,20 @@ export default function ProfilePage() {
               <p>E-mail: {params.user.email}</p>
               <p>CPF: {params.user.cpf}</p>
               <Button
-              onClick={()=>goToEditarCadastroPage(navigate)}
+                onClick={() => goToEditarCadastroPage(navigate)}
                 color='primary'
-              aria-label='editar-perfil'>
-                <Edit/>
-                </Button>
+                aria-label='editar-perfil'>
+                <Edit />
+              </Button>
             </InformacoesContainer>
             <EnderecoContainer>
-                <h3>Endereço de Entrega</h3>
+              <h3>Endereço de Entrega</h3>
               <p>Endereço: {params.user.address}</p>
-               <Button
-               onClick={()=>goToEditarEndereçoPage(navigate)}
+              <Button
+                onClick={() => goToEditarEndereçoPage(navigate)}
                 color='primary'
-               arial-label='editar-endereço'
-               ><Edit/></Button>
+                arial-label='editar-endereço'
+              ><Edit /></Button>
             </EnderecoContainer>
           </>
 

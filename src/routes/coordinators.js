@@ -2,15 +2,15 @@ export const goToFeedPage = (navigate) => {
     navigate('/feed')
 }
 
-export const goToEditarCadastroPage =(navigate) =>{
+export const goToEditarCadastroPage = (navigate) => {
     navigate('/perfil/editar-cadastro')
-} 
-export const goToEditarEndereçoPage = (navigate) =>{
-    navigate ('/perfil/editar-endereco')
+}
+export const goToEditarEndereçoPage = (navigate) => {
+    navigate('/perfil/editar-endereco')
 }
 export const goToBack = (navigate) => {
     navigate(-1)
-
+}
 
 export const goToRestDetails = (navigate, id) => {
     navigate(`/estabelecimento/${id}`)
@@ -22,5 +22,4 @@ export const goToCart = (navigate) => {
 
 export const goToProfile = (navigate) => {
     navigate('/perfil')
-
 }
