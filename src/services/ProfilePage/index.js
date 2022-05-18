@@ -14,10 +14,21 @@ export const getProfile = (setUser) => {
 export const getOrdersHistory =(setHistory)=> {
     axios.get(`${baseURL}/orders/history`, headers
     ).then((res)=>{
-        setHistory(res.data)
-        console.log(res.data)
+        setHistory(res.data.orders)
     }).catch((err)=>{
         console.log(err.response)
-        alert("ve o index la do service")
+        // alert("vo ve e te aviso")
+    })
+}
+
+export const getFullAddress = (setFullAddress, setForm) =>{
+    axios.get(`${baseURL}/profile/address`, headers
+    ).then((res)=>{
+        setFullAddress(res.data)
+        setForm(res.data.address)
+
+
+    }).catch((err)=>{
+        console.log(err.response)
     })
 }

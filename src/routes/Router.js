@@ -6,6 +6,8 @@ import HomePage from "../pages/HomePage/HomePage"
 import LoginPage from "../pages/LoginPage/LoginPage"
 import OrderPage from "../pages/OrderPage/OrderPage"
 import ProfilePage from "../pages/ProfilePage/ProfilePage"
+import EditarCadastroPage from "../pages/ProfilePage/EditarCadastroPage";
+import EditarEnderecoPage from "../pages/ProfilePage/EditarEnderecoPage";
 import SearchPage from "../pages/SearchPage/SearchPage"
 import SignUpPage from "../pages/SignUpPage/SignUpPage"
 import SignUpPageAndress from "../pages/SingUpAndressPage/singUpAndress";
@@ -22,6 +24,8 @@ const Router = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/ordem-pedido" element={<OrderPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />
+                <Route path="/perfil/editar-endereco" element={<EditarEnderecoPage/>}/>
+                <Route path="/perfil/editar-cadastro" element={<EditarCadastroPage/>}/>
                 <Route path="/buscar-pedido" element={<SearchPage />} />
                 <Route path="/cadastro" element={<SignUpPage />} />
                 <Route path='/cadastro/endereco' element={<SignUpPageAndress />} />

@@ -20,3 +20,6 @@ export const EnderecoContainer = styled.div`
 export const InformacoesContainer = styled.div`
 
 `
+export const HistoricoContainer = styled.div`
+
+`
