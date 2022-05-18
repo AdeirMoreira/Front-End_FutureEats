@@ -1,13 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { SignUpRequest } from '../../services/SignUp'
+import { useInput } from '../../Hooks/useInput'
 
 export default function SignUpPage() {
+  const [confirm, handleValue] = useInput('')
+  const [confirmed, setConfirmed] = useState(false)
   const params = useContext(FutureEats)
 
-  const preventDefault = (e) => {
-    e.preventDefault()
-    SignUpRequest(params.dataForm.personalData.form)
+  const preventDefault = (event) => {
+    event.preventDefault()
+    if (params.dataForm.personalData.form.password === confirm) {
+      console.log(params.dataForm.personalData.form)
+    } else {
+      setConfirmed(true)
+    }
   }
 
   return (
@@ -28,6 +35,8 @@ export default function SignUpPage() {
             name='email' value={params.dataForm.personalData.form.email}
             onChange={params.dataForm.personalData.onChange}
             placeholder='email@email.com'
+            pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
+            title='EX: email@provedor.com'
             required />
         </label>
         <label htmlFor='cpf'>CPF*
@@ -36,6 +45,8 @@ export default function SignUpPage() {
             name='cpf' value={params.dataForm.personalData.form.cpf}
             onChange={params.dataForm.personalData.onChange}
             placeholder='000.000.000-00'
+            pattern='^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$'
+            title='Use ponto e traço ao digitar o CPF'
             required />
         </label>
         <label htmlFor=''>Senha*
@@ -44,16 +55,24 @@ export default function SignUpPage() {
             name='password' value={params.dataForm.personalData.form.password}
             onChange={params.dataForm.personalData.onChange}
             placeholder='Mínimo 6 caracteres'
+            pattern='^[a-zA-Z0-9]{6,}$'
+            title='Mínimo 6 caracteres entre letras e números'
             required />
         </label>
-        {/* <label htmlFor='confirm'>Confirmar*
+        <div>
+          {confirmed && <p>A senha e a confirmação são diferentes</p>}
+        </div>
+
+        <label htmlFor='confirm'>Confirmar*
           <input
             id='confirm'
-            name='confirm' value={params.dataForm.personalData.form.password}
-            onChange={params.dataForm.personalData.onChange}
+            name='confirm' value={confirm}
+            onChange={handleValue}
             placeholder='Confirme a senha anterior'
+            pattern='^[a-zA-Z0-9]{6,}$'
+            title='Mínimo 6 caracteres entre letras e números'
             required />
-        </label> */}
+        </label>
         <button>enviar</button>
       </form>
     </>
