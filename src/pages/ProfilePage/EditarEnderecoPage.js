@@ -1,28 +1,47 @@
-import React, { useContext } from 'react'
-import { FutureEats } from '../../globalState/Context'
+import React, { useContext, useEffect } from 'react'
 import { InputsContainer, ScreenContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
+import { goToBack } from '../../routes/coordinators'
+import { getFullAddress } from '../../services/ProfilePage'
+import { useState } from 'react'
+import {SignUpRequestAndress} from '../../services/SignUp'
 
 import useForm from '../../Hooks/useForm'
+import { useNavigate } from 'react-router-dom'
 
 
-const EditarEndereco = () =>{
+const EditarEnderecoPage = () =>{
+const navigate =useNavigate()
+const [fullAddress, setFullAddress] = useState()
 
-const params = useContext(FutureEats)
+
+useEffect (()=>{
+  getFullAddress(setFullAddress, setForm)
+  
+},[])
+const { form, onChange, cleanFields, setForm } = useForm({
+  street:"",
+  number:"", neighbourhood:"", city:"", state: "", complement:""})
+
 
   const onSubmitForm = (event) =>{
     event.preventDefault()
+    SignUpRequestAndress(form)
 
   }
   return (
+    <>
+    {fullAddress &&
       <ScreenContainer>
+        <button onClick={()=>goToBack(navigate)}>voltar</button>
+        
         <h3>Editar Endereço</h3>
       <InputsContainer>
-      <form onSubmit={onSubmitForm}>
+      <form onSubmit={onSubmitForm}> 
         <TextField
         name={"street"}
-        value={params.dataForm.editAddressData.form.street}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.street}
+        onChange={onChange}
         label={"Logradouro"}
         variant={"outlined"}
         fullWidth
@@ -31,8 +50,8 @@ const params = useContext(FutureEats)
         />
          <TextField
         name={"number"}
-        value={params.dataForm.editAddressData.form.email}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.number}
+        onChange={onChange}
         label={"Número"}
         variant={"outlined"}
         fullWidth
@@ -41,8 +60,8 @@ const params = useContext(FutureEats)
         />
          <TextField
         name={"neighbourhood"}
-        value={params.dataForm.editAddressData.form.neighbourhood}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.neighbourhood}
+        onChange={onChange}
         label={"Bairro"}
         variant={"outlined"}
         fullWidth
@@ -51,8 +70,8 @@ const params = useContext(FutureEats)
         />
         <TextField
         name={"city"}
-        value={params.dataForm.editAddressData.form.city}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.city}
+        onChange={onChange}
         label={"Cidade"}
         variant={"outlined"}
         fullWidth
@@ -61,8 +80,8 @@ const params = useContext(FutureEats)
         />
          <TextField
         name={"state"}
-        value={params.dataForm.editAddressData.form.state}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.state}
+        onChange={onChange}
         label={"Estado"}
         variant={"outlined"}
         fullWidth
@@ -71,15 +90,15 @@ const params = useContext(FutureEats)
         />
         <TextField
         name={"complement"}
-        value={params.dataForm.editAddressData.form.complement}
-        onChange={params.dataForm.editAddressData.onChange}
+        value={form.complement}
+        onChange={onChange}
         label={"Complemento"}
         variant={"outlined"}
         fullWidth
         margin={"normal"}
         required
         />
-        
+       
         <Button
         type={"submit"}
         fullWidth
@@ -90,7 +109,8 @@ const params = useContext(FutureEats)
       </form>
       </InputsContainer>
       </ScreenContainer>
+      }</>
   )
 }
 
-export default EditarEndereco
+export default EditarEnderecoPage

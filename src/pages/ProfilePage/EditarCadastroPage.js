@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { InputsContainer, ScreenContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
-
+import { goToBack } from '../../routes/coordinators'
 import useForm from '../../Hooks/useForm'
+import { useNavigate } from 'react-router-dom'
 
 
-const EditarCadastro = () =>{
+const EditarCadastroPage = () =>{
+const navigate=useNavigate()
 
 const params = useContext(FutureEats)
 
@@ -16,6 +18,7 @@ const params = useContext(FutureEats)
   }
   return (
       <ScreenContainer>
+        <button onClick={()=>goToBack(navigate)}>voltar</button>
         <h3>Editar Cadastro</h3>
       <InputsContainer>
       <form onSubmit={onSubmitForm}>
@@ -62,4 +65,4 @@ const params = useContext(FutureEats)
   )
 }
 
-export default EditarCadastro
+export default EditarCadastroPage
