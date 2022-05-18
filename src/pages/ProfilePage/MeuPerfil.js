@@ -3,6 +3,7 @@ import { FutureEats } from '../../globalState/Context'
 import { getProfile } from '../../services/ProfilePage';
 
 import { Button } from '@material-ui/core';
+import { ScreenContainer } from './styled';
 
 
 export default function MeuPerfil() {
@@ -21,21 +22,17 @@ export default function MeuPerfil() {
     }, []);
 
     return (
-        <div>
+        <ScreenContainer>
             {params.user &&
                 <div>
                     <h3>Meu Perfil</h3>
-                    <p>{params.user.name}</p>
-                    <p>{params.user.email}</p>
-                    <p>{params.user.cpf}</p>
-                    <p>{params.user.address}</p>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    >Eu sou lindo e maravilhoso</Button>
+                    <p>Nome: {params.user.name}</p>
+                    <p>E-mail: {params.user.email}</p>
+                    <p>CPF: {params.user.cpf}</p>
+                    <p>Endereço: {params.user.address}</p>
                 </div>
             }
-        </div>
+        </ScreenContainer>
     )
 }
 
