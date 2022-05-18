@@ -5,3 +5,11 @@ export const goToFeedPage = (navigate) => {
 export const goToRestDetails = (navigate, id) => {
     navigate(`/estabelecimento/${id}`)
 }
+
+export const goToCart = (navigate) => {
+    navigate('/carrinho')
+}
+
+export const goToProfile = (navigate) => {
+    navigate('/perfil')
+}

@@ -9,6 +9,9 @@ export default function EstablishmentPage() {
   const params = useParams();
   const detail = useContext(FutureEats)
 
+
+
+
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -27,6 +30,9 @@ export default function EstablishmentPage() {
   //   )
   // })
 
+
+  
+
   const restDetail = detail.restDetail && detail.restDetail.restaurant.products.map((list) => {
     return (
       <div key={list.id}>
@@ -39,10 +45,29 @@ export default function EstablishmentPage() {
       </div>
     )
   })
-  console.log(detail)
-  // console.log(detail.restDetail.restaurant.products)
+
   return (
     <div>
+
+    {/* <div>
+      <p>Selecione a quatidade desejada:</p>
+      <select>
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      <button> Adicionar ao carrinho </button>
+
+    </div> */}
+
       {detail.restDetail &&
         <>
         <p>{detail.restDetail.restaurant.name}</p>
