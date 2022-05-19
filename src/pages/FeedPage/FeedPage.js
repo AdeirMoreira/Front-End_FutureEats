@@ -73,29 +73,6 @@ export default function FeedPage() {
         </ListRestaurants>
       )
     })
-  //   .filter((buscar) => {
-  //   return (
-  //     <ListRestaurants key={restaurants.id}>
-  //       <img src={restaurants.logoUrl} alt="Logo restaurante" />
-  //       <h3>{restaurants.name}</h3>
-  //       <ContainerEntrega>
-  //       <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
-  //       <p>Frete R${restaurants.shipping}</p>
-  //       </ContainerEntrega>
-  //     </ListRestaurants>
-  //     buscar.name.toUpperCase().includes(search.toUpperCase())
-  //   )
-  // })
-  //   .map((restaurants) => {
-  //     return (
-  //       <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
-  //         <img src={restaurants.logoUrl} alt="Logo restaurante" />
-  //         <h3>{restaurants.name}</h3>
-  //         <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
-  //         <p>Frete R${restaurants.shipping}</p>
-  //       </ListRestaurants>
-  //     )
-  //   })
 
   return (
     <div>

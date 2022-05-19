@@ -11,12 +11,39 @@ export default function EstablishmentPage() {
   const detail = useContext(FutureEats)
   const [quantidade, handleQuantidade, clearInput] = useInput('')
   const [displawPopUp, setPopUp] = useState(false)
+  const [productsInCart, setProductInCat] = useState([])
 
-  useEffect(() => {
-    getRestaurantDetails(detail.setRestDetail, params.id)
-  }, [])
+  useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
 
   const showPopUpFunction = () => displawPopUp ? setPopUp(false) : setPopUp(true)
+
+  const addProduct = (products) => {
+
+    const product = {
+      id: products.id,
+      quantity: quantidade
+    }
+    const newCart = [...detail.cart, product]
+    detail.setCart(newCart)
+    clearInput()
+    console.log(detail.cart)
+  }
+
+  const remover = (products) => {
+    const cart = detail.cart
+    const newCard = cart.filter(e => e.id !== products.id)
+    detail.setCart(newCard)
+  }
+
+  const twoFunction = (product) => {
+    showPopUpFunction()
+    addProduct(product)
+  }
+
+  const twoFunctionRemover = (product) => {
+    showPopUpFunction(product)
+    remover(product)
+  }
 
   const restDetail = detail.restDetail && detail.restDetail.restaurant.products.map((list) => {
     return (
@@ -25,7 +52,12 @@ export default function EstablishmentPage() {
         <p>Preço: {list.price}</p>
         <img src={list.photoUrl} />
         <p>Descrição: {list.description}</p>
-        <button onClick={showPopUpFunction}> Adicionar </button>
+        {productsInCart.includes(list.id) ?
+          <button onClick={twoFunctionRemover(list)}> Remover </button>
+          :
+          <button onClick={showPopUpFunction}> Adicionar </button>
+        }
+
         {displawPopUp && <ContainerPopUp>
           <ContainerSelectQuantidade>
             <p>Selecione a quantidade desejada</p>
@@ -42,7 +74,7 @@ export default function EstablishmentPage() {
               <option value={9} key={9}>9</option>
               <option value={10} key={10}>10</option>
             </select>
-            <button onClick={showPopUpFunction} >Adicionar ao Carrinho</button>
+            <button onClick={() => twoFunction(list)} >Adicionar ao Carrinho</button>
           </ContainerSelectQuantidade>
         </ContainerPopUp>}
       </div>
