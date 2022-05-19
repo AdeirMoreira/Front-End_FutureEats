@@ -2,28 +2,32 @@ import { Container } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
-import { getRestaurants } from '../../services/FeedPage';
+import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import { ListRestaurants, ContainerEntrega } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs } from '@material-ui/core';
-import Footer from '../../Components/Footer/Footer';
+import Footer from '../../components/Footer/Footer';
 
 export default function FeedPage() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
-  const params = useContext(FutureEats)
+  const params = useContext(FutureEats);
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
     console.log(search)
-  }
+  };
 
   useEffect(() => {
-    getRestaurants(params.setRest, token)
+    getRestaurants(params.setRest)
+  }, []);
+
+  useEffect(() => {
+    getActiveOrder(params.setOrder)
   }, []);
 
   const [valueCategory, setValueCategory] = useState(0);
@@ -32,7 +36,15 @@ export default function FeedPage() {
     setValueCategory(newValue);
   };
 
+  const renderOrder = () => (
+    <div>
+      <p>Pedido em andamento:</p>
+      <p>{params.order.restaurantName}</p>
+      <p>Total: R${params.order.totalPrice}</p>
+    </div>
+  )
 
+  console.log(params.order)
 
   const navList = params.rest
     ?.filter((restaurant) => {
@@ -133,6 +145,9 @@ export default function FeedPage() {
       </Box>
       <div>
         {navList}
+      </div>
+      <div>
+      {params.order && renderOrder()}
       </div>
       <Footer />
     </div>
