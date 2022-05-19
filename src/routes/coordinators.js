@@ -23,3 +23,8 @@ export const goToCart = (navigate) => {
 export const goToProfile = (navigate) => {
     navigate('/perfil')
 }
+
+export const goToSignUpAddress = (navigate) => {
+    navigate('/cadastro/endereco')
+}
+
