@@ -89,3 +89,4 @@ const EditarCadastroPage = () => {
 }
 
 export default EditarCadastroPage
+
