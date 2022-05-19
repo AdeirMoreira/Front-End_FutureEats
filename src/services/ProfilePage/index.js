@@ -21,13 +21,21 @@ export const getOrdersHistory =(setHistory)=> {
     })
 }
 
-export const getFullAddress = (setFullAddress, setForm) =>{
+export const getEditAddress = (setEditAddress, setForm) =>{
     axios.get(`${baseURL}/profile/address`, headers
     ).then((res)=>{
-        setFullAddress(res.data)
+        setEditAddress(res.data)
         setForm(res.data.address)
+    }).catch((err)=>{
+        console.log(err.response)
+    })
+}
 
-
+export const getEditRegister = (setEditRegister, setForm) => {
+    axios.get(`${baseURL}/profile/singup`, headers
+    ).then((res)=>{
+        setEditRegister(res.data)
+        setForm(res.data)
     }).catch((err)=>{
         console.log(err.response)
     })
