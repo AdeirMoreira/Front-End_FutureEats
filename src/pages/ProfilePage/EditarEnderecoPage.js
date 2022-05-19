@@ -2,26 +2,30 @@ import React, { useContext, useEffect } from 'react'
 import { InputsContainer, ScreenContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
-import { getFullAddress } from '../../services/ProfilePage'
+import { getEditAddress } from '../../services/ProfilePage'
 import { useState } from 'react'
 import {SignUpRequestAndress} from '../../services/SignUp'
-
 import useForm from '../../Hooks/useForm'
 import { useNavigate } from 'react-router-dom'
 
 
 const EditarEnderecoPage = () =>{
 const navigate =useNavigate()
-const [fullAddress, setFullAddress] = useState()
+const [editAddress, setEditAddress] = useState()
 
 
 useEffect (()=>{
-  getFullAddress(setFullAddress, setForm)
+  getEditAddress(setEditAddress, setForm)
   
 },[])
 const { form, onChange, cleanFields, setForm } = useForm({
   street:"",
-  number:"", neighbourhood:"", city:"", state: "", complement:""})
+  number:"",
+  neighbourhood:"",
+  city:"",
+  state: "",
+  complement:""
+  })
 
 
   const onSubmitForm = (event) =>{
@@ -31,7 +35,7 @@ const { form, onChange, cleanFields, setForm } = useForm({
   }
   return (
     <>
-    {fullAddress &&
+    {editAddress &&
       <ScreenContainer>
         <button onClick={()=>goToBack(navigate)}>voltar</button>
         

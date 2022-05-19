@@ -1,22 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { InputsContainer, ScreenContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
 import useForm from '../../Hooks/useForm'
 import { useNavigate } from 'react-router-dom'
+import { getEditRegister} from '../../services/ProfilePage'
+import {SignUpRequest} from '../../services/SignUp'
 
 
 const EditarCadastroPage = () =>{
 const navigate=useNavigate()
+const [editRegister, setEditRegister] = useState()
 
-const params = useContext(FutureEats)
+useEffect (()=>{
+  getEditRegister(setEditRegister, setForm)
+},[])
+const { form, onChange, cleanFields, setForm} = useForm({
+  name:"",
+  email:"",
+  cpf:""
+  })
 
   const onSubmitForm = (event) =>{
     event.preventDefault()
-
+    SignUpRequest(form)
   }
   return (
+    <>
+    {editRegister &&
       <ScreenContainer>
         <button onClick={()=>goToBack(navigate)}>voltar</button>
         <h3>Editar Cadastro</h3>
@@ -24,8 +36,8 @@ const params = useContext(FutureEats)
       <form onSubmit={onSubmitForm}>
         <TextField
         name={"name"}
-        value={params.dataForm.editPersonalData.form.name}
-        onChange={params.dataForm.editPersonalData.onChange}
+        value={form.name}
+        onChange={onChange}
         label={"Nome"}
         variant={"outlined"}
         fullWidth
@@ -34,8 +46,8 @@ const params = useContext(FutureEats)
         />
          <TextField
         name={"email"}
-        value={params.dataForm.editPersonalData.form.email}
-        onChange={params.dataForm.editPersonalData.onChange}
+        value={form.email}
+        onChange={onChange}
         label={"E-mail"}
         variant={"outlined"}
         fullWidth
@@ -44,8 +56,8 @@ const params = useContext(FutureEats)
         />
          <TextField
         name={"cpf"}
-        value={params.dataForm.editPersonalData.form.cpf}
-        onChange={params.dataForm.editPersonalData.onChange}
+        value={form.cpf}
+        onChange={onChange}
         label={"CPF"}
         variant={"outlined"}
         fullWidth
@@ -62,6 +74,7 @@ const params = useContext(FutureEats)
       </form>
       </InputsContainer>
       </ScreenContainer>
+      }</>
   )
 }
 
