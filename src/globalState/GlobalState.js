@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useForm from "../Hooks/useForm";
-import { FutureEats } from "./Context"; 
+import { FutureEats } from "./Context";
 
 export const GlobalState = (props) => {
     const [restDetail, setRestDetail] = useState()
@@ -8,15 +8,16 @@ export const GlobalState = (props) => {
     const [history, setHistory] = useState()
     const [rest, setRest] = useState([])
     const dataForm = {
-        editPersonalData: useForm({name:"", email:"", cpf:""}),
-        loginData: useForm({email: "", password: ""}),
+
+        editPersonalData: useForm({ name: "", email: "", cpf: "" }),
+        loginData: useForm({ email: "", password: "" }),
         personalData: useForm({ name: "", email: "", cpf: "", password: "" }),
         andressData: useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: "" })
     }
 
     const params = {
         dataForm,
-        rest, 
+        rest,
         setRest,
         user,
         setUser,
@@ -25,7 +26,7 @@ export const GlobalState = (props) => {
         restDetail,
         setRestDetail,
     }
-    
+
     return (
         <FutureEats.Provider value={params}>
             {props.children}
