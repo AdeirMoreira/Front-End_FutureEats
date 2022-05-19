@@ -1,14 +1,16 @@
 import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { FutureEats } from "../../globalState/Context"
 import { SignUpRequestAndress } from "../../services/SignUp"
 
 
 export default function SignUpPageAndress() {
     const params = useContext(FutureEats)
+    const navigate = useNavigate()
 
     const preventDefault = (e) => {
         e.preventDefault()
-        SignUpRequestAndress(params.dataForm.andressData.form)
+        SignUpRequestAndress(params.dataForm.andressData.form, navigate)
     }
 
     return (
@@ -29,6 +31,7 @@ export default function SignUpPageAndress() {
                         name='number' value={params.dataForm.andressData.form.number}
                         onChange={params.dataForm.andressData.onChange}
                         placeholder='Número'
+                        type="number"
                         required />
                 </label>
                 <label htmlFor='neighbourhood'>Bairro*
@@ -60,8 +63,7 @@ export default function SignUpPageAndress() {
                         id='complement'
                         name='complement' value={params.dataForm.andressData.form.complement}
                         onChange={params.dataForm.andressData.onChange}
-                        placeholder='Apto / Bloco'
-                        required />
+                        placeholder='Apto / Bloco' />
                 </label>
                 <button>enviar</button>
             </form>

@@ -11,13 +11,12 @@ export default function LoginPage() {
   const onSubmitForm = (event) => {
     event.preventDefault()
     login(params.dataForm.loginData.form, navigate)
-    
-}
+
+  }
 
   return (
     <div>
       <h1>Login</h1>
-
       <form onSubmit={onSubmitForm}>
         <input
           name='email'
@@ -40,10 +39,8 @@ export default function LoginPage() {
           type='password'
         />
 
-
         <button> Bora comer! </button>
       </form>
-
       <Link to="/cadastro" ><button> Cadastre-se!</button></Link>
     </div>
   )

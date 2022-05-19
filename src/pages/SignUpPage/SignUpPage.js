@@ -2,16 +2,18 @@ import React, { useContext, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { SignUpRequest } from '../../services/SignUp'
 import { useInput } from '../../Hooks/useInput'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUpPage() {
   const [confirm, handleValue] = useInput('')
   const [confirmed, setConfirmed] = useState(false)
   const params = useContext(FutureEats)
+  const navigate = useNavigate()
 
   const preventDefault = (event) => {
     event.preventDefault()
     if (params.dataForm.personalData.form.password === confirm) {
-      console.log(params.dataForm.personalData.form)
+      SignUpRequest(params.dataForm.personalData.form, navigate)
     } else {
       setConfirmed(true)
     }
@@ -46,7 +48,7 @@ export default function SignUpPage() {
             onChange={params.dataForm.personalData.onChange}
             placeholder='000.000.000-00'
             pattern='^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$'
-            title='Use ponto e traço ao digitar o CPF'
+            title='Use ponto e traço ao digitar o CPF EX: 000.000.000-00'
             required />
         </label>
         <label htmlFor=''>Senha*
@@ -62,7 +64,6 @@ export default function SignUpPage() {
         <div>
           {confirmed && <p>A senha e a confirmação são diferentes</p>}
         </div>
-
         <label htmlFor='confirm'>Confirmar*
           <input
             id='confirm'
@@ -76,7 +77,5 @@ export default function SignUpPage() {
         <button>enviar</button>
       </form>
     </>
-
-
   )
 }

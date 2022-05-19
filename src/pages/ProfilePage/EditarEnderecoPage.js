@@ -4,15 +4,13 @@ import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
 import { getEditAddress } from '../../services/ProfilePage'
 import { useState } from 'react'
-import {SignUpRequestAndress} from '../../services/SignUp'
+import { SignUpRequestAndress } from '../../services/SignUp'
 import useForm from '../../Hooks/useForm'
 import { useNavigate } from 'react-router-dom'
 
-
-const EditarEnderecoPage = () =>{
+const EditarEnderecoPage = () => {
 const navigate =useNavigate()
 const [editAddress, setEditAddress] = useState()
-
 
 useEffect (()=>{
   getEditAddress(setEditAddress, setForm)
@@ -27,8 +25,13 @@ const { form, onChange, cleanFields, setForm } = useForm({
   complement:""
   })
 
+  }, [])
+  const { form, onChange, cleanFields, setForm } = useForm({
+    street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""
+  })
 
-  const onSubmitForm = (event) =>{
+
+  const onSubmitForm = (event) => {
     event.preventDefault()
     SignUpRequestAndress(form)
 
@@ -37,8 +40,7 @@ const { form, onChange, cleanFields, setForm } = useForm({
     <>
     {editAddress &&
       <ScreenContainer>
-        <button onClick={()=>goToBack(navigate)}>voltar</button>
-        
+        <button onClick={()=>goToBack(navigate)}>voltar</button>     
         <h3>Editar Endereço</h3>
       <InputsContainer>
       <form onSubmit={onSubmitForm}> 
@@ -101,8 +103,7 @@ const { form, onChange, cleanFields, setForm } = useForm({
         fullWidth
         margin={"normal"}
         required
-        />
-       
+        />      
         <Button
         type={"submit"}
         fullWidth

@@ -1,17 +1,22 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
-
 import { getRestaurantDetails } from '../../services/RestaurantDetails'
+import { useInput } from '../../Hooks/useInput'
+import { ContainerPopUp, ContainerSelectQuantidade } from './styles'
 
 
 export default function EstablishmentPage() {
   const params = useParams();
   const detail = useContext(FutureEats)
+  const [quantidade, handleQuantidade, clearInput] = useInput('')
+  const [displawPopUp, setPopUp] = useState(false)
 
   useEffect(() => {
     getRestaurantDetails(detail.setRestDetail, params.id)
   }, [])
+
+  const showPopUpFunction = () => displawPopUp ? setPopUp(false) : setPopUp(true)
 
   const restDetail = detail.restDetail && detail.restDetail.restaurant.products.map((list) => {
     return (
@@ -20,33 +25,32 @@ export default function EstablishmentPage() {
         <p>Preço: {list.price}</p>
         <img src={list.photoUrl} />
         <p>Descrição: {list.description}</p>
-        <button> Adicionar </button>
+        <button onClick={showPopUpFunction}> Adicionar </button>
+        {displawPopUp && <ContainerPopUp>
+          <ContainerSelectQuantidade>
+            <p>Selecione a quantidade desejada</p>
+            <select onChange={handleQuantidade} name='quantidade' id='quantidade' value={quantidade} required>
+              <option value='' disabled>0</option>
+              <option value={1} key={1}>1</option>
+              <option value={2} key={2}>2</option>
+              <option value={3} key={3}>3</option>
+              <option value={4} key={4}>4</option>
+              <option value={5} key={5}>5</option>
+              <option value={6} key={6}>6</option>
+              <option value={7} key={7}>7</option>
+              <option value={8} key={8}>8</option>
+              <option value={9} key={9}>9</option>
+              <option value={10} key={10}>10</option>
+            </select>
+            <button onClick={showPopUpFunction} >Adicionar ao Carrinho</button>
+          </ContainerSelectQuantidade>
+        </ContainerPopUp>}
       </div>
     )
   })
 
   return (
     <div>
-
-      {/* <div>
-      <p>Selecione a quatidade desejada:</p>
-      <select>
-        <option>0</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-      </select>
-      <button> Adicionar ao carrinho </button>
-
-    </div> */}
-
       {detail.restDetail &&
         <>
           <p>{detail.restDetail.restaurant.name}</p>
@@ -56,7 +60,6 @@ export default function EstablishmentPage() {
         </>
       }
       {restDetail}
-
     </div>
   )
 }
