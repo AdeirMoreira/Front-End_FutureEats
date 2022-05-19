@@ -3,40 +3,42 @@ import { baseURL, headers } from "../../constants/constants";
 
 export const getProfile = (setUser) => {
 
-    axios.get(`${baseURL}/profile`,headers
+    axios.get(`${baseURL}/profile`, headers
     ).then((res) => {
         setUser(res.data.user)
-    }).catch((err)=>{
+    }).catch((err) => {
         alert("a net ta ruim, tente meia noite 👍")
     })
 }
 
-export const getOrdersHistory =(setHistory)=> {
+export const getOrdersHistory = (setHistory) => {
     axios.get(`${baseURL}/orders/history`, headers
-    ).then((res)=>{
+    ).then((res) => {
         setHistory(res.data.orders)
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err.response)
         // alert("vo ve e te aviso")
     })
 }
 
-export const getEditAddress = (setEditAddress, setForm) =>{
+export const getEditAddress = (setEditAddress, setForm) => {
     axios.get(`${baseURL}/profile/address`, headers
-    ).then((res)=>{
+    ).then((res) => {
         setEditAddress(res.data)
         setForm(res.data.address)
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err.response)
     })
 }
 
-export const getEditRegister = (setEditRegister, setForm) => {
-    axios.get(`${baseURL}/profile/singup`, headers
-    ).then((res)=>{
-        setEditRegister(res.data)
-        setForm(res.data)
-    }).catch((err)=>{
+export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, cleanFields) => {
+    axios.put(`${baseURL}/profile`, form, headers
+    ).then((res) => {
+        // setForm(setPersonalFormInputs(res.data))
+        cleanFields()
+        setUser(setPersonalFormInputs(res.data))
+    }).catch((err) => {
         console.log(err.response)
     })
 }
+
