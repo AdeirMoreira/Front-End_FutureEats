@@ -7,7 +7,9 @@ export const GlobalState = (props) => {
     const [user, setUser] = useState()
     const [history, setHistory] = useState()
     const [rest, setRest] = useState([])
+    const [order, setOrder] = useState([])
     const [cart, setCart] = useState([])
+
     const dataForm = {
 
         editPersonalData: useForm({ name: "", email: "", cpf: "" }),
@@ -26,6 +28,8 @@ export const GlobalState = (props) => {
         setHistory,
         restDetail,
         setRestDetail,
+        order, 
+        setOrder,
         cart,
         setCart
     }
