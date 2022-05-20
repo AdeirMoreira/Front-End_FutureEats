@@ -5,8 +5,8 @@ import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs, TextField } from '@material-ui/core';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import Footer from '../../Components/Footer/Footer'
+import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 
@@ -80,12 +80,12 @@ export default function FeedPage() {
           <ContainerName>{restaurants.name}</ContainerName>
           <ContainerEntrega>
             <DeliveryTime>
-            <img src={time}/><p>{restaurants.deliveryTime}min</p>
+              <img src={time} /><p>{restaurants.deliveryTime}min</p>
             </DeliveryTime>
             <Shipping>
-            <img src={delivery}/><p>Frete R${restaurants.shipping}</p>
+              <img src={delivery} /><p>Frete R${restaurants.shipping}</p>
             </Shipping>
-            </ContainerEntrega>
+          </ContainerEntrega>
         </ListRestaurants>
       )
     })
