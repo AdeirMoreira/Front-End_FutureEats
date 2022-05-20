@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { getProfile, getOrdersHistory } from '../../services/ProfilePage';
-import { ScreenContainer, EnderecoContainer, InformacoesContainer, HistoricoContainer } from './styled';
-import Edit from "@material-ui/icons/Edit"
+import { ScreenContainerProfile, EnderecoContainer, InformacoesContainer, HistoricoContainer, TitleEndereco } from './styled';
+import Edit from "@material-ui/icons/EditOutlined"
 import Button from "@material-ui/core/Button"
 import { Link, useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
@@ -18,44 +18,55 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <ScreenContainer>
+      <ScreenContainerProfile>
         {(params.user && params.history) &&
           <>
-            <h3>Meu Perfil</h3>
+            
+            <p>Meu Perfil</p>
+            
             <InformacoesContainer>
               <p>Nome: {params.user.name}</p>
               <p>E-mail: {params.user.email}</p>
               <p>CPF: {params.user.cpf}</p>
-              <Button
+              <Button style={{color:"black"}}
                 onClick={() => goToEditarCadastroPage(navigate)}
                 color='primary'
                 aria-label='editar-perfil'>
                 <Edit />
               </Button>
             </InformacoesContainer>
-            <EnderecoContainer>
-              <h3>Endereço de Entrega</h3>
+              <TitleEndereco>
+               <p style={{color:"#b8b8b8"}}>Endereço cadastrado</p>
+               </TitleEndereco>
+              <EnderecoContainer>
+             
               <p>Endereço: {params.user.address}</p>
-              <Button
+              <div>
+              <Button style={{color:"black"}}
                 onClick={() => goToEditarEndereçoPage(navigate)}
-                color='primary'
                 arial-label='editar-endereço'
               ><Edit /></Button>
+              </div>
             </EnderecoContainer>
+            <p>Histórico de Pedidos</p>
+
           </>
 
         }
         {(params.user && params.history) && params.history.map(res => (
+        
+            
+
           <HistoricoContainer key={res.createdAt}>
-            <h3>Histórico de Pedidos</h3>
-            <p>Nome do Restaurant: {res.restaurantName}</p>
-            <p>Valor Cobrado: {res.totalPrice}</p>
-            <p>Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
-            <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
-            <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p style={{color:"#5cb646"}}
+            >{res.restaurantName}</p>
+            <p style={{fontSize:"12px"}} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
+            <b>Subtotal: {res.totalPrice}</b>
+            {/* <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p> */}
           </HistoricoContainer>
         ))}
-      </ScreenContainer>
+      </ScreenContainerProfile>
 
     </div>
   )

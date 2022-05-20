@@ -28,3 +28,7 @@ export const goToSignUpAddress = (navigate) => {
     navigate('/cadastro/endereco')
 }
 
+export const goToCadastro = (navigate) =>{
+    navigate("/cadastro")
+}
+

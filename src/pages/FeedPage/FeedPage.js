@@ -10,6 +10,7 @@ import Header from '../../components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 
+
 export default function FeedPage() {
   const navigate = useNavigate();
 
@@ -43,8 +44,6 @@ export default function FeedPage() {
       <p>Total: R${params.order.totalPrice}</p>
     </div>
   )
-
-  console.log(params.order)
 
   const navList = params.rest
     ?.filter((restaurant) => {
