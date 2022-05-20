@@ -6,12 +6,10 @@ import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import { ListRestaurants, ContainerEntrega } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs } from '@material-ui/core';
-import Footer from '../../Components/Footer/Footer';
+import Footer from '../../Components/Footer/Footer'
 
 export default function FeedPage() {
   const navigate = useNavigate();
-
-  const token = localStorage.getItem('token');
 
   const params = useContext(FutureEats);
 
@@ -43,8 +41,6 @@ export default function FeedPage() {
       <p>Total: R${params.order.totalPrice}</p>
     </div>
   )
-
-  console.log(params.order)
 
   const navList = params.rest
     ?.filter((restaurant) => {
@@ -124,7 +120,7 @@ export default function FeedPage() {
         {navList}
       </div>
       <div>
-      {params.order && renderOrder()}
+        {params.order && renderOrder()}
       </div>
       <Footer />
     </div>
