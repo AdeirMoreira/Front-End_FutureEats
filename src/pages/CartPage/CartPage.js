@@ -3,25 +3,24 @@ import { Link } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { getProfile } from '../../services/ProfilePage'
 import { ProductsCard } from '../../Components/ProductsCard'
+import { useInput } from '../../Hooks/useInput'
 
 export default function CartPage() {
   const parms = useContext(FutureEats)
-  const [cart, setCart] = useState([])
-
-  const addPropertyInCart = (array) => {
-    const newState = array.map(e => {
-      return { ...e, inCart: true }
-
-    })
-    setCart(newState)
-  }
+  const [Price, setPrice] = useState()
+  const [Payment, handlePayment] = useInput('')
+  console.log(Payment)
 
   useEffect(() => getProfile(parms.setUser), [])
-  useEffect(() => addPropertyInCart(parms.cart), [])
+  useEffect(() => calculePrice(parms.cart), [])
 
   // console.log(parms.restDetail)
   // console.log(parms.cart)
 
+  const calculePrice = () => {
+    const price = parms.cart.reduce((a, e) => a += e.price * e.quantity, 0)
+    setPrice(price)
+  }
   const removeProducToCart = (product) => {
     const newCart = parms.cart.filter(e => product.id !== e.id)
     parms.setCart(newCart)
@@ -47,11 +46,26 @@ export default function CartPage() {
           </div>
           <div>
             <ProductsCard
-              products={cart}
+              products={parms.cart}
               twoFunction={''}
               category={'Pricipais'}
               removeProduct={removeProducToCart}
             />
+          </div>
+          <p>Frete:{parms.restDetail.restaurant.shipping}</p>
+          <div>
+            <p>SubTotal</p>
+            <p>R${Price}</p>
+          </div>
+          <div>
+            <form>
+
+            </form>
+            <p>Forma de Pagamento</p>
+            <input type='radio' id='money' value={'money'} name={'paymentMetod'} />
+            <label for='money'>Dinheiro</label>
+            <input type='radio' id='creditcard' value={'creditcard'} name={'paymentMetod'} />
+            <label for='creditcard'>Cartão de Crédito</label>
           </div>
         </>
       }
