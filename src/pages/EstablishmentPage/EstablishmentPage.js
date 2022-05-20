@@ -15,6 +15,7 @@ export default function EstablishmentPage() {
   const [productId, setProductid] = useState()
   const [Principais, setPrincipais] = useState([])
   const [Acompanhamento, setAcompanhamento] = useState([])
+  const [seguro, setSeguro] = useState()
 
   useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
   useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products)
