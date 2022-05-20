@@ -107,12 +107,14 @@ export default function FeedPage() {
         sx={{ maxWidth: { xs: 350, sm: 480 }, margin: "auto" }}
       >
         <Tabs
+          indicatorColor="primary"
           value={valueCategory}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons="auto"
           allowScrollButtonsMobile
           aria-label="scrollable force tabs example"
+          textColor="primary"
         >
           <Tab label="Tudo" />
           <Tab label="Burguer" />

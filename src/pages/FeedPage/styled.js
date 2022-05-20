@@ -21,6 +21,8 @@ width: 100%;
 height: 100%;
 margin: 0 0 12px;
 border-radius: 8px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
 background-color: #d8d8d8;
 }
 `
