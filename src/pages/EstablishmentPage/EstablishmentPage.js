@@ -6,6 +6,9 @@ import { useInput } from '../../Hooks/useInput'
 import * as container from './styles'
 import { ProductsCard } from '../../Components/ProductsCard'
 import { PopUpQuantity } from '../../Components/PopUpQuantity'
+import Header from '../../Components/Header/Header'
+import time from '../../assets/Images/time.png';
+import delivery from '../../assets/Images/delivery.png';
 
 export default function EstablishmentPage() {
   const params = useParams();
@@ -45,7 +48,7 @@ export default function EstablishmentPage() {
   }
 
   const UpdateProductCard = (products, category) => {
-    if (category === 'Pricipais') {
+    if (category === 'Principais') {
       const newPrincipal = Principais.map(e => products.id === e.id ? { ...e, inCart: e.inCart ? false : true } : e)
       setPrincipais(newPrincipal)
       setProductid(products.id)
@@ -90,47 +93,53 @@ export default function EstablishmentPage() {
   const showPopUpFunction = () => displawPopUp ? setPopUp(false) : setPopUp(true)
 
   return (
-    <container.FullScreen>
-      <Link to={'/carrinho'}><h1>carrinho</h1></Link>
-      {detail.restDetail &&
-        <container.RestaurantData>
-          <container.RestaurantLogoImg src={detail.restDetail.restaurant.logoUrl} />
-          <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
-          <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
-          <container.Freight>
-            <container.Paragrafo>{detail.restDetail.restaurant.deliveryTime} minutos</container.Paragrafo>
-            <container.Paragrafo>Frete: R$ {detail.restDetail.restaurant.shipping}</container.Paragrafo>
-          </container.Freight>
-          <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
-        </container.RestaurantData>
-      }
-      <container.AllCards>
-        <h3>Pricipais</h3>
-        <ProductsCard
-          products={Principais}
-          twoFunction={twoFunctionOpen}
-          category={'Pricipais'}
-          removeProduct={removeProduct}
-        />
-      </container.AllCards>
-      <container.AllCards>
-        <h3>Acompanhamentos</h3>
-        <ProductsCard
-          products={Acompanhamento}
-          twoFunction={twoFunctionOpen}
-          category={'Acompanhamentos'}
-          removeProduct={removeProduct}
-        />
-      </container.AllCards>
-      {showPopUpFunction &&
-        <PopUpQuantity
-          displawPopUp={displawPopUp}
-          handleQuantidade={handleQuantidade}
-          quantidade={quantidade}
-          twoFunction={twoFunctionClose}
-          id={productId}
-        />
-      }
-    </container.FullScreen>
+    <div>
+      <Header />
+      <container.FullScreen>
+        {detail.restDetail &&
+          <container.RestaurantData>
+            <container.RestaurantLogoImg src={detail.restDetail.restaurant.logoUrl} />
+            <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
+            <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
+            <container.Freight>
+              <container.Paragrafo><img src={time} /> {detail.restDetail.restaurant.deliveryTime} min</container.Paragrafo>
+              <container.Paragrafo><img src={delivery} /> Frete R${detail.restDetail.restaurant.shipping}</container.Paragrafo>
+            </container.Freight>
+            <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
+          </container.RestaurantData>
+        }
+        <container.AllCards>
+          <h3>Principais</h3>
+          <container.Line>
+          </container.Line>
+          <ProductsCard
+            products={Principais}
+            twoFunction={twoFunctionOpen}
+            category={'Principais'}
+            removeProduct={removeProduct}
+          />
+        </container.AllCards>
+        <container.AllCards>
+          <h3>Acompanhamentos</h3>
+          <container.Line>
+          </container.Line>
+          <ProductsCard
+            products={Acompanhamento}
+            twoFunction={twoFunctionOpen}
+            category={'Acompanhamentos'}
+            removeProduct={removeProduct}
+          />
+        </container.AllCards>
+        {showPopUpFunction &&
+          <PopUpQuantity
+            displawPopUp={displawPopUp}
+            handleQuantidade={handleQuantidade}
+            quantidade={quantidade}
+            twoFunction={twoFunctionClose}
+            id={productId}
+          />
+        }
+      </container.FullScreen>
+    </div>
   )
 }
