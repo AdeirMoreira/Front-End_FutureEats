@@ -80,13 +80,16 @@ export default function SignUpPage() {
               required
             />
 
-            <FormControl variant="outlined" style={{width:'100%', marginTop:'10'}}>
-              <InputLabel htmlFor="campoSenha">Senha</InputLabel>
+            <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
+              <InputLabel>Senha</InputLabel>
               <OutlinedInput
-                id="campoSenha"
+                name={"password"}
                 type={showPassword ? 'text' : 'password'}
                 value={params.dataForm.personalData.form.password}
-                onChange={ e => params.dataForm.personalData.form.password(e.target.value)}
+                onChange={params.dataForm.personalData.onChange}
+                required
+                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                placeholder={'Mínimo 6 caracteres entre letras e números'}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -98,47 +101,40 @@ export default function SignUpPage() {
                     </IconButton>
                   </InputAdornment>
                 }
-                labelWidth={120}
+                labelWidth={50}
               />
             </FormControl>
 
-
-            {/* <TextField
-      name={"password"}
-      value={params.dataForm.personalData.form.password}
-      onChange={params.dataForm.personalData.onChange}
-      label={"Senha"}
-      type={params.dataForm.personalData.form.password ? 'text' : 'password'}
-      variant={"outlined"}
-      placeholder={"Mínimo 6 caracteres entre letras e números"}
-      inputProps={{pattern:'^[a-zA-Z0-9]{6,}$'}}
-      fullWidth
-      margin={"normal"}
-      required
-      /> */}
             <>
               {confirmed && <p>A senha e a confirmação são diferentes</p>}
             </>
-            <TextField
-              name={'confirm'}
-              value={confirm}
-              onChange={handleValue}
-              type={'password'}
-              label={"Confirmar"}
-              placeholder={"Confirme a senha anterior"}
-              inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
-              variant={"outlined"}
-              fullWidth
-              margin={"normal"}
-              required
-              InputProps={{
-                startAdornment: (
-                  <Button position="end">
-                    <Visibility />
-                  </Button>
-                ),
-              }}
-            />
+
+            <FormControl variant="outlined" style={{ width: '100%', marginTop: '10px', marginBottom: '25px' }}>
+              <InputLabel>Confirmar</InputLabel>
+              <OutlinedInput
+                name={confirm}
+                type={showPassword ? 'text' : 'password'}
+                value={confirm}
+                onChange={handleValue}
+                required
+                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                placeholder={'Confirme a senha anterior'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={e => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={70}
+              />
+              
+            </FormControl>
+
             <Button
               type={"submit"}
               fullWidth
