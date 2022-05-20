@@ -21,15 +21,16 @@ function App() {
   // useEffect(()=>{
   // setTimeout(()=>{
   // setLoading(false)
-  // },3000)
+  // },1700)
   // },[])
   return (
     <ThemeProvider theme={theme}>
+    <GlobalState>
 
-      <GlobalState>
-        {/* {loading ? <SplachScreen/> : <Router />} */}
-        <Router />
-      </GlobalState>
+      {/* {loading ? <SplachScreen/> : }  */}
+      <Router/>
+    </GlobalState>
+
     </ThemeProvider>
   );
 }
