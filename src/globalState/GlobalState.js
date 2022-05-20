@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useForm from "../Hooks/useForm";
 import { FutureEats } from "./Context";
 
@@ -10,6 +10,7 @@ export const GlobalState = (props) => {
     const [order, setOrder] = useState([])
     const [cart, setCart] = useState([])
 
+    // useEffect(() => console.log(cart), [cart])
     const dataForm = {
 
         editPersonalData: useForm({ name: "", email: "", cpf: "" }),
@@ -28,7 +29,7 @@ export const GlobalState = (props) => {
         setHistory,
         restDetail,
         setRestDetail,
-        order, 
+        order,
         setOrder,
         cart,
         setCart
