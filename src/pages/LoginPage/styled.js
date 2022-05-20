@@ -6,7 +6,7 @@ flex-direction: column;
 gap: 20px;
 align-items: center;
 text-align: center;
-margin-top: 10vw;
+margin-top: 30vw;
 img{
     width: 150px;
 }
