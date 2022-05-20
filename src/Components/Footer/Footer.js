@@ -8,8 +8,6 @@ import profileGreen from '../../assets/Images/profileGreen.svg'
 import { useNavigate } from 'react-router-dom'
 import {goToCart, goToFeedPage, goToProfile} from '../../routes/coordinators'
 
-
-
 function Footer() {
     let urlPage = ""  
 
