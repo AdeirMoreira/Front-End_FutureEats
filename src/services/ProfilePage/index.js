@@ -2,11 +2,11 @@ import axios from "axios";
 import { baseURL, headers } from "../../constants/constants";
 
 export const getProfile = (setUser) => {
-
     axios.get(`${baseURL}/profile`, headers
     ).then((res) => {
         setUser(res.data.user)
     }).catch((err) => {
+        console.log(err.response)
         alert("a net ta ruim, tente meia noite 👍")
     })
 }
@@ -17,7 +17,7 @@ export const getOrdersHistory = (setHistory) => {
         setHistory(res.data.orders)
     }).catch((err) => {
         console.log(err.response)
-        // alert("vo ve e te aviso")
+        alert("vo ve e te aviso")
     })
 }
 
