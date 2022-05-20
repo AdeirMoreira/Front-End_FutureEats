@@ -26,7 +26,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <GlobalState>
-      {loading ? <SplachScreen/> : <Router />}
+      {/* {loading ? <SplachScreen/> :  */}
+      <Router />
+      {/* } */}
     </GlobalState>
     </ThemeProvider>
   );

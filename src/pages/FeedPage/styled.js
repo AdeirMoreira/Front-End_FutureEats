@@ -1,36 +1,80 @@
+import { DeleteForeverOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 
-export const ListRestaurants = styled.div`
+export const ContainerRestaurants = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 10px;
-margin: 10px;
-margin-bottom: 20px;
-line-height: 1px;
-height: 274px;
-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-border-radius:20px;
+margin: 10px 0px;
+`
+
+export const ListRestaurants = styled.div`
+width: 328px;
+height: 188px;
+padding: 0 0 16px;
+border-radius: 8px;
+border: solid 1px #b8b8b8;
+margin: 10px 0px;
 img{
-width: 10rem;
-height: 10rem;
-border-radius: 25px;
-}
-h3{
-color: #5CB646;
-font-size: 20px;
+object-fit: cover;
+width: 100%;
+height: 100%;
+margin: 0 0 12px;
+border-radius: 8px;
+background-color: #d8d8d8;
 }
 `
+
+export const ContainerImg = styled.div`
+width: 328px;
+height: 120px;
+`
+
+export const ContainerName = styled.div`
+width: 296px;
+height: 18px;
+margin: 12px 16px 4px;
+font-size: 16px;
+font-weight: bold;
+font-stretch: normal;
+font-style: normal;
+line-height: normal;
+color: #5cb646;
+`
+
 export const ContainerEntrega = styled.div`
 display: flex;
-flex-direction: row;
 justify-content: space-between;
-width: 100%;
-padding: 10px;
+margin: 0 15px;
+color: #b8b8b8;
+`
+
+export const DeliveryTime = styled.div`
+display: flex;
+flex-direction: flex-start;
+align-items: center;
+justify-content: center;
+gap: 5px;
+img{
+background-color: white;
+height: 20px;
+}
 p{
-color:#b8b8b8;
-font-size: 20px;
+padding-bottom: 10px;
 }
 `
 
-
+export const Shipping = styled.div`
+display: flex;
+flex-direction: flex-end;
+align-items: center;
+gap: 5px;
+img{
+background-color: white;
+height: 20px;
+width: 20px;
+}
+p{
+padding-bottom: 10px;
+}
+`

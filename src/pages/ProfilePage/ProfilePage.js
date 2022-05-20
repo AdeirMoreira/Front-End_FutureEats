@@ -7,20 +7,14 @@ import Button from "@material-ui/core/Button"
 import { Link, useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
 
-
-
-
 export default function ProfilePage() {
   const navigate = useNavigate()
   const params = useContext(FutureEats)
-
 
   useEffect(() => {
     getProfile(params.setUser)
     getOrdersHistory(params.setHistory)
   }, []);
-
-
 
   return (
     <div>
