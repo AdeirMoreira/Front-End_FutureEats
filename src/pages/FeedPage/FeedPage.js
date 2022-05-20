@@ -1,17 +1,17 @@
-import { Container } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants, ContainerEntrega } from './styled';
+import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
-import { Box, Tab, Tabs } from '@material-ui/core';
-import Footer from '../../Components/Footer/Footer';
+import { Box, Tab, Tabs, TextField } from '@material-ui/core';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import time from '../../assets/Images/time.png';
+import delivery from '../../assets/Images/delivery.png';
 
 export default function FeedPage() {
   const navigate = useNavigate();
-
-  const token = localStorage.getItem('token');
 
   const params = useContext(FutureEats);
 
@@ -44,8 +44,6 @@ export default function FeedPage() {
     </div>
   )
 
-  console.log(params.order)
-
   const navList = params.rest
     ?.filter((restaurant) => {
       if (valueCategory === 0) {
@@ -76,28 +74,35 @@ export default function FeedPage() {
     .map((restaurants) => {
       return (
         <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
-          <img src={restaurants.logoUrl} alt="Logo restaurante" />
-          <h3>{restaurants.name}</h3>
+          <ContainerImg>
+            <img src={restaurants.logoUrl} alt="Logo restaurante" />
+          </ContainerImg>
+          <ContainerName>{restaurants.name}</ContainerName>
           <ContainerEntrega>
-            <p>Tempo de entrega: {restaurants.deliveryTime}min</p>
-            <p>Frete R${restaurants.shipping}</p>
-          </ContainerEntrega>
+            <DeliveryTime>
+            <img src={time}/><p>{restaurants.deliveryTime}min</p>
+            </DeliveryTime>
+            <Shipping>
+            <img src={delivery}/><p>Frete R${restaurants.shipping}</p>
+            </Shipping>
+            </ContainerEntrega>
         </ListRestaurants>
       )
     })
 
   return (
     <div>
+      <Header />
       <div>
-        <input
+        <TextField
+          label={'Restaurante'}
+          variant={'outlined'}
           type="text"
           value={search}
           onChange={handleSearch}
-          placeholder='Buscar'
           required
         />
       </div>
-      <h1>FeedPage</h1>
       <Box
         sx={{ maxWidth: { xs: 350, sm: 480 }, margin: "auto" }}
       >
@@ -120,13 +125,13 @@ export default function FeedPage() {
           <Tab label="Carnes" />
         </Tabs>
       </Box>
-      <div>
+      <ContainerRestaurants>
         {navList}
-      </div>
+      </ContainerRestaurants>
       <div>
-      {params.order && renderOrder()}
+        {params.order && renderOrder()}
       </div>
       <Footer />
-    </div>
+    </div >
   )
 };

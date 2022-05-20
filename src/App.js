@@ -1,9 +1,9 @@
-import React, {useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from './routes/Router';
 import { GlobalState } from './globalState/GlobalState';
 import theme from './constants/themes';
 import { ThemeProvider } from '@material-ui/core/styles';
-import  styled  from 'styled-components';
+import styled from 'styled-components';
 import splachScreen from './assets/Images/splachScreen.png'
 
 
@@ -30,6 +30,7 @@ function App() {
       {/* {loading ? <SplachScreen/> : }  */}
       <Router/>
     </GlobalState>
+
     </ThemeProvider>
   );
 }

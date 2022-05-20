@@ -1,97 +1,135 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { getRestaurantDetails } from '../../services/RestaurantDetails'
 import { useInput } from '../../Hooks/useInput'
-import { ContainerPopUp, ContainerSelectQuantidade } from './styles'
-
+import * as container from './styles'
+import { ProductsCard } from '../../Components/ProductsCard'
+import { PopUpQuantity } from '../../Components/PopUpQuantity'
 
 export default function EstablishmentPage() {
   const params = useParams();
   const detail = useContext(FutureEats)
   const [quantidade, handleQuantidade, clearInput] = useInput('')
   const [displawPopUp, setPopUp] = useState(false)
-  const [productsInCart, setProductInCat] = useState([])
+  const [productId, setProductid] = useState()
+  const [Principais, setPrincipais] = useState([])
+  const [Acompanhamento, setAcompanhamento] = useState([])
 
   useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
+  useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products)
+    , [detail.restDetail])
+
+  const addPropertyInCart = (array) => {
+    const newState = array.map(e => {
+      return { ...e, inCart: false }
+
+    })
+    separar(newState)
+  }
+
+  const separar = (e) => {
+    const principal = []
+    const acompanhamentos = []
+    e.map(e => {
+      if (e.category === 'Pizza' || e.category === 'Refeição' || e.category === 'Lanche' ||
+        e.category === 'Pastel' || e.category === 'Salgado') {
+        principal.push(e)
+      } else {
+        acompanhamentos.push(e)
+      }
+    })
+    setPrincipais(principal)
+    setAcompanhamento(acompanhamentos)
+  }
+
+  const UpdateProductCard = (products, category) => {
+    if (category === 'Pricipais') {
+      const newPrincipal = Principais.map(e => products.id === e.id ? { ...e, inCart: e.inCart ? false : true } : e)
+      setPrincipais(newPrincipal)
+      setProductid(products.id)
+    } else {
+      const newAcompanhamento = Acompanhamento.map(e => products.id === e.id ? { ...e, inCart: e.inCart ? false : true } : e)
+      setAcompanhamento(newAcompanhamento)
+      setProductid(products.id)
+    }
+  }
+
+  const addProduct = (products, category) => {
+    const product = {
+      products: products.products
+    }
+    const newCart = [...detail.cart, products]
+    UpdateProductCard(products, category)
+    detail.setCart(newCart)
+    clearInput()
+  }
+
+  const removeProduct = (product, category) => {
+    const newCart = detail.cart.filter(e => product.id !== e.id)
+    detail.setCart(newCart)
+    UpdateProductCard(product, category)
+  }
+
+  const addProductQuantity = (id) => {
+    const newCart = detail.cart.map(e => id === e.id ? { ...e, quantity: quantidade } : e)
+    detail.setCart(newCart)
+  }
+
+  const twoFunctionClose = (id) => {
+    addProductQuantity(id)
+    showPopUpFunction()
+  }
+
+  const twoFunctionOpen = (product, category) => {
+    showPopUpFunction()
+    addProduct(product, category)
+  }
 
   const showPopUpFunction = () => displawPopUp ? setPopUp(false) : setPopUp(true)
 
-  const addProduct = (products) => {
-
-    const product = {
-      id: products.id,
-      quantity: quantidade
-    }
-    const newCart = [...detail.cart, product]
-    detail.setCart(newCart)
-    clearInput()
-    console.log(detail.cart)
-  }
-
-  const remover = (products) => {
-    const cart = detail.cart
-    const newCard = cart.filter(e => e.id !== products.id)
-    detail.setCart(newCard)
-  }
-
-  const twoFunction = (product) => {
-    showPopUpFunction()
-    addProduct(product)
-  }
-
-  const twoFunctionRemover = (product) => {
-    showPopUpFunction(product)
-    remover(product)
-  }
-
-  const restDetail = detail.restDetail && detail.restDetail.restaurant.products.map((list) => {
-    return (
-      <div key={list.id}>
-        <p>Nome: {list.name}</p>
-        <p>Preço: {list.price}</p>
-        <img src={list.photoUrl} />
-        <p>Descrição: {list.description}</p>
-        {productsInCart.includes(list.id) ?
-          <button onClick={twoFunctionRemover(list)}> Remover </button>
-          :
-          <button onClick={showPopUpFunction}> Adicionar </button>
-        }
-
-        {displawPopUp && <ContainerPopUp>
-          <ContainerSelectQuantidade>
-            <p>Selecione a quantidade desejada</p>
-            <select onChange={handleQuantidade} name='quantidade' id='quantidade' value={quantidade} required>
-              <option value='' disabled>0</option>
-              <option value={1} key={1}>1</option>
-              <option value={2} key={2}>2</option>
-              <option value={3} key={3}>3</option>
-              <option value={4} key={4}>4</option>
-              <option value={5} key={5}>5</option>
-              <option value={6} key={6}>6</option>
-              <option value={7} key={7}>7</option>
-              <option value={8} key={8}>8</option>
-              <option value={9} key={9}>9</option>
-              <option value={10} key={10}>10</option>
-            </select>
-            <button onClick={() => twoFunction(list)} >Adicionar ao Carrinho</button>
-          </ContainerSelectQuantidade>
-        </ContainerPopUp>}
-      </div>
-    )
-  })
-
   return (
-    <div>
+    <container.FullScreen>
+      <Link to={'/carrinho'}><h1>carrinho</h1></Link>
       {detail.restDetail &&
-        <>
-          <p>{detail.restDetail.restaurant.name}</p>
-          <p>{detail.restDetail.restaurant.category}</p>
-          <p>{detail.restDetail.restaurant.deliveryTime} minutos  Frete: R$ {detail.restDetail.restaurant.shipping}</p>
-          <p>{detail.restDetail.restaurant.address}</p>
-        </>
+        <container.RestaurantData>
+          <container.RestaurantLogoImg src={detail.restDetail.restaurant.logoUrl} />
+          <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
+          <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
+          <container.Freight>
+            <container.Paragrafo>{detail.restDetail.restaurant.deliveryTime} minutos</container.Paragrafo>
+            <container.Paragrafo>Frete: R$ {detail.restDetail.restaurant.shipping}</container.Paragrafo>
+          </container.Freight>
+          <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
+        </container.RestaurantData>
       }
-      {restDetail}
-    </div>
+      <container.AllCards>
+        <h3>Pricipais</h3>
+        <ProductsCard
+          products={Principais}
+          twoFunction={twoFunctionOpen}
+          category={'Pricipais'}
+          removeProduct={removeProduct}
+        />
+      </container.AllCards>
+      <container.AllCards>
+        <h3>Acompanhamentos</h3>
+        <ProductsCard
+          products={Acompanhamento}
+          twoFunction={twoFunctionOpen}
+          category={'Acompanhamentos'}
+          removeProduct={removeProduct}
+        />
+      </container.AllCards>
+      {showPopUpFunction &&
+        <PopUpQuantity
+          displawPopUp={displawPopUp}
+          handleQuantidade={handleQuantidade}
+          quantidade={quantidade}
+          twoFunction={twoFunctionClose}
+          id={productId}
+        />
+      }
+    </container.FullScreen>
   )
 }

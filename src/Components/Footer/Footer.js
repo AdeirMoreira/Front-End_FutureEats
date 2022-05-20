@@ -9,8 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import { goToCart, goToFeedPage, goToProfile } from '../../routes/coordinators'
 import { ContainerFooter } from './styled'
 
-
-
 function Footer() {
   let urlPage = ""
 

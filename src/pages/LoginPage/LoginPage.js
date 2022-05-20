@@ -1,12 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { login } from '../../services/LoginRequest/login'
+import logo from "../../assets/Images/Logo.png"
+import { InputsContainer, ScreenContainer } from '../LoginPage/styled'
+import { Button, IconButton, TextField } from '@material-ui/core'
+import Visibility from "@material-ui/icons/Visibility"
+import VisibilityOff from "@material-ui/icons/VisibilityOff"
+import InputAdornment from '@material-ui/core/InputAdornment'
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { FormControl } from '@material-ui/core'
+import { InputLabel } from '@material-ui/core'
+import { goToCadastro } from '../../routes/coordinators'
+
 
 export default function LoginPage() {
   const navigate = useNavigate();
 
   const params = useContext(FutureEats)
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
@@ -15,33 +28,68 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          name='email'
-          value={params.dataForm.loginData.form.email}
-          onChange={params.dataForm.loginData.onChange}
-          required
-          placeholder='email'
-          pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-          title="O email deve ter o seguinte formato: exemplo@provedor.com"
-          type='email'
-        />
+    <>
+      <ScreenContainer>
+        <img src={logo} />
+        <p>Entrar</p>
+        <InputsContainer>
+          <form onSubmit={onSubmitForm}>
+            <TextField
+              name={"email"}
+              value={params.dataForm.loginData.form.email}
+              onChange={params.dataForm.loginData.onChange}
+              required
+              variant={"outlined"}
+              label={"E-mail"}
+              placeholder='email@email.com'
+              fullWidth
+              margin={"normal"}
+              // inputProps={{ pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$' }}
+            />
 
-        <input
-          name='password'
-          value={params.dataForm.loginData.form.password}
-          onChange={params.dataForm.loginData.onChange}
-          required
-          placeholder='senha'
-          title="Senha deve ter entre 6 e 30 caracteres entre letras e números"
-          type='password'
-        />
+            <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
+              <InputLabel>Senha</InputLabel>
+              <OutlinedInput
+                name={"password"}
+                type={showPassword ? 'text' : 'password'}
+                value={params.dataForm.loginData.form.password}
+                onChange={params.dataForm.loginData.onChange}
+                required
+                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                placeholder={'Mínimo 6 caracteres'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={e => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={50}
+              />
+            </FormControl>
 
-        <button> Bora comer! </button>
-      </form>
-      <Link to="/cadastro" ><button> Cadastre-se!</button></Link>
-    </div>
+            <Button style={{width:'100%', marginTop:"5px", marginBottom:'15px', color:"black", textTransform: 'none'}}
+            type={"submit"}
+            variant={'contained'}
+            color={'primary'}
+            margin={'normal'}
+            >Entrar</Button>
+          </form>
+          <Button style={{color:"black", textTransform: 'none'}}
+            onClick={()=>goToCadastro(navigate)}
+            fullWidth
+            variant={'text'}
+            margin={"normal"}
+            type={"submit"}
+            
+            // color={"primary"}
+          > Não possui cadastro? Clique aqui.</Button>
+        </InputsContainer>
+      </ScreenContainer>
+    </>
   )
 }
