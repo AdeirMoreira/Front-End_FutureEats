@@ -21,15 +21,15 @@ export const ProductsCard = (props) => {
                             <p>{e.description}</p>
                         </container.Description>
                         <container.Price>
-                            <p>{e.price}</p>
+                            <p>R${e.price.toFixed(2)}</p>
                         </container.Price>
                         {!e.inCart ?
                             <container.ButtonDiv>
-                                <container.Button onClick={() => twoFunction(e, category)}> Adicionar </container.Button>
+                                <container.ButtonVerde onClick={() => twoFunction(e, category)}> Adicionar </container.ButtonVerde>
                             </container.ButtonDiv>
                             :
                             <container.ButtonDiv>
-                                <container.Button onClick={() => removeProduct(e, category)}>Remover</container.Button>
+                                <container.ButtonVermelho onClick={() => removeProduct(e, category)}>Remover</container.ButtonVermelho>
                             </container.ButtonDiv>
                         }
                     </container.CardProduct>
