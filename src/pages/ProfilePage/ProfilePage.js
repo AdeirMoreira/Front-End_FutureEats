@@ -21,31 +21,30 @@ export default function ProfilePage() {
       <ScreenContainerProfile>
         {(params.user && params.history) &&
           <>
-            
+
             <p>Meu Perfil</p>
-            
+
             <InformacoesContainer>
               <p>Nome: {params.user.name}</p>
               <p>E-mail: {params.user.email}</p>
               <p>CPF: {params.user.cpf}</p>
-              <Button style={{color:"black"}}
+              <Button style={{ color: "black" }}
                 onClick={() => goToEditarCadastroPage(navigate)}
                 color='primary'
                 aria-label='editar-perfil'>
                 <Edit />
               </Button>
             </InformacoesContainer>
-              <TitleEndereco>
-               <p style={{color:"#b8b8b8"}}>Endereço cadastrado</p>
-               </TitleEndereco>
-              <EnderecoContainer>
-             
+            <TitleEndereco>
+              <p style={{ color: "#b8b8b8" }}>Endereço cadastrado</p>
+            </TitleEndereco>
+            <EnderecoContainer>
               <p>Endereço: {params.user.address}</p>
               <div>
-              <Button style={{color:"black"}}
-                onClick={() => goToEditarEndereçoPage(navigate)}
-                arial-label='editar-endereço'
-              ><Edit /></Button>
+                <Button style={{ color: "black" }}
+                  onClick={() => goToEditarEndereçoPage(navigate)}
+                  arial-label='editar-endereço'
+                ><Edit /></Button>
               </div>
             </EnderecoContainer>
             <p>Histórico de Pedidos</p>
@@ -54,13 +53,13 @@ export default function ProfilePage() {
 
         }
         {(params.user && params.history) && params.history.map(res => (
-        
-            
+
+
 
           <HistoricoContainer key={res.createdAt}>
-            <p style={{color:"#5cb646"}}
+            <p style={{ color: "#5cb646" }}
             >{res.restaurantName}</p>
-            <p style={{fontSize:"12px"}} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
+            <p style={{ fontSize: "12px" }} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
             <b>Subtotal: {res.totalPrice}</b>
             {/* <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
             <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p> */}

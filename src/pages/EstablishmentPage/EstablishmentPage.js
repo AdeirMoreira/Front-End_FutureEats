@@ -15,7 +15,6 @@ export default function EstablishmentPage() {
   const [productId, setProductid] = useState()
   const [Principais, setPrincipais] = useState([])
   const [Acompanhamento, setAcompanhamento] = useState([])
-  const [seguro, setSeguro] = useState()
 
   useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
   useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products)
@@ -73,7 +72,7 @@ export default function EstablishmentPage() {
   }
 
   const addProductQuantity = (id) => {
-    const newCart = detail.cart.map(e => id === e.id ? { ...e, quantity: quantidade } : e)
+    const newCart = detail.cart.map(e => id === e.id ? { ...e, quantity: quantidade, inCart: true } : e)
     detail.setCart(newCart)
   }
 
