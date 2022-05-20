@@ -2,7 +2,6 @@ import React from "react";
 import CartPage from "../pages/CartPage/CartPage"
 import EstablishmentPage from "../pages/EstablishmentPage/EstablishmentPage"
 import FeedPage from "../pages/FeedPage/FeedPage"
-import HomePage from "../pages/HomePage/HomePage"
 import LoginPage from "../pages/LoginPage/LoginPage"
 import OrderPage from "../pages/OrderPage/OrderPage"
 import ProfilePage from "../pages/ProfilePage/ProfilePage"
@@ -17,11 +16,11 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                
                 <Route path="/carrinho" element={<CartPage />} />
                 <Route path="/estabelecimento/:id" element={<EstablishmentPage />} />
                 <Route path="/feed" element={<FeedPage />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={<LoginPage />} />
                 <Route path="/ordem-pedido" element={<OrderPage />} />
                 <Route path="/perfil" element={<ProfilePage />} />
                 <Route path="/perfil/editar-endereco" element={<EditarEnderecoPage/>}/>

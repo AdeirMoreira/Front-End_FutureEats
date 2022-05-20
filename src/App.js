@@ -17,16 +17,18 @@ background-repeat: no-repeat;
 `
 
 function App() {
-  const [loading,setLoading] = useState(true)
-  useEffect(()=>{
-  setTimeout(()=>{
-  setLoading(false)
-  },3000)
-  },[])
+  // const [loading,setLoading] = useState(true)
+  // useEffect(()=>{
+  // setTimeout(()=>{
+  // setLoading(false)
+  // },1700)
+  // },[])
   return (
     <ThemeProvider theme={theme}>
     <GlobalState>
-      {loading ? <SplachScreen/> : <Router />}
+
+      {/* {loading ? <SplachScreen/> : }  */}
+      <Router/>
     </GlobalState>
     </ThemeProvider>
   );

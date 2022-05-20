@@ -6,7 +6,7 @@ import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import { ListRestaurants, ContainerEntrega } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs } from '@material-ui/core';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../Components/Footer/Footer';
 
 export default function FeedPage() {
   const navigate = useNavigate();
