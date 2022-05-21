@@ -18,16 +18,21 @@ margin-bottom: 20px;
 export const ScreenContainerProfile = styled.div`
 display: flex;
 flex-direction: column;
+justify-content: space-between;
+
 `
 export const InformacoesContainer = styled.div`
-border: 1px solid black;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
 width: 100vw;
-Button{
-    
+p{
+    display: flex;
+    flex-direction: column;
 }
 `
 export const TitleEndereco=styled.div`
-
+margin-bottom: -30px;
 `
 
 export const EnderecoContainer = styled.div`
@@ -47,5 +52,8 @@ margin: 5px;
 padding: 16px;
 border: 1px solid black;
 border-radius: 8px;
+
+`
+export const Header = styled.div`
 
 `
