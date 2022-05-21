@@ -4,6 +4,7 @@ export const FullScreen = styled.div`
     display: flex;
     flex-direction: column;
     padding: 16px;
+    padding-bottom: 70px;
 `
 
 export const RestaurantData = styled.div`
@@ -24,9 +25,9 @@ export const RestName = styled.p`
 `
 
 export const Line = styled.div`
-height: 1px;
-width: 100%;
-background: black;
+    height: 1px;
+    width: 100%;
+    background: black;
 `
 
 export const Paragrafo = styled.p`

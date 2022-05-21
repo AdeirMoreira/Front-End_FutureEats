@@ -15,7 +15,7 @@ export const ProductsCard = (props) => {
                             <p>{e.name}</p>
                         </container.Name>
                         <container.Quantity>
-                            <p>0</p>
+                            <p>{e.quantity ? e.quantity : 0}</p>
                         </container.Quantity>
                         <container.Description>
                             <p>{e.description}</p>

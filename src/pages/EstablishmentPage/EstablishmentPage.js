@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { getRestaurantDetails } from '../../services/RestaurantDetails'
 import { useInput } from '../../Hooks/useInput'
 import * as container from './styles'
-import { ProductsCard } from '../../Components/ProductsCard'
-import { PopUpQuantity } from '../../Components/PopUpQuantity'
+import { ProductsCard } from '../../Components/ProductsCard/ProductCard'
+import { PopUpQuantity } from '../../Components/PopUpQuantity/popUp'
 import Header from '../../Components/Header/Header'
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
@@ -19,15 +19,20 @@ export default function EstablishmentPage() {
   const [productId, setProductid] = useState()
   const [Principais, setPrincipais] = useState([])
   const [Acompanhamento, setAcompanhamento] = useState([])
+  const [category, setCategory] = useState('')
 
   useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
-  useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products)
+  useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products, detail.cart)
     , [detail.restDetail])
 
-  const addPropertyInCart = (array) => {
+  const addPropertyInCart = (array, cart) => {
     const newState = array.map(e => {
-      return { ...e, inCart: false }
-
+      const alreadyInCart = cart.find(a => a.id === e.id)
+      if (alreadyInCart) {
+        return alreadyInCart
+      } else {
+        return { ...e, inCart: false }
+      }
     })
     separar(newState)
   }
@@ -47,53 +52,60 @@ export default function EstablishmentPage() {
     setAcompanhamento(acompanhamentos)
   }
 
-  const UpdateProductCard = (products, category) => {
+  const UpdateProductCard = (products) => {
     if (category === 'Principais') {
-      const newPrincipal = Principais.map(e => products.id === e.id ? { ...e, inCart: e.inCart ? false : true } : e)
+      const newPrincipal = Principais.map(e =>
+        products.id === e.id ? { ...e, inCart: e.inCart ? false : true, quantity: 0 } : e)
       setPrincipais(newPrincipal)
-      setProductid(products.id)
     } else {
-      const newAcompanhamento = Acompanhamento.map(e => products.id === e.id ? { ...e, inCart: e.inCart ? false : true } : e)
+      const newAcompanhamento = Acompanhamento.map(e =>
+        products.id === e.id ? { ...e, inCart: e.inCart ? false : true, quantity: 0 } : e)
       setAcompanhamento(newAcompanhamento)
-      setProductid(products.id)
     }
   }
 
-  const addProduct = (products, category) => {
-    const product = {
-      products: products.products
-    }
+  const addProduct = (products) => {
     const newCart = [...detail.cart, products]
-    UpdateProductCard(products, category)
     detail.setCart(newCart)
     clearInput()
   }
 
-  const removeProduct = (product, category) => {
+  const removeProduct = (product) => {
     const newCart = detail.cart.filter(e => product.id !== e.id)
     detail.setCart(newCart)
-    UpdateProductCard(product, category)
+    UpdateProductCard(product)
   }
 
-  const addProductQuantity = (id) => {
-    const newCart = detail.cart.map(e => id === e.id ? { ...e, quantity: quantidade, inCart: true } : e)
+  const addProductCart = () => {
+    if (category === 'Principais') {
+      const newPrincipal = Principais.map(e =>
+        productId === e.id ? { ...e, inCart: e.inCart ? false : true, quantity: quantidade } : e)
+      setPrincipais(newPrincipal)
+    } else {
+      const newAcompanhamento = Acompanhamento.map(e =>
+        productId === e.id ? { ...e, inCart: e.inCart ? false : true, quantity: quantidade } : e)
+      setAcompanhamento(newAcompanhamento)
+    }
+    const newCart = detail.cart.map(e => productId === e.id ? { ...e, quantity: quantidade, inCart: true } : e)
     detail.setCart(newCart)
-  }
-
-  const twoFunctionClose = (id) => {
-    addProductQuantity(id)
-    showPopUpFunction()
   }
 
   const twoFunctionOpen = (product, category) => {
     showPopUpFunction()
+    setCategory(category)
+    setProductid(product.id)
     addProduct(product, category)
+  }
+
+  const twoFunctionClose = (id) => {
+    addProductCart(id)
+    showPopUpFunction()
   }
 
   const showPopUpFunction = () => displawPopUp ? setPopUp(false) : setPopUp(true)
 
   return (
-    <div>
+    <>
       <Header />
       <container.FullScreen>
         {detail.restDetail &&
@@ -136,11 +148,10 @@ export default function EstablishmentPage() {
             handleQuantidade={handleQuantidade}
             quantidade={quantidade}
             twoFunction={twoFunctionClose}
-            id={productId}
           />
         }
         <Footer />
       </container.FullScreen>
-    </div>
+    </>
   )
 }

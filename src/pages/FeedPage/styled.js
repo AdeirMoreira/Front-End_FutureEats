@@ -1,4 +1,3 @@
-import { DeleteForeverOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 
 export const ContainerRestaurants = styled.div`
@@ -79,4 +78,7 @@ width: 20px;
 p{
 padding-bottom: 10px;
 }
+`
+export const ContainerRenderOrder = styled.div`
+    padding-bottom: 50px;
 `

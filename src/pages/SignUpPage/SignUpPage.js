@@ -19,7 +19,6 @@ import { goToBack } from "../../routes/coordinators"
 
 
 
-
 export default function SignUpPage() {
   const [confirm, handleValue] = useInput('')
   const [confirmed, setConfirmed] = useState(false)
@@ -148,7 +147,6 @@ export default function SignUpPage() {
               />
 
             </FormControl>
-
             <Button
               type={"submit"}
               fullWidth
@@ -159,6 +157,7 @@ export default function SignUpPage() {
 
           </form>
         </InputsContainer>
+
       </ScreenContainer>
     </>
   )

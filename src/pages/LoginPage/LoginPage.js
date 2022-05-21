@@ -16,15 +16,12 @@ import { goToCadastro } from '../../routes/coordinators'
 
 export default function LoginPage() {
   const navigate = useNavigate();
-
   const params = useContext(FutureEats)
-
   const [showPassword, setShowPassword] = useState(false)
 
   const onSubmitForm = (event) => {
     event.preventDefault()
     login(params.dataForm.loginData.form, navigate)
-
   }
 
   return (
@@ -44,7 +41,7 @@ export default function LoginPage() {
               placeholder='email@email.com'
               fullWidth
               margin={"normal"}
-              // inputProps={{ pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$' }}
+            // inputProps={{ pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$' }}
             />
 
             <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
@@ -72,21 +69,19 @@ export default function LoginPage() {
               />
             </FormControl>
 
-            <Button style={{width:'100%', marginTop:"5px", marginBottom:'15px', color:"black", textTransform: 'none'}}
-            type={"submit"}
-            variant={'contained'}
-            color={'primary'}
-            margin={'normal'}
+            <Button style={{ width: '100%', marginTop: "5px", marginBottom: '15px', color: "black", textTransform: 'none' }}
+              type={"submit"}
+              variant={'contained'}
+              color={'primary'}
+              margin={'normal'}
             >Entrar</Button>
           </form>
-          <Button style={{color:"black", textTransform: 'none'}}
-            onClick={()=>goToCadastro(navigate)}
+          <Button style={{ color: "black", textTransform: 'none' }}
+            onClick={() => goToCadastro(navigate)}
             fullWidth
             variant={'text'}
             margin={"normal"}
             type={"submit"}
-            
-            // color={"primary"}
           > Não possui cadastro? Clique aqui.</Button>
         </InputsContainer>
       </ScreenContainer>
