@@ -9,7 +9,12 @@ import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
-
+import { FormControl } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
+import { OutlinedInput } from '@material-ui/core';
+import { InputAdornment } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import { Search } from '@material-ui/icons/Search';
 export default function FeedPage() {
   const navigate = useNavigate();
   const params = useContext(FutureEats);
@@ -102,6 +107,27 @@ export default function FeedPage() {
           onChange={handleSearch}
           required
         />
+        {/* <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
+              <InputLabel>Senha</InputLabel>
+              <OutlinedInput
+                name={"search"}
+                type={"text"}
+                value={search}
+                onChange={handleSearch}
+                required
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={setSearch}
+                      edge="end"
+                    >
+                      {<Search/>}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={50}
+              />
+            </FormControl> */}
       </div>
       <Box
         sx={{ maxWidth: { xs: 350, sm: 480 }, margin: "auto" }}

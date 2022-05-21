@@ -3,10 +3,9 @@ import styled from "styled-components";
 export const ScreenContainer = styled.div`
 display: flex;
 flex-direction: column;
-gap: 20px;
 align-items: center;
 text-align: center;
-margin-top: 30vw;
+padding-top:25vh;
 img{
     width: 150px;
 }

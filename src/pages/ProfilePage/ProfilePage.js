@@ -72,10 +72,10 @@ export default function ProfilePage() {
             <p style={{ color: "#5cb646" }}
             >{res.restaurantName}</p>
             <p style={{ fontSize: "12px" }} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
-
+            <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
             <b>Subtotal: R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
-            <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
-            <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            
   
           </HistoricoContainer>
         ))}
