@@ -21,7 +21,7 @@ export const ProductsCard = (props) => {
                             <p>{e.description}</p>
                         </container.Description>
                         <container.Price>
-                            <p>R${e.price.toFixed(2)}</p>
+                            <p>R${e.price.toFixed(2).replace('.', ',')}</p>
                         </container.Price>
                         {!e.inCart ?
                             <container.ButtonDiv>

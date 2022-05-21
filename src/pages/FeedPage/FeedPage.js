@@ -12,9 +12,7 @@ import delivery from '../../assets/Images/delivery.png';
 
 export default function FeedPage() {
   const navigate = useNavigate();
-
   const params = useContext(FutureEats);
-
   const [search, setSearch] = useState("");
 
   const handleSearch = (event) => {
@@ -40,7 +38,9 @@ export default function FeedPage() {
     <div>
       <p>Pedido em andamento:</p>
       <p>{params.order.restaurantName}</p>
-      <p>Total: R${params.order.totalPrice}</p>
+      {params.order.totalPrice &&
+        <p>Total: R${params.order.totalPrice.toFixed(2).replace('.', ',')}</p>
+      }
     </div>
   )
 
