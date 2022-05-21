@@ -15,7 +15,6 @@ import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 
 
-
 export default function SignUpPage() {
   const [confirm, handleValue] = useInput('')
   const [confirmed, setConfirmed] = useState(false)
@@ -134,7 +133,6 @@ export default function SignUpPage() {
               />
 
             </FormControl>
-
             <Button
               type={"submit"}
               fullWidth
@@ -145,6 +143,7 @@ export default function SignUpPage() {
 
           </form>
         </InputsContainer>
+
       </ScreenContainer>
     </>
   )

@@ -7,8 +7,8 @@ justify-content: space-evenly;
 background: #EFEFEF;
 bottom: 0;
 position: fixed;
-width: 100vw;
-height: 49px;
+width: 100%;
+height: 50px;
 button{
     border: none;
     background: none;

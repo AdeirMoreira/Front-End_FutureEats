@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping } from './styled';
+import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs, TextField } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
+import { Link } from 'react-router-dom';
 
 export default function FeedPage() {
   const navigate = useNavigate();
@@ -112,7 +113,6 @@ export default function FeedPage() {
           onChange={handleChange}
           variant="scrollable"
           scrollButtons="auto"
-          allowScrollButtonsMobile
           aria-label="scrollable force tabs example"
           textColor="primary"
         >
@@ -130,9 +130,9 @@ export default function FeedPage() {
       <ContainerRestaurants>
         {navList}
       </ContainerRestaurants>
-      <div>
+      <ContainerRenderOrder>
         {params.order && renderOrder()}
-      </div>
+      </ContainerRenderOrder>
       <Footer />
     </div >
   )
