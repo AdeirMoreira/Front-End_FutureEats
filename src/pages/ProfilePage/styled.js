@@ -18,7 +18,8 @@ margin-bottom: 20px;
 export const ScreenContainerProfile = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: space-between;
+align-items: center;
+
 
 `
 export const InformacoesContainer = styled.div`

@@ -3,8 +3,8 @@ import { FutureEats } from '../../globalState/Context'
 import { SignUpRequest } from '../../services/SignUp'
 import { useInput } from '../../Hooks/useInput'
 import { useNavigate } from 'react-router-dom'
-import { InputsContainer, ScreenContainer } from '../SignUpPage/style'
-import { IconButton, TextField } from '@material-ui/core'
+import { InputsContainer, ScreenContainer, Header } from '../SignUpPage/style'
+import { IconButton, TextField, Toolbar } from '@material-ui/core'
 import { Button } from "@material-ui/core"
 import logo from "../../assets/Images/Logo.png"
 import Visibility from "@material-ui/icons/Visibility"
@@ -13,6 +13,10 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
+import { AppBar } from '@material-ui/core'
+import { goToBack } from "../../routes/coordinators"
+
 
 
 export default function SignUpPage() {
@@ -36,12 +40,22 @@ export default function SignUpPage() {
   return (
     <>
       <ScreenContainer>
+      <Header>
+                    <AppBar position="static" style={{ width: "100vw" }} >
+                        <Toolbar variant="dense">
+                            <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                                <ArrowBackIos />
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                </Header>
         <img src={logo} />
-        <p>Cadastrar</p>
+        
         <InputsContainer>
+        <p>Cadastrar</p>
           <form onSubmit={preventDefault}>
 
-            <TextField element={<Button></Button>}
+            <TextField
               name={"name"}
               value={params.dataForm.personalData.form.name}
               onChange={params.dataForm.personalData.onChange}
