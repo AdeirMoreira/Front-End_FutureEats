@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button"
 import { useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
 import Footer from '../../Components/Footer/Footer';
+import { AppBar } from '@material-ui/core'
+import { Toolbar } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -23,18 +26,29 @@ export default function ProfilePage() {
         {(params.user && params.history) &&
           <>
 
-            <p>Meu Perfil</p>
+            <AppBar position="static" style={{ width: "100vw" }} >
+              <Toolbar variant="dense">
+                <Typography  variant="h6" style={{ color: "black", textAlign:"center" }} >
+                  Meu Perfil
+                </Typography>
+              </Toolbar>
+            </AppBar>
 
             <InformacoesContainer>
-              <p>Nome: {params.user.name}</p>
-              <p>E-mail: {params.user.email}</p>
-              <p>CPF: {params.user.cpf}</p>
+              <div>
+              <p>{params.user.name}</p>
+              <p>{params.user.email}</p>
+              <p>{params.user.cpf}</p>
+              </div>
+              <div>
               <Button style={{ color: "black" }}
                 onClick={() => goToEditarCadastroPage(navigate)}
                 color='primary'
                 aria-label='editar-perfil'>
                 <Edit />
               </Button>
+              </div>
+              
             </InformacoesContainer>
             <TitleEndereco>
               <p style={{ color: "#b8b8b8" }}>Endereço cadastrado</p>
@@ -58,9 +72,11 @@ export default function ProfilePage() {
             <p style={{ color: "#5cb646" }}
             >{res.restaurantName}</p>
             <p style={{ fontSize: "12px" }} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
+
             <b>Subtotal: R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
             <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
             <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
+  
           </HistoricoContainer>
         ))}
         <Footer />
