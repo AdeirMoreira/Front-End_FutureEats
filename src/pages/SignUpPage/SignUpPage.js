@@ -60,7 +60,7 @@ export default function SignUpPage() {
               onChange={params.dataForm.personalData.onChange}
               label={"E-mail"}
               variant={"outlined"}
-              inputProps={{ pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$' }}
+              inputProps={{ pattern: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$' }}
               placeholder={"email@email.com"}
               fullWidth
               margin={"normal"}
@@ -132,7 +132,7 @@ export default function SignUpPage() {
                 }
                 labelWidth={70}
               />
-              
+
             </FormControl>
 
             <Button

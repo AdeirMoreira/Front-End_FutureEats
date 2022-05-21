@@ -4,8 +4,9 @@ import { getProfile, getOrdersHistory } from '../../services/ProfilePage';
 import { ScreenContainerProfile, EnderecoContainer, InformacoesContainer, HistoricoContainer, TitleEndereco } from './styled';
 import Edit from "@material-ui/icons/EditOutlined"
 import Button from "@material-ui/core/Button"
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
+import Footer from '../../Components/Footer/Footer';
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -53,18 +54,16 @@ export default function ProfilePage() {
 
         }
         {(params.user && params.history) && params.history.map(res => (
-
-
-
           <HistoricoContainer key={res.createdAt}>
             <p style={{ color: "#5cb646" }}
             >{res.restaurantName}</p>
             <p style={{ fontSize: "12px" }} >Data do pedido: {new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
-            <b>Subtotal: {res.totalPrice}</b>
-            {/* <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
-            <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p> */}
+            <b>Subtotal: R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
+            <p>Horário do pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p>Horário da entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
           </HistoricoContainer>
         ))}
+        <Footer />
       </ScreenContainerProfile>
 
     </div>

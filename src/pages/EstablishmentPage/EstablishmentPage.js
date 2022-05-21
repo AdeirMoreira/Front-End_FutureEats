@@ -9,6 +9,7 @@ import { PopUpQuantity } from '../../Components/PopUpQuantity'
 import Header from '../../Components/Header/Header'
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
+import Footer from '../../Components/Footer/Footer'
 
 export default function EstablishmentPage() {
   const params = useParams();
@@ -138,6 +139,7 @@ export default function EstablishmentPage() {
             id={productId}
           />
         }
+        <Footer />
       </container.FullScreen>
     </div>
   )
