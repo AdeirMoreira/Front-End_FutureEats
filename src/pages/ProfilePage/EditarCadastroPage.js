@@ -1,12 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
-import { InputsContainer, ScreenContainer } from './styled'
+import { InputsContainer, ScreenContainer, Header } from './styled'
 import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
 import useForm from '../../Hooks/useForm'
 import { useNavigate } from 'react-router-dom'
 import { updateProfile } from '../../services/ProfilePage'
 import { getProfile } from '../../services/ProfilePage'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
+import { AppBar } from '@material-ui/core'
+import { Toolbar } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+
+
 
 
 const EditarCadastroPage = () => {
@@ -40,8 +47,26 @@ const EditarCadastroPage = () => {
     <>
       {params.user &&
         <ScreenContainer>
-          <button onClick={() => goToBack(navigate)}>voltar</button>
-          <h3>Editar Cadastro</h3>
+          {/* <Header>
+          <div>
+          <Button onClick={() => goToBack(navigate)}><ArrowBackIos/></Button>
+          </div>
+          <div>
+          <p>Editar Cadastro</p>
+          </div>
+          </Header> */}
+        <Header>
+      <AppBar position="static" style={{width:"100vw"}} >
+        <Toolbar variant="dense">
+          <IconButton onClick={() => goToBack(navigate)} edge="start" style={{color:"black"}} aria-label="voltar">
+            <ArrowBackIos />
+          </IconButton>
+          <Typography variant="h6" style={{color:"black"}} >
+            Perfil
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Header>
           <InputsContainer>
             <form onSubmit={onSubmitForm}>
               <TextField
@@ -74,13 +99,13 @@ const EditarCadastroPage = () => {
                 margin={"normal"}
                 required
               />
-              <Button
+              <Button style={{color:"black", textTransform: 'none', marginTop:"15px"}}
                 type={"submit"}
                 fullWidth
                 variant={'contained'}
                 color={'primary'}
                 margin={'normal'}
-              >Alterar</Button>
+              >Salvar</Button>
             </form>
           </InputsContainer>
         </ScreenContainer>

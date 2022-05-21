@@ -7,6 +7,11 @@ import { useState } from 'react'
 import { SignUpRequestAndress } from '../../services/SignUp'
 import useForm from '../../Hooks/useForm'
 import { useNavigate } from 'react-router-dom'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
+import { AppBar } from '@material-ui/core'
+import { Toolbar } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 const EditarEnderecoPage = () => {
   const navigate = useNavigate()
@@ -28,8 +33,18 @@ const EditarEnderecoPage = () => {
     <>
       {editAddress &&
         <ScreenContainer>
-          <button onClick={() => goToBack(navigate)}>voltar</button>
-          <h3>Editar Endereço</h3>
+ 
+            <AppBar position="static" style={{ width: "100vw" }} >
+              <Toolbar variant="dense">
+                <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                  <ArrowBackIos />
+                </IconButton>
+                <Typography variant="h6" style={{ color: "black" }} >
+                  Endereço
+                </Typography>
+              </Toolbar>
+            </AppBar>
+
           <InputsContainer>
             <form onSubmit={onSubmitForm}>
               <TextField
@@ -92,7 +107,7 @@ const EditarEnderecoPage = () => {
                 margin={"normal"}
                 required
               />
-              <Button
+              <Button style={{color:"black", textTransform:"none", marginTop:"15px"}}
                 type={"submit"}
                 fullWidth
                 variant={'contained'}
