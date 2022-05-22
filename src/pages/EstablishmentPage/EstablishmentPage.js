@@ -31,7 +31,7 @@ export default function EstablishmentPage() {
       if (alreadyInCart) {
         return alreadyInCart
       } else {
-        return { ...e, inCart: false }
+        return { ...e, inCart: false, restaurantId: detail.restDetail.restaurant.id }
       }
     })
     separar(newState)
@@ -106,7 +106,14 @@ export default function EstablishmentPage() {
 
   return (
     <>
-      <Header />
+      <Header
+        setUser={params.setUser}
+        setRestDetail={params.setRestDetail}
+        setHistory={params.setHistory}
+        setRest={params.setRest}
+        setOrder={params.setOrder}
+        setCart={params.setCart} />
+
       <container.FullScreen>
         {detail.restDetail &&
           <container.RestaurantData>
