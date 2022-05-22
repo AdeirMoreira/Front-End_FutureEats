@@ -12,10 +12,8 @@ import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
-import { Search } from '@material-ui/icons/Search';
 import clock from '../../assets/Images/clock.png';
-import { InputAdornment } from '@material-ui/core';
-import { InputProps } from '@material-ui/core';
+import { getProfile } from '../../services/ProfilePage';
 
 export default function FeedPage() {
   const navigate = useNavigate();
@@ -35,6 +33,9 @@ export default function FeedPage() {
     getActiveOrder(params.setOrder)
   }, []);
 
+  useEffect(()=>{
+    getProfile(params.setUser)
+  },[]);
   const [valueCategory, setValueCategory] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -116,9 +117,6 @@ export default function FeedPage() {
           value={search}
           placeholder="Pesquise seu restaurante aqui..."
           onChange={handleSearch}
-          startAdornment = {(
-            <Button><Search /></Button>
-            )}
         />
 
       </SearchContainer>
