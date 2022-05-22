@@ -11,5 +11,6 @@ export const login = (form, navigate, setErrorMessage) => {
         })
         .catch((error) => {
             setErrorMessage(error.response.data.message)
+            alert("Ocorreu um erro, por favor tente mais tarde.")
         })
 }

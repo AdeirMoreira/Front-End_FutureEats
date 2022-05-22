@@ -10,6 +10,7 @@ export const SignUpRequest = async (form, navigate, setErrorMessage) => {
     } catch (err) {
         setErrorMessage(err.response.data.message)
         console.log(err.response.data)
+        alert("Ocorreu um erro, por favor tente mais tarde.")
     }
 }
 

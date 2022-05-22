@@ -22,5 +22,6 @@ export const getActiveOrder = (setOrder) => {
         setOrder(res.data.order)
     }).catch((err) => {
         console.log(err.response)
+        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 };

@@ -9,5 +9,6 @@ export const getRestaurantDetails = (setRestDetail, id, setLoading) => {
         })
         .catch((error) => {
             console.log(error.response)
+            alert("Ocorreu um erro, por favor tente mais tarde.")
         })
 }
