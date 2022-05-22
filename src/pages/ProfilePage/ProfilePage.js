@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useLayoutEffect } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { getProfile, getOrdersHistory } from '../../services/ProfilePage';
 import { ScreenContainerProfile, EnderecoContainer, InformacoesContainer, HistoricoContainer, TitleEndereco } from './styled';
@@ -13,8 +13,8 @@ export default function ProfilePage() {
   const navigate = useNavigate()
   const params = useContext(FutureEats)
 
-  useEffect(() => {
-    !params.user && getProfile(params.setUser)
+  useLayoutEffect(() => {
+    getProfile(params.setUser)
     getOrdersHistory(params.setHistory)
   }, []);
 
@@ -23,7 +23,14 @@ export default function ProfilePage() {
       <ScreenContainerProfile>
         {(params.user && params.history) &&
           <>
-            <Header />
+            <Header
+              setUser={params.setUser}
+              setRestDetail={params.setRestDetail}
+              setHistory={params.setHistory}
+              setRest={params.setRest}
+              setOrder={params.setOrder}
+              setCart={params.setCart} />
+
             <InformacoesContainer>
               <div>
                 <p>{params.user.name}</p>
@@ -38,7 +45,6 @@ export default function ProfilePage() {
                   <Edit />
                 </Button>
               </div>
-
             </InformacoesContainer>
             <TitleEndereco>
               <p style={{ color: "#b8b8b8" }}>Endereço cadastrado</p>
