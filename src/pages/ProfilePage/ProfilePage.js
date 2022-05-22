@@ -7,9 +7,7 @@ import Button from "@material-ui/core/Button"
 import { useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
 import Footer from '../../Components/Footer/Footer';
-import { AppBar } from '@material-ui/core'
-import { Toolbar } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
+import Header from '../../Components/Header/Header';
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -25,30 +23,22 @@ export default function ProfilePage() {
       <ScreenContainerProfile>
         {(params.user && params.history) &&
           <>
-
-            <AppBar position="static" style={{ width: "100vw" }} >
-              <Toolbar variant="dense">
-                <Typography  variant="h6" style={{ color: "black", textAlign:"center" }} >
-                  Meu Perfil
-                </Typography>
-              </Toolbar>
-            </AppBar>
-
+            <Header />
             <InformacoesContainer>
               <div>
-              <p>{params.user.name}</p>
-              <p>{params.user.email}</p>
-              <p>{params.user.cpf}</p>
+                <p>{params.user.name}</p>
+                <p>{params.user.email}</p>
+                <p>{params.user.cpf}</p>
               </div>
               <div>
-              <Button style={{ color: "black" }}
-                onClick={() => goToEditarCadastroPage(navigate)}
-                color='primary'
-                aria-label='editar-perfil'>
-                <Edit />
-              </Button>
+                <Button style={{ color: "black" }}
+                  onClick={() => goToEditarCadastroPage(navigate)}
+                  color='primary'
+                  aria-label='editar-perfil'>
+                  <Edit />
+                </Button>
               </div>
-              
+
             </InformacoesContainer>
             <TitleEndereco>
               <p style={{ color: "#b8b8b8" }}>Endereço cadastrado</p>
@@ -75,8 +65,8 @@ export default function ProfilePage() {
             <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
             <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
             <b>Subtotal: R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
-            
-  
+
+
           </HistoricoContainer>
         ))}
         <Footer />

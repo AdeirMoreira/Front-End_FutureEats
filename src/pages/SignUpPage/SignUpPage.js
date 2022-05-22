@@ -3,7 +3,7 @@ import { FutureEats } from '../../globalState/Context'
 import { SignUpRequest } from '../../services/SignUp'
 import { useInput } from '../../Hooks/useInput'
 import { useNavigate } from 'react-router-dom'
-import { InputsContainer, ScreenContainer, Header } from '../SignUpPage/style'
+import { InputsContainer, ScreenContainer, ErrorMessageContainer } from '../SignUpPage/style'
 import { IconButton, TextField, Toolbar } from '@material-ui/core'
 import { Button } from "@material-ui/core"
 import logo from "../../assets/Images/Logo.png"
@@ -16,13 +16,14 @@ import { InputLabel } from '@material-ui/core'
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import { AppBar } from '@material-ui/core'
 import { goToBack } from "../../routes/coordinators"
+import alertImg from '../../assets/Images/alert.png'
 
 
 
 export default function SignUpPage() {
   const [confirm, handleValue] = useInput('')
-  const [confirmed, setConfirmed] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [messageError, setMessageErro] = useState('')
   const params = useContext(FutureEats)
   const navigate = useNavigate()
 
@@ -30,9 +31,10 @@ export default function SignUpPage() {
   const preventDefault = (event) => {
     event.preventDefault()
     if (params.dataForm.personalData.form.password === confirm) {
-      SignUpRequest(params.dataForm.personalData.form, navigate)
+      messageError && setMessageErro('')
+      SignUpRequest(params.dataForm.personalData.form, navigate, setMessageErro)
     } else {
-      setConfirmed(true)
+      setMessageErro('A senha e a confirmação não são iguais')
     }
   }
 
@@ -40,17 +42,26 @@ export default function SignUpPage() {
   return (
     <>
       <ScreenContainer>
-      <Header>
-                    <AppBar position="static" style={{ width: "100vw" }} >
-                        <Toolbar variant="dense">
-                            <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
-                                <ArrowBackIos />
-                            </IconButton>
-                        </Toolbar>
-                    </AppBar>
-                </Header>
+        <div>
+          <AppBar position="static" style={{ width: "100vw" }} >
+            <Toolbar variant="dense">
+              <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                <ArrowBackIos />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </div>
+
         <img src={logo} />
-        
+        <ErrorMessageContainer>
+          {messageError &&
+            <>
+              <img src={alertImg} />
+              <p>{messageError}</p>
+            </>
+          }
+        </ErrorMessageContainer>
+
         <InputsContainer>
         <p>Cadastrar</p>
           <form onSubmit={preventDefault}>
@@ -117,10 +128,6 @@ export default function SignUpPage() {
                 labelWidth={50}
               />
             </FormControl>
-
-            <>
-              {confirmed && <p>A senha e a confirmação são diferentes</p>}
-            </>
 
             <FormControl variant="outlined" style={{ width: '100%', marginTop: '10px', marginBottom: '25px' }}>
               <InputLabel>Confirmar</InputLabel>
