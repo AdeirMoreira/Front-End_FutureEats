@@ -43,13 +43,10 @@ export default function CartPage() {
 
   return (
     <container.FullScreen>
-      <header>
-        <h2>Meu Carrinho</h2>
-      </header>
       {parms.user &&
         <div style={{ padding: '16px' }}>
           <container.Address>
-            <p>Endereço de Entrega</p>
+            <p>Endereço de entrega</p>
             <p>{parms.user.address}</p>
           </container.Address>
           {parms.cart.length > 0 ?
@@ -68,38 +65,38 @@ export default function CartPage() {
                 />
               </div>
             </> :
-            <container.Vazio><p>Carrinho Vazio</p></container.Vazio>}
+            <container.Vazio><p><b>Carrinho Vazio</b></p></container.Vazio>}
         </div>
       }
       <container.Invoicing >
-        <container.Freight>Frete:R${parms.cart.length === 0 ? '0,00' :
-          parms.restDetail.restaurant.shipping.toFixed(2).replace('.', ',')}
+        <container.Freight><b>Frete R${parms.cart.length === 0 ? '0,00' :
+          parms.restDetail.restaurant.shipping.toFixed(2).replace('.', ',')}</b>
         </container.Freight>
         <container.TotalPrice>
-          <span>SUBTOTAL</span>
-          <span>R${Price !== undefined ? Price.toFixed(2).replace('.', ',') : '0,00'}</span>
+        <span>SUBTOTAL</span>
+        <span>R${Price !== undefined ? Price.toFixed(2).replace('.', ',') : '0,00'}</span>
         </container.TotalPrice>
         <container.Paymentmethod>
-          <p>Forma de Pagamento</p>
+        <b><p>Forma de Pagamento</p></b>
           <container.Line></container.Line>
           <container.Radio>
             <input type='radio' id='money' value={'money'} name={'paymentMetod'} onChange={handlePaymentMethod} />
-            <label htmlFor='money'>Dinheiro</label>
+            <b><label htmlFor='money'>Dinheiro</label></b>
           </container.Radio>
           <container.Radio>
             <input type='radio' id='creditcard' value={'creditcard'} name={'paymentMetod'} onChange={handlePaymentMethod} />
-            <label htmlFor='creditcard'>Cartão de Crédito</label>
+            <b><label htmlFor='creditcard'>Cartão de Crédito</label></b>
           </container.Radio>
         </container.Paymentmethod>
         <container.Teste>
-          <Button onClick={buildBodyRequest} color={'primary'} fullWidth variant='contained' >Confirmar</Button>
+          <Button style={{ color: "black", textTransform: 'none' }} onClick={buildBodyRequest} color={'primary'} fullWidth variant='contained' >Confirmar</Button>
         </container.Teste>
       </container.Invoicing>
       {showPopUp &&
         <container.PopUp>
           <container.MessagePopUP>
             <button onClick={() => setShowPopUp(false)}><img src={XButton} /></button>
-            <p>Selecione um metodo de Pagamento</p>
+            <p>Selecione um método de Pagamento</p>
           </container.MessagePopUP>
         </container.PopUp>
       }

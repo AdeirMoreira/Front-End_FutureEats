@@ -81,7 +81,8 @@ export const Invoicing = styled.div`
 export const TotalPrice = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;        
+    font-weight: bold;
     span:nth-of-type(2){
         color: #5cb646;
         font-size: 16px;

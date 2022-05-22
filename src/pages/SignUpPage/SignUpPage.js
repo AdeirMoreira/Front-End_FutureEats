@@ -52,7 +52,6 @@ export default function SignUpPage() {
         <img src={logo} />
         
         <InputsContainer>
-        <p>Cadastrar</p>
           <form onSubmit={preventDefault}>
 
             <TextField
@@ -147,7 +146,7 @@ export default function SignUpPage() {
               />
 
             </FormControl>
-            <Button
+            <Button style={{ color: "black", textTransform: 'none' }}
               type={"submit"}
               fullWidth
               variant={'contained'}
