@@ -52,6 +52,7 @@ export default function SignUpPage() {
         <img src={logo} />
         
         <InputsContainer>
+        <p>Cadastrar</p>
           <form onSubmit={preventDefault}>
 
             <TextField
@@ -72,7 +73,7 @@ export default function SignUpPage() {
               onChange={params.dataForm.personalData.onChange}
               label={"E-mail"}
               variant={"outlined"}
-              inputProps={{ pattern: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$' }}
+              // inputProps={{ pattern: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$' }}
               placeholder={"email@email.com"}
               fullWidth
               margin={"normal"}
@@ -84,7 +85,7 @@ export default function SignUpPage() {
               value={params.dataForm.personalData.form.cpf}
               onChange={params.dataForm.personalData.onChange}
               label={"CPF"}
-              inputProps={{ pattern: "([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" }}
+              // inputProps={{ pattern: "([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" }}
               variant={"outlined"}
               placeholder={"000.000.000-00"}
               fullWidth
@@ -100,7 +101,7 @@ export default function SignUpPage() {
                 value={params.dataForm.personalData.form.password}
                 onChange={params.dataForm.personalData.onChange}
                 required
-                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                // inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
                 placeholder={'Mínimo 6 caracteres entre letras e números'}
                 endAdornment={
                   <InputAdornment position="end">
@@ -129,7 +130,7 @@ export default function SignUpPage() {
                 value={confirm}
                 onChange={handleValue}
                 required
-                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                // inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
                 placeholder={'Confirme a senha anterior'}
                 endAdornment={
                   <InputAdornment position="end">

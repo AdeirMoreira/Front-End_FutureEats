@@ -47,14 +47,6 @@ const EditarCadastroPage = () => {
     <>
       {params.user &&
         <ScreenContainer>
-          {/* <Header>
-          <div>
-          <Button onClick={() => goToBack(navigate)}><ArrowBackIos/></Button>
-          </div>
-          <div>
-          <p>Editar Cadastro</p>
-          </div>
-          </Header> */}
         <Header>
       <AppBar position="static" style={{width:"100vw"}} >
         <Toolbar variant="dense">

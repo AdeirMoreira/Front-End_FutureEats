@@ -124,3 +124,8 @@ img{
 height: 30px;
 }
 `
+export const SearchContainer= styled.div`
+display: flex;
+justify-content: center;
+`
+
