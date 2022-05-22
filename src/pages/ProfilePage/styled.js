@@ -22,7 +22,7 @@ flex-direction: column;
 align-items: center;
 `
 
-export const TitleEndereco=styled.div`
+export const TitleEndereco = styled.div`
 margin-bottom: -30px;
 `
 
@@ -39,11 +39,12 @@ flex-direction: column;
 export const HistoricoContainer = styled.div`
 width: 80%;
 margin: 5px;
-padding: 5px;
+padding: 16px;
 border: 1px solid #b8b8b8;
 border-radius: 8px;
 p{
-    font-weight: bold;
+    margin: 0;
+    padding: 2px;
 }
 `
 
@@ -99,6 +100,10 @@ grid-template:
 /1fr;
 margin-top: 25px;
 background-color: #eeeeee;
+padding: 16px;
+p{
+    margin: 0;
+}
 `
 
 export const TituloEndereco = styled.div`

@@ -23,16 +23,16 @@ export default function ProfilePage() {
     <div>
 
       <ScreenContainerProfile>
+        <Header
+          setUser={params.setUser}
+          setRestDetail={params.setRestDetail}
+          setHistory={params.setHistory}
+          setRest={params.setRest}
+          setOrder={params.setOrder}
+          setCart={params.setCart} />
         {(params.user && params.history) &&
-
           <div>
-            <Header
-              setUser={params.setUser}
-              setRestDetail={params.setRestDetail}
-              setHistory={params.setHistory}
-              setRest={params.setRest}
-              setOrder={params.setOrder}
-              setCart={params.setCart} />
+
             <ContainerDados>
               <ContainerName>
                 <p>{params.user.name}</p>
@@ -50,32 +50,6 @@ export default function ProfilePage() {
                 <Edit />
               </Button>
             </ContainerDados>
-              </div>
-
-              <div>
-                <Button style={{ color: "black" }}
-                  onClick={() => goToEditarCadastroPage(navigate)}
-                  color='primary'
-                  aria-label='editar-perfil'>
-                  <Edit />
-                </Button>
-              </div>
-            </InformacoesContainer>
-            <TitleEndereco>
-              <p style={{ color: "#b8b8b8" }}>Endereço cadastrado</p>
-            </TitleEndereco>
-            <EnderecoContainer>
-              <p>Endereço: {params.user.address}</p>
-              <div>
-                <Button style={{ color: "black" }}
-                  onClick={() => goToEditarEndereçoPage(navigate)}
-                  arial-label='editar-endereço'
-                ><Edit /></Button>
-              </div>
-            </EnderecoContainer>
-            <p>Histórico de Pedidos</p>
-
-          </>
 
             <ContainerEndereco>
               <TituloEndereco>
@@ -94,16 +68,15 @@ export default function ProfilePage() {
           </div>
         }
         <ContainerTitulo>
-        <p>Histórico de pedidos</p>
+          <p>Histórico de pedidos</p>
         </ContainerTitulo>
         {(params.user && params.history) && params.history.map(res => (
           <HistoricoContainer key={res.createdAt}>
             <p style={{ color: "#5cb646" }}>{res.restaurantName}</p>
             <p style={{ fontSize: "12px" }} >{new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
-            {/* <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
-            <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p> */}
-            <p>SUBTOTAL R${res.totalPrice.toFixed(2).replace('.', ',')}</p>
-
+            <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <b>SUBTOTAL R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
 
           </HistoricoContainer>
         ))}
