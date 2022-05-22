@@ -47,7 +47,7 @@
 
 🛒 Carrinho e finalizar compra
 - [x] Visualizar a lista de itens que adicionou ao carrinho
-- [x] Caso o usuário não tenha adicionado nenhum item, deverá ver uma mensagem de "Carrinho Vazio"
+- [x] Caso o usuário não tenha adicionado nenhum item, deverá ver a mensagem de "Carrinho vazio"
 - [x] Visualizar, no topo da tela, o endereço de entrega
 - [x] Visualizar o preço total da compra
 - [x] Selecionar uma forma de pagamento dentre as opções de dinheiro e cartão de crédito
