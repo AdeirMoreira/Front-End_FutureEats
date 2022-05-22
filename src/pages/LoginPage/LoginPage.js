@@ -28,7 +28,6 @@ export default function LoginPage() {
     <>
       <ScreenContainer>
         <img src={logo} />
-        <p>Entrar</p>
         <InputsContainer>
           <form onSubmit={onSubmitForm}>
             <TextField
@@ -82,7 +81,7 @@ export default function LoginPage() {
             variant={'text'}
             margin={"normal"}
             type={"submit"}
-          > Não possui cadastro? Clique aqui.</Button>
+          ><b>Não possui cadastro? Clique aqui.</b></Button>
         </InputsContainer>
       </ScreenContainer>
     </>

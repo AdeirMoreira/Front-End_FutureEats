@@ -5,9 +5,10 @@ display: flex;
 flex-direction: column;
 align-items: center;
 text-align: center;
-padding-top:25vh;
+padding-top: 15vh;
 img{
     width: 150px;
+    margin-bottom: 50px;
 }
 `
 export const InputsContainer = styled.div`

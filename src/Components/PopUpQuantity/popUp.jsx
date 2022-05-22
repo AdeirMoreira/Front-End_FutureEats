@@ -8,7 +8,7 @@ export const PopUpQuantity = ({ displawPopUp, handleQuantidade, quantidade, twoF
             {displawPopUp &&
                 <container.PopUp>
                     <container.SelectQuantidade>
-                        <p>Selecione a quantidade desejada</p>
+                        <p><b>Selecione a quantidade desejada</b></p>
                         <select onChange={handleQuantidade} name='quantidade' id='quantidade' value={quantidade} required>
                             <option value='' disabled >0</option>
                             <option value={1} key={1}>1</option>
