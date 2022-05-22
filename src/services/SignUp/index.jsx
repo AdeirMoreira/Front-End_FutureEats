@@ -13,13 +13,13 @@ export const SignUpRequest = async (form, navigate, setErrorMessage) => {
     }
 }
 
-export const SignUpRequestAndress = async (form, navigate) => {
+export const SignUpRequestAndress = async (form, navigate, setErrorMessage) => {
     try {
         const response = await axios.put(`${baseURL}/address`, form, headers)
         window.localStorage.setItem('token', response.data.token)
         navigate && goToFeedPage(navigate)
     } catch (err) {
-        console.log(err.response)
+        setErrorMessage(err.response.data.message)
         alert('desculpe, ocorreu um erro, tente novamente')
     }
 }

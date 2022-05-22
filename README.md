@@ -16,4 +16,4 @@
  
 <h2 id="imagens">📱 Imagens do site</h2>
 
-![mockup - 2105 (3)](https://user-images.githubusercontent.com/98977257/169675706-1e158af4-98b6-4c66-bf37-c043c5981c4f.png)
+![mockup - 2105 (4)](https://user-images.githubusercontent.com/98977257/169715748-729b6965-7e8b-48be-b60f-e9291bc91f46.png)

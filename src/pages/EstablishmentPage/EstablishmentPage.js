@@ -10,6 +10,7 @@ import Header from '../../Components/Header/Header'
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 import Footer from '../../Components/Footer/Footer'
+import LoadingCompoent from '../../Components/Loading/loading'
 
 export default function EstablishmentPage() {
   const params = useParams();
@@ -20,18 +21,21 @@ export default function EstablishmentPage() {
   const [Principais, setPrincipais] = useState([])
   const [Acompanhamento, setAcompanhamento] = useState([])
   const [category, setCategory] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id), [])
+  useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id, setLoading), [])
   useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products, detail.cart)
     , [detail.restDetail])
 
   const addPropertyInCart = (array, cart) => {
+    const anotherRestaurantProduct = cart.find(e => e.id !== detail.restDetail.restaurant.id)
+    anotherRestaurantProduct && detail.setCart([])
     const newState = array.map(e => {
       const alreadyInCart = cart.find(a => a.id === e.id)
       if (alreadyInCart) {
         return alreadyInCart
       } else {
-        return { ...e, inCart: false }
+        return { ...e, inCart: false, restaurantId: detail.restDetail.restaurant.id }
       }
     })
     separar(newState)
@@ -50,6 +54,7 @@ export default function EstablishmentPage() {
     })
     setPrincipais(principal)
     setAcompanhamento(acompanhamentos)
+    setLoading(false)
   }
 
   const UpdateProductCard = (products) => {
@@ -106,42 +111,61 @@ export default function EstablishmentPage() {
 
   return (
     <>
-      <Header />
+      <Header
+        setUser={params.setUser}
+        setRestDetail={params.setRestDetail}
+        setHistory={params.setHistory}
+        setRest={params.setRest}
+        setOrder={params.setOrder}
+        setCart={params.setCart} />
+
       <container.FullScreen>
-        {detail.restDetail &&
-          <container.RestaurantData>
-            <container.RestaurantLogoImg src={detail.restDetail.restaurant.logoUrl} />
-            <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
-            <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
-            <container.Freight>
-              <container.Paragrafo><img src={time} /> {detail.restDetail.restaurant.deliveryTime} min</container.Paragrafo>
-              <container.Paragrafo><img src={delivery} /> Frete R${detail.restDetail.restaurant.shipping}</container.Paragrafo>
-            </container.Freight>
-            <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
-          </container.RestaurantData>
+        {
+          loading ?
+            <container.Loading>
+              <LoadingCompoent />
+            </container.Loading>
+            :
+            <>
+              {detail.restDetail &&
+                <>
+                  <container.RestaurantData>
+                    <container.RestaurantLogoImg src={detail.restDetail.restaurant.logoUrl} />
+                    <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
+                    <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
+                    <container.Freight>
+                      <container.Paragrafo><img src={time} /> {detail.restDetail.restaurant.deliveryTime} min</container.Paragrafo>
+                      <container.Paragrafo><img src={delivery} /> Frete R${detail.restDetail.restaurant.shipping}</container.Paragrafo>
+                    </container.Freight>
+                    <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
+                  </container.RestaurantData>
+                  <container.AllCards>
+                    <h3>Principais</h3>
+                    <container.Line>
+                    </container.Line>
+                    <ProductsCard
+                      products={Principais}
+                      twoFunction={twoFunctionOpen}
+                      category={'Principais'}
+                      removeProduct={removeProduct}
+                    />
+                  </container.AllCards>
+                  <container.AllCards>
+                    <h3>Acompanhamentos</h3>
+                    <container.Line>
+                    </container.Line>
+                    <ProductsCard
+                      products={Acompanhamento}
+                      twoFunction={twoFunctionOpen}
+                      category={'Acompanhamentos'}
+                      removeProduct={removeProduct}
+                    />
+                  </container.AllCards>
+                </>
+              }
+            </>
         }
-        <container.AllCards>
-          <h3>Principais</h3>
-          <container.Line>
-          </container.Line>
-          <ProductsCard
-            products={Principais}
-            twoFunction={twoFunctionOpen}
-            category={'Principais'}
-            removeProduct={removeProduct}
-          />
-        </container.AllCards>
-        <container.AllCards>
-          <h3>Acompanhamentos</h3>
-          <container.Line>
-          </container.Line>
-          <ProductsCard
-            products={Acompanhamento}
-            twoFunction={twoFunctionOpen}
-            category={'Acompanhamentos'}
-            removeProduct={removeProduct}
-          />
-        </container.AllCards>
+
         {showPopUpFunction &&
           <PopUpQuantity
             displawPopUp={displawPopUp}

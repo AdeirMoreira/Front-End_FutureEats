@@ -18,7 +18,7 @@ export default function CartPage() {
   const [paymentMethod, handlePaymentMethod] = useInput('')
   const [showPopUp, setShowPopUp] = useState(false)
   const [popUp, setMessage] = useState('')
-
+  console.log(parms.cart)
   useEffect(() => getProfile(parms.setUser), [])
   useEffect(() => getActiveOrder(parms.setOrder), [])
   useEffect(() => activeOrderAlert(), [])
@@ -29,6 +29,7 @@ export default function CartPage() {
       parms.setCart([])
       setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
       quando seu pedido atual estiver concluído`)
+
       setShowPopUp(true)
     }
   }
@@ -63,7 +64,7 @@ export default function CartPage() {
   }
 
   const noPaymentMethod = () => {
-    setMessage('Selecione um método de Pagamento')
+    setMessage('Selecione um método de pagamento')
     setShowPopUp(true)
   }
 
@@ -83,7 +84,14 @@ export default function CartPage() {
 
   return (
     <container.FullScreen>
-      <Header />
+      <Header
+        setUser={parms.setUser}
+        setRestDetail={parms.setRestDetail}
+        setHistory={parms.setHistory}
+        setRest={parms.setRest}
+        setOrder={parms.setOrder}
+        setCart={parms.setCart} />
+
       {parms.user &&
         <div style={{ padding: '16px' }}>
           <container.Address>

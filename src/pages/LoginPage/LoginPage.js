@@ -25,7 +25,6 @@ export default function LoginPage() {
     event.preventDefault()
     login(params.dataForm.loginData.form, navigate, setMessageErro)
   }
-
   return (
     <>
       <ScreenContainer>
