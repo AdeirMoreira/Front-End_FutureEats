@@ -96,7 +96,6 @@ background-color: #5cb646;
 export const ContainerPedido = styled.div`
 grid-area: pedido;
 padding: 10px;
-background-color: green;
 h4{
 color: white;
 margin: 0;
