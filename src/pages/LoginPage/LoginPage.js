@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { login } from '../../services/LoginRequest/login'
 import logo from "../../assets/Images/Logo.png"
-import { InputsContainer, ScreenContainer } from '../LoginPage/styled'
+import { ErrorMessageContainer, InputsContainer, ScreenContainer } from '../LoginPage/styled'
 import { Button, IconButton, TextField } from '@material-ui/core'
 import Visibility from "@material-ui/icons/Visibility"
 import VisibilityOff from "@material-ui/icons/VisibilityOff"
@@ -12,22 +12,32 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { goToCadastro } from '../../routes/coordinators'
+import alertImg from '../../assets/Images/alert.png'
 
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const params = useContext(FutureEats)
   const [showPassword, setShowPassword] = useState(false)
+  const [messageError, setMessageErro] = useState('')
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    login(params.dataForm.loginData.form, navigate)
+    login(params.dataForm.loginData.form, navigate, setMessageErro)
   }
 
   return (
     <>
       <ScreenContainer>
         <img src={logo} />
+        <ErrorMessageContainer>
+          {messageError &&
+            <>
+              <img src={alertImg} />
+              <p>{messageError}</p>
+            </>
+          }
+        </ErrorMessageContainer>
         <InputsContainer>
           <form onSubmit={onSubmitForm}>
             <TextField
