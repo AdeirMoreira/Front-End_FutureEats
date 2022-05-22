@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder } from './styled';
+import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder, ContainerOrderActive, ContainerPedido, ContainerNome, ContainerTotal, ContainerClock } from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
 import { Box, Tab, Tabs, TextField } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer'
@@ -15,7 +15,7 @@ import { OutlinedInput } from '@material-ui/core';
 import { InputAdornment } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { Search } from '@material-ui/icons/Search';
-
+import clock from '../../assets/Images/clock.png';
 
 export default function FeedPage() {
   const navigate = useNavigate();
@@ -42,13 +42,22 @@ export default function FeedPage() {
   };
 
   const renderOrder = () => (
-    <div>
-      <p>Pedido em andamento:</p>
-      <p>{params.order.restaurantName}</p>
-      {params.order.totalPrice &&
-        <p>Total: R${params.order.totalPrice.toFixed(2).replace('.', ',')}</p>
-      }
-    </div>
+    <ContainerOrderActive>
+      <ContainerPedido>
+        <h4>Pedido em andamento</h4>
+      </ContainerPedido>
+      <ContainerNome>
+        <h5>{params.order.restaurantName}</h5>
+      </ContainerNome>
+      <ContainerTotal>
+        {params.order.totalPrice &&
+          <h5>SUBTOTAL R${params.order.totalPrice.toFixed(2).replace('.', ',')}</h5>
+        }
+      </ContainerTotal>
+      <ContainerClock>
+        <img src={clock} />
+      </ContainerClock>
+    </ContainerOrderActive>
   )
 
   const navList = params.rest

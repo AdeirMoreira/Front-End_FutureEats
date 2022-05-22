@@ -82,3 +82,45 @@ padding-bottom: 10px;
 export const ContainerRenderOrder = styled.div`
     padding-bottom: 50px;
 `
+
+export const ContainerOrderActive = styled.div`
+display: grid;
+grid-template: 
+'clock pedido' 1fr
+'clock nome' 1fr
+'clock total' 1fr
+/1fr 3fr;
+background-color: #5cb646;
+`
+
+export const ContainerPedido = styled.div`
+grid-area: pedido;
+padding: 10px;
+h4{
+color: white;
+margin: 0;
+}
+`
+export const ContainerNome = styled.div`
+grid-area: nome;
+padding: 10px;
+h5{
+margin: 0;
+}
+`
+export const ContainerTotal = styled.div`
+grid-area: total;
+padding: 10px;
+h5{
+margin: 0;
+}
+`
+export const ContainerClock = styled.div`
+grid-area: clock;
+display: flex;
+justify-content: center;
+align-items: center;
+img{
+height: 30px;
+}
+`
