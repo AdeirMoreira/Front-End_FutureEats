@@ -1,29 +1,31 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FutureEats } from "../../globalState/Context"
 import { SignUpRequestAndress } from "../../services/SignUp"
 import { TextField } from "@material-ui/core"
-import { InputsContainer, ScreenContainer, Header } from "../SingUpAndressPage/styled"
+import { InputsContainer, ScreenContainer, ErrorMessageContainer } from "../SingUpAndressPage/styled"
 import { Button } from "@material-ui/core"
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import { AppBar } from '@material-ui/core'
 import { goToBack } from "../../routes/coordinators"
 import { Toolbar } from "@material-ui/core"
 import { IconButton } from "@material-ui/core"
+import alertImg from '../../assets/Images/alert.png'
 
 export default function SignUpPageAndress() {
     const params = useContext(FutureEats)
     const navigate = useNavigate()
+    const [messageError, setMessageErro] = useState('')
 
     const preventDefault = (e) => {
         e.preventDefault()
-        SignUpRequestAndress(params.dataForm.andressData.form, navigate)
+        SignUpRequestAndress(params.dataForm.andressData.form, navigate, setMessageErro)
     }
 
     return (
 
         <ScreenContainer>
-            <Header>
+            <div>
                 <AppBar position="static" style={{ width: "100vw" }} >
                     <Toolbar variant="dense">
                         <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
@@ -31,10 +33,18 @@ export default function SignUpPageAndress() {
                         </IconButton>
                     </Toolbar>
                 </AppBar>
-            </Header>
+            </div>
+
+            <ErrorMessageContainer>
+                {messageError &&
+                    <>
+                        <img src={alertImg} />
+                        <p>{messageError}</p>
+                    </>
+                }
+            </ErrorMessageContainer>
 
             <InputsContainer>
-                <p>Meu endereço</p>
                 <form onSubmit={preventDefault}>
                     <TextField
                         fullWidth
@@ -46,8 +56,8 @@ export default function SignUpPageAndress() {
                         label={"Logradouro"}
                         margin={"normal"}
                         required
-
                     />
+
                     <TextField
                         fullWidth
                         name="number"
@@ -61,7 +71,6 @@ export default function SignUpPageAndress() {
                         required
                     />
 
-
                     <TextField
                         fullWidth
                         name="city"
@@ -72,7 +81,6 @@ export default function SignUpPageAndress() {
                         label={"Cidade"}
                         margin={"normal"}
                         required
-
                     />
                     <TextField
                         fullWidth
@@ -84,7 +92,6 @@ export default function SignUpPageAndress() {
                         label={"Bairro"}
                         margin={"normal"}
                         required
-
                     />
 
                     <TextField
@@ -97,7 +104,6 @@ export default function SignUpPageAndress() {
                         label={"Estado"}
                         margin={"normal"}
                         required
-
                     />
 
                     <TextField
@@ -110,7 +116,6 @@ export default function SignUpPageAndress() {
                         label={"Complemento"}
                         margin={"normal"}
                         required
-
                     />
 
                     <Button style={{ color: "black", textTransform: 'none', marginTop: "20px" }}

@@ -8,10 +8,8 @@ export const login = (form, navigate, setErrorMessage) => {
         .then((response) => {
             localStorage.setItem("token", response.data.token);
             goToFeedPage(navigate);
-            console.log(response.data)
         })
         .catch((error) => {
             setErrorMessage(error.response.data.message)
-            console.log(error.response)
         })
 }

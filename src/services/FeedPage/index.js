@@ -2,7 +2,7 @@ import axios from 'axios';
 import { baseURL, headers } from '../../constants/constants';
 
 export const getRestaurants = (setRest) => {
-
+    console.log(headers)
     axios.get(`${baseURL}/restaurants`, headers
     ).then((res) => {
         setRest(res.data.restaurants)
@@ -13,7 +13,7 @@ export const getRestaurants = (setRest) => {
 };
 
 export const getActiveOrder = (setOrder) => {
-
+    console.log(headers)
     axios.get(`${baseURL}/active-order`, headers
     ).then((res) => {
         setOrder(res.data.order)

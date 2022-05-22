@@ -5,11 +5,17 @@ import { gotoLogin } from '../../routes/coordinators'
 import { Button } from '@material-ui/core'
 import { ExitToApp } from '@material-ui/icons'
 
-export default function Header() {
+export default function Header(props) {
   const navigate = useNavigate()
   const logOut = () => {
     window.localStorage.removeItem('token')
     gotoLogin(navigate)
+    props.setUser('')
+    props.setRest([])
+    props.setHistory()
+    props.setRestDetail()
+    props.setOrder()
+    props.setCart([])
   }
   return (
     <ContainerHeader>
