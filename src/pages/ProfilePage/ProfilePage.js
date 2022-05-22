@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/coordinators';
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
+import LoadingCompoent from '../../Components/Loading/loading';
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -20,6 +21,7 @@ export default function ProfilePage() {
 
   return (
     <div>
+
       <ScreenContainerProfile>
         {(params.user && params.history) &&
 
