@@ -7,7 +7,7 @@ export const GlobalState = (props) => {
     const [user, setUser] = useState()
     const [history, setHistory] = useState()
     const [rest, setRest] = useState([])
-    const [order, setOrder] = useState([])
+    const [order, setOrder] = useState()
     const [cart, setCart] = useState([])
 
     // useEffect(() => console.log(cart), [cart])
