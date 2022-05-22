@@ -7,7 +7,7 @@ export const getProfile = (setUser) => {
         setUser(res.data.user)
     }).catch((err) => {
         console.log(err.response)
-        alert("a net ta ruim, tente meia noite 👍")
+        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 }
 
@@ -17,7 +17,7 @@ export const getOrdersHistory = (setHistory) => {
         setHistory(res.data.orders)
     }).catch((err) => {
         console.log(err.response)
-        alert("vo ve e te aviso")
+        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 }
 
@@ -28,13 +28,14 @@ export const getEditAddress = (setEditAddress, setForm) => {
         setForm(res.data.address)
     }).catch((err) => {
         console.log(err.response)
+        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 }
 
 export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, cleanFields) => {
     axios.put(`${baseURL}/profile`, form, headers
     ).then((res) => {
-        // setForm(setPersonalFormInputs(res.data))
+        setForm(setPersonalFormInputs(res.data))
         cleanFields()
         setUser(setPersonalFormInputs(res.data))
     }).catch((err) => {
