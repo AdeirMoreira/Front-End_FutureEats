@@ -21,95 +21,108 @@ export default function SignUpPageAndress() {
     }
 
     return (
-        
-            <ScreenContainer>
-                 <Header>
-                    <AppBar position="static" style={{ width: "100vw" }} >
-                        <Toolbar variant="dense">
-                            <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
-                                <ArrowBackIos />
-                            </IconButton>
-                        </Toolbar>
-                    </AppBar>
-                </Header>
-                
-                <InputsContainer>
+
+        <ScreenContainer>
+            <Header>
+                <AppBar position="static" style={{ width: "100vw" }} >
+                    <Toolbar variant="dense">
+                        <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                            <ArrowBackIos />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+            </Header>
+
+            <InputsContainer>
                 <p>Meu endereço</p>
-                    <form onSubmit={preventDefault}>
-                        <TextField
-                            fullWidth
-                            name="street"
-                            value={params.dataForm.andressData.form.street}
-                            onChange={params.dataForm.andressData.onChange}
-                            placeholder='Rua / AV'
-                            variant={"outlined"}
-                            label={"Logradouro"}
-                            margin={"normal"}
-                            required
+                <form onSubmit={preventDefault}>
+                    <TextField
+                        fullWidth
+                        name="street"
+                        value={params.dataForm.andressData.form.street}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Rua / AV'
+                        variant={"outlined"}
+                        label={"Logradouro"}
+                        margin={"normal"}
+                        required
 
-                        />
-                        <TextField
-                            fullWidth
-                            name="number"
-                            type="number"
-                            value={params.dataForm.andressData.form.number}
-                            onChange={params.dataForm.andressData.onChange}
-                            placeholder='Número'
-                            variant={"outlined"}
-                            label={"Número"}
-                            margin={"normal"}
-                            required
-                        />
-
-
-                        <TextField
-                            fullWidth
-                            name="city"
-                            value={params.dataForm.andressData.form.city}
-                            onChange={params.dataForm.andressData.onChange}
-                            placeholder='Cidade'
-                            variant={"outlined"}
-                            label={"Cidade"}
-                            margin={"normal"}
-                            required
-
-                        />
-
-                        <TextField
-                            fullWidth
-                            name="state"
-                            value={params.dataForm.andressData.form.state}
-                            onChange={params.dataForm.andressData.onChange}
-                            placeholder='Estado'
-                            variant={"outlined"}
-                            label={"Estado"}
-                            margin={"normal"}
-                            required
-
-                        />
-
-                        <TextField
-                            fullWidth
-                            name="complement"
-                            value={params.dataForm.andressData.form.complement}
-                            onChange={params.dataForm.andressData.onChange}
-                            placeholder='Apto / Bloco'
-                            variant={"outlined"}
-                            label={"Complemento"}
-                            margin={"normal"}
-                            required
-
-                        />
+                    />
+                    <TextField
+                        fullWidth
+                        name="number"
+                        type="number"
+                        value={params.dataForm.andressData.form.number}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Número'
+                        variant={"outlined"}
+                        label={"Número"}
+                        margin={"normal"}
+                        required
+                    />
 
 
-                        <Button style={{ color: "black", textTransform: 'none', marginTop:"20px" }}
-                            type={"submit"}
-                            fullWidth
-                            variant={'contained'}
-                            color={'primary'}
-                            margin={'normal'}
-                        >Enviar</Button>
-                        {/* <label htmlFor='street'>Logadouro*
+                    <TextField
+                        fullWidth
+                        name="city"
+                        value={params.dataForm.andressData.form.city}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Cidade'
+                        variant={"outlined"}
+                        label={"Cidade"}
+                        margin={"normal"}
+                        required
+
+                    />
+                    <TextField
+                        fullWidth
+                        name="neighbourhood"
+                        value={params.dataForm.andressData.form.neighbourhood}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Bairro'
+                        variant={"outlined"}
+                        label={"Bairro"}
+                        margin={"normal"}
+                        required
+
+                    />
+
+                    <TextField
+                        fullWidth
+                        name="state"
+                        value={params.dataForm.andressData.form.state}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Estado'
+                        variant={"outlined"}
+                        label={"Estado"}
+                        margin={"normal"}
+                        required
+
+                    />
+
+                    <TextField
+                        fullWidth
+                        name="complement"
+                        value={params.dataForm.andressData.form.complement}
+                        onChange={params.dataForm.andressData.onChange}
+                        placeholder='Apto / Bloco'
+                        variant={"outlined"}
+                        label={"Complemento"}
+                        margin={"normal"}
+                        required
+
+                    />
+
+
+
+                    <Button style={{ color: "black", textTransform: 'none', marginTop: "20px" }}
+                        type={"submit"}
+                        fullWidth
+                        variant={'contained'}
+                        color={'primary'}
+                        margin={'normal'}
+                    >Enviar</Button>
+                    {/* <label htmlFor='street'>Logadouro*
                         <input
                         id='street'
                         name='street' value={params.dataForm.andressData.form.street}
@@ -148,14 +161,15 @@ export default function SignUpPageAndress() {
                         name='complement' value={params.dataForm.andressData.form.complement}
                         onChange={params.dataForm.andressData.onChange}
                         placeholder='Apto / Bloco' />
-                        </label>  */}
+                        </label> 
+                        <button>enviar</button> */}
 
-                        </form>
-                        </InputsContainer>
-                        </ScreenContainer>
-                        
+                </form>
+            </InputsContainer>
+        </ScreenContainer>
 
 
-)
+
+    )
 }
 
