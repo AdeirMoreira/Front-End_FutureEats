@@ -13,9 +13,6 @@ import { Toolbar } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
 
-
-
-
 const EditarCadastroPage = () => {
   const navigate = useNavigate()
   const params = useContext(FutureEats)

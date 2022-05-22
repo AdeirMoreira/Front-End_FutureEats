@@ -113,8 +113,6 @@ export default function SignUpPageAndress() {
 
                     />
 
-
-
                     <Button style={{ color: "black", textTransform: 'none', marginTop: "20px" }}
                         type={"submit"}
                         fullWidth

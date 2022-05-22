@@ -28,7 +28,7 @@ export default function CartPage() {
     if (parms.order) {
       parms.setCart([])
       setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
-      quando seu pedio atual estiver concluido`)
+      quando seu pedio atual estiver concluído`)
       setShowPopUp(true)
     }
   }
@@ -57,13 +57,13 @@ export default function CartPage() {
 
   const cleanCart = () => {
     parms.setCart([])
-    setMessage('Seu Pedido está sendo preparado em embreve chegará na sua Casa')
+    setMessage('Seu pedido está sendo preparado e em breve chegará em sua rensidência')
     setShowPopUp(true)
     getActiveOrder(parms.setOrder)
   }
 
   const noPaymentMethod = () => {
-    setMessage('Selecione um método de Pagamento')
+    setMessage('Selecione um método de pagamento')
     setShowPopUp(true)
   }
 
@@ -73,7 +73,7 @@ export default function CartPage() {
     } else if (parms.order) {
       parms.setCart([])
       setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
-      quando seu pedio atual estiver concluido`)
+      quando seu pedio atual estiver sido concluído`)
       setShowPopUp(true)
     } else {
       setMessage('Seu carrinho está vazio')
