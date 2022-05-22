@@ -14,7 +14,7 @@ export default function ProfilePage() {
   const params = useContext(FutureEats)
 
   useEffect(() => {
-    getProfile(params.setUser)
+    !params.user && getProfile(params.setUser)
     getOrdersHistory(params.setHistory)
   }, []);
 

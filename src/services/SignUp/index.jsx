@@ -14,7 +14,6 @@ export const SignUpRequest = async (form, navigate, setErrorMessage) => {
 }
 
 export const SignUpRequestAndress = async (form, navigate) => {
-    console.log(headers)
     try {
         const response = await axios.put(`${baseURL}/address`, form, headers)
         window.localStorage.setItem('token', response.data.token)

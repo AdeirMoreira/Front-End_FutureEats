@@ -2,20 +2,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FutureEats } from '../../globalState/Context';
 import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
-import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants, ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder, ContainerOrderActive, ContainerPedido, ContainerNome, ContainerTotal, ContainerClock } from './styled';
+import { ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants,
+ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder, ContainerOrderActive,
+ContainerPedido, ContainerNome, ContainerTotal, ContainerClock, SearchContainer }
+from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
-import { Box, Tab, Tabs, TextField } from '@material-ui/core';
+import { Box, Button, OutlinedInput, Tab, Tabs, TextField } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
-import { FormControl } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import { OutlinedInput } from '@material-ui/core';
-import { InputAdornment } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { Search } from '@material-ui/icons/Search';
 import clock from '../../assets/Images/clock.png';
+import { getProfile } from '../../services/ProfilePage';
 
 export default function FeedPage() {
   const navigate = useNavigate();
@@ -35,6 +33,9 @@ export default function FeedPage() {
     getActiveOrder(params.setOrder)
   }, []);
 
+  useEffect(()=>{
+    getProfile(params.setUser)
+  },[]);
   const [valueCategory, setValueCategory] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -109,37 +110,16 @@ export default function FeedPage() {
   return (
     <div>
       <Header />
-      <div>
-        <TextField
+      <SearchContainer>
+        <TextField style={{width:"80vw"}}
           label={'Restaurante'}
           variant={'outlined'}
-          type="text"
           value={search}
+          placeholder="Pesquise seu restaurante aqui..."
           onChange={handleSearch}
-          required
         />
-        {/* <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
-              <InputLabel>Senha</InputLabel>
-              <OutlinedInput
-                name={"search"}
-                type={"text"}
-                value={search}
-                onChange={handleSearch}
-                required
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={setSearch}
-                      edge="end"
-                    >
-                      {<Search/>}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                labelWidth={50}
-              />
-            </FormControl> */}
-      </div>
+
+      </SearchContainer>
       <Box
         sx={{ maxWidth: { xs: 350, sm: 480 }, margin: "auto" }}
       >
@@ -170,6 +150,6 @@ export default function FeedPage() {
         {params.order && renderOrder()}
       </ContainerRenderOrder>
       <Footer />
-    </div >
+    </div>
   )
 };
