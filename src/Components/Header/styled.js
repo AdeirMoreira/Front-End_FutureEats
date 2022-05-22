@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 export const ContainerHeader = styled.div`
-font-size: 16px;
-text-align: center;
-font-weight: bold;
+    text-align: center;
+    button{
+        position: absolute;
+        right: 3%;
+        top: 1px;
+        border: none;
+        background-color: none;
+    }
 `

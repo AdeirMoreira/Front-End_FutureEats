@@ -8,6 +8,8 @@ import Footer from '../../Components/Footer/Footer'
 import * as container from './styles'
 import { Button } from '@material-ui/core'
 import XButton from '../../assets/Images/xbox.png'
+import { getActiveOrder } from '../../services/FeedPage'
+import Header from '../../Components/Header/Header'
 
 
 export default function CartPage() {
@@ -15,9 +17,21 @@ export default function CartPage() {
   const [Price, setPrice] = useState()
   const [paymentMethod, handlePaymentMethod] = useInput('')
   const [showPopUp, setShowPopUp] = useState(false)
+  const [popUp, setMessage] = useState('')
 
   useEffect(() => getProfile(parms.setUser), [])
+  useEffect(() => getActiveOrder(parms.setOrder), [])
+  useEffect(() => activeOrderAlert(), [])
   useEffect(() => calculePrice(parms.cart), [parms.cart])
+
+  const activeOrderAlert = () => {
+    if (parms.order) {
+      parms.setCart([])
+      setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
+      quando seu pedio atual estiver concluido`)
+      setShowPopUp(true)
+    }
+  }
 
   const calculePrice = () => {
     const price = parms.cart.reduce((a, e) => a += e.price * e.quantity, 0)
@@ -35,14 +49,41 @@ export default function CartPage() {
       })
       const body = { products, paymentMethod }
       console.log(body)
-      PlaceOrder(parms.restDetail.restaurant.id, body)
+      PlaceOrder(parms.restDetail.restaurant.id, body, cleanCart)
     } else {
+      noPaymentMethod()
+    }
+  }
+
+  const cleanCart = () => {
+    parms.setCart([])
+    setMessage('Seu Pedido está sendo preparado em embreve chegará na sua Casa')
+    setShowPopUp(true)
+    getActiveOrder(parms.setOrder)
+  }
+
+  const noPaymentMethod = () => {
+    setMessage('Selecione um método de Pagamento')
+    setShowPopUp(true)
+  }
+
+  const checkCart = () => {
+    if (parms.cart.length > 0) {
+      buildBodyRequest()
+    } else if (parms.order) {
+      parms.setCart([])
+      setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
+      quando seu pedio atual estiver concluido`)
+      setShowPopUp(true)
+    } else {
+      setMessage('Seu carrinho está vazio')
       setShowPopUp(true)
     }
   }
 
   return (
     <container.FullScreen>
+      <Header />
       {parms.user &&
         <div style={{ padding: '16px' }}>
           <container.Address>
@@ -73,11 +114,11 @@ export default function CartPage() {
           parms.restDetail.restaurant.shipping.toFixed(2).replace('.', ',')}</b>
         </container.Freight>
         <container.TotalPrice>
-        <span>SUBTOTAL</span>
-        <span>R${Price !== undefined ? Price.toFixed(2).replace('.', ',') : '0,00'}</span>
+          <span>SUBTOTAL</span>
+          <span>R${Price !== undefined ? Price.toFixed(2).replace('.', ',') : '0,00'}</span>
         </container.TotalPrice>
         <container.Paymentmethod>
-        <b><p>Forma de Pagamento</p></b>
+          <b><p>Forma de Pagamento</p></b>
           <container.Line></container.Line>
           <container.Radio>
             <input type='radio' id='money' value={'money'} name={'paymentMetod'} onChange={handlePaymentMethod} />
@@ -89,14 +130,14 @@ export default function CartPage() {
           </container.Radio>
         </container.Paymentmethod>
         <container.Teste>
-          <Button style={{ color: "black", textTransform: 'none' }} onClick={buildBodyRequest} color={'primary'} fullWidth variant='contained' >Confirmar</Button>
+          <Button style={{ color: "black", textTransform: 'none' }} onClick={checkCart} color={'primary'} fullWidth variant='contained' >Confirmar</Button>
         </container.Teste>
       </container.Invoicing>
       {showPopUp &&
         <container.PopUp>
           <container.MessagePopUP>
             <button onClick={() => setShowPopUp(false)}><img src={XButton} /></button>
-            <p>Selecione um método de Pagamento</p>
+            <p>{popUp}</p>
           </container.MessagePopUP>
         </container.PopUp>
       }
