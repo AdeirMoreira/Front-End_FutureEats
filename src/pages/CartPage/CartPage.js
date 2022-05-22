@@ -27,8 +27,8 @@ export default function CartPage() {
   const activeOrderAlert = () => {
     if (parms.order) {
       parms.setCart([])
-      setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
-      quando seu pedio atual estiver concluido`)
+      setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
+      quando seu pedido atual estiver concluído`)
       setShowPopUp(true)
     }
   }
@@ -57,7 +57,7 @@ export default function CartPage() {
 
   const cleanCart = () => {
     parms.setCart([])
-    setMessage('Seu Pedido está sendo preparado em embreve chegará na sua Casa')
+    setMessage('Seu pedido está sendo preparado, em breve chegará na sua casa')
     setShowPopUp(true)
     getActiveOrder(parms.setOrder)
   }
@@ -72,8 +72,8 @@ export default function CartPage() {
       buildBodyRequest()
     } else if (parms.order) {
       parms.setCart([])
-      setMessage(`Desculpe, só é possivel ter um pedido ativo por vez, tente novamente 
-      quando seu pedio atual estiver concluido`)
+      setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
+      quando seu pedido atual estiver concluído`)
       setShowPopUp(true)
     } else {
       setMessage('Seu carrinho está vazio')
