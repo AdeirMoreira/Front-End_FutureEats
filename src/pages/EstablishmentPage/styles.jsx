@@ -61,3 +61,8 @@ export const RestaurantLogoImg = styled.img`
     align-self: center;
     border-radius: 8px;
 `
+export const Loading = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 30vh;
+`

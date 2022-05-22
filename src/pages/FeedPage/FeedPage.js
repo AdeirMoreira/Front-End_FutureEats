@@ -5,7 +5,7 @@ import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import {
   ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants,
   ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder, ContainerOrderActive,
-  ContainerPedido, ContainerNome, ContainerTotal, ContainerClock, SearchContainer
+  ContainerPedido, ContainerNome, ContainerTotal, ContainerClock, SearchContainer, Loading
 }
   from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
@@ -17,12 +17,14 @@ import delivery from '../../assets/Images/delivery.png';
 import clock from '../../assets/Images/clock.png';
 import { getProfile } from '../../services/ProfilePage';
 import useProtectPage from '../../Hooks/useProtectedPage';
+import LoadingCompoent from '../../Components/Loading/loading';
 
 export default function FeedPage() {
   useProtectPage()
   const navigate = useNavigate();
   const params = useContext(FutureEats);
   const [search, setSearch] = useState("");
+  const [loading, setLoaging] = useState(false)
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
@@ -30,27 +32,14 @@ export default function FeedPage() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      getRestaurants(params.setRest)
-      getActiveOrder(params.setOrder)
-      getProfile(params.setUser)
-    } else {
-      alert('calma ae porra')
-    }
-
+    params.rest.length === 0 && getRestaurants(params.setRest, setLoaging)
+    getActiveOrder(params.setOrder)
+    getProfile(params.setUser)
   }, []);
-
-  // useEffect(() => {
-
-  // }, []);
-
-  // useEffect(() => {
-
-  // }, []);
 
   const [valueCategory, setValueCategory] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValueCategory(newValue);
   };
 
@@ -128,7 +117,6 @@ export default function FeedPage() {
         setRest={params.setRest}
         setOrder={params.setOrder}
         setCart={params.setCart} />
-
       <SearchContainer>
         <TextField style={{ width: "80vw" }}
           label={'Restaurante'}
@@ -162,12 +150,23 @@ export default function FeedPage() {
           <Tab label="Carnes" />
         </Tabs>
       </Box>
-      <ContainerRestaurants>
-        {navList}
-      </ContainerRestaurants>
-      <ContainerRenderOrder>
-        {params.order && renderOrder()}
-      </ContainerRenderOrder>
+      {
+        loading ?
+          <Loading>
+            <LoadingCompoent />
+          </Loading>
+          :
+          <>
+            <ContainerRestaurants>
+              {navList}
+            </ContainerRestaurants>
+            <ContainerRenderOrder>
+              {params.order && renderOrder()}
+            </ContainerRenderOrder>
+          </>
+
+      }
+
       <Footer />
     </div>
   )
