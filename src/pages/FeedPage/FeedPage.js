@@ -4,8 +4,8 @@ import { FutureEats } from '../../globalState/Context';
 import { getActiveOrder, getRestaurants } from '../../services/FeedPage';
 import {
   ListRestaurants, ContainerName, ContainerImg, ContainerRestaurants,
-  ContainerEntrega, DeliveryTime, Shipping, ContainerRenderOrder, ContainerOrderActive,
-  ContainerPedido, ContainerNome, ContainerTotal, ContainerClock, SearchContainer, Loading
+  ContainerEntrega, DeliveryTime, Shipping, ContainerOrderActive,
+  ContainerPedido, ContainerNome, ContainerTotal, ContainerClock, SearchContainer, Loading,
 }
   from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
@@ -15,7 +15,6 @@ import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 import clock from '../../assets/Images/clock.png';
-import { getProfile } from '../../services/ProfilePage';
 import { useProtectPage } from '../../Hooks/useProtectedPage';
 import LoadingCompoent from '../../Components/Loading/loading';
 
@@ -30,10 +29,10 @@ export default function FeedPage() {
     setSearch(event.target.value)
     console.log(search)
   };
+
   useEffect(() => {
     params.rest.length === 0 && getRestaurants(params.setRest, setLoaging)
     getActiveOrder(params.setOrder)
-    getProfile(params.setUser)
   }, []);
 
   const [valueCategory, setValueCategory] = useState(0);
@@ -159,12 +158,12 @@ export default function FeedPage() {
           </Loading>
           :
           <>
+            {params.order && renderOrder()}
             <ContainerRestaurants>
               {navList}
             </ContainerRestaurants>
-            <ContainerRenderOrder>
-              {params.order && renderOrder()}
-            </ContainerRenderOrder>
+            <div style={{ paddingBottom: '50px' }}>
+            </div>
           </>
 
       }

@@ -11,15 +11,18 @@ import XButton from '../../assets/Images/xbox.png'
 import { getActiveOrder } from '../../services/FeedPage'
 import Header from '../../Components/Header/Header'
 import { useProtectPage } from '../../Hooks/useProtectedPage'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function CartPage() {
-  useProtectPage()
+  const navigate = useNavigate()
+  useProtectPage(navigate)
   const parms = useContext(FutureEats)
   const [Price, setPrice] = useState()
   const [paymentMethod, handlePaymentMethod] = useInput('')
   const [showPopUp, setShowPopUp] = useState(false)
   const [popUp, setMessage] = useState('')
+
   useEffect(() => getProfile(parms.setUser), [])
   useEffect(() => getActiveOrder(parms.setOrder), [])
   useEffect(() => activeOrderAlert(), [])

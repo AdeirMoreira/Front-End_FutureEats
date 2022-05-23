@@ -27,7 +27,6 @@ export default function ProfilePage() {
 
   return (
     <div>
-
       <ScreenContainerProfile>
         <Header
           setUser={params.setUser}
@@ -42,11 +41,8 @@ export default function ProfilePage() {
           </Loading>
           :
           <>
-
-
             {(params.user && params.history) &&
               <div>
-
                 <ContainerDados>
                   <ContainerName>
                     <p>{params.user.name}</p>
@@ -95,14 +91,14 @@ export default function ProfilePage() {
                 <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
                 <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
                 <b>SUBTOTAL R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
-
               </HistoricoContainer>
+
             ))}
+            <div style={{ marginBottom: '70px' }}></div>
           </>
         }
         <Footer />
       </ScreenContainerProfile>
-
     </div>
   )
 }

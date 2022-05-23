@@ -13,9 +13,11 @@ import { Toolbar } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
 import alertImg from '../../assets/Images/alert.png'
+import { useProtectPage } from '../../Hooks/useProtectedPage'
 
 const EditarCadastroPage = () => {
   const navigate = useNavigate()
+  useProtectPage(navigate)
   const params = useContext(FutureEats)
   const [messageError, setMessageErro] = useState('')
 
@@ -53,7 +55,7 @@ const EditarCadastroPage = () => {
                   <ArrowBackIos />
                 </IconButton>
                 <Typography variant="h6" style={{ color: "black" }} >
-                  Perfil
+                  Editar Perfil
                 </Typography>
               </Toolbar>
             </AppBar>

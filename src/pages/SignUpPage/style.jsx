@@ -21,11 +21,12 @@ margin-bottom: 20px;
 
 export const ErrorMessageContainer = styled.div`
     height: 40px;
-    width: 100%;
+    padding: 16px 16px 0px 16px;
     display: flex;
     flex-direction: row;
     gap: 5px;
     justify-content: center;
+    align-items: center;
     img{
         width: 40px;
         height: 40px;

@@ -13,16 +13,18 @@ import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { goToCadastro } from '../../routes/coordinators'
 import alertImg from '../../assets/Images/alert.png'
+import { useNoProtectPage } from '../../Hooks/useNoProtectedPage'
 
 
 export default function LoginPage() {
+  const navigate = useNavigate()
+  useNoProtectPage(navigate)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, 1700)
   }, [])
-  const navigate = useNavigate();
   const params = useContext(FutureEats)
   const [showPassword, setShowPassword] = useState(false)
   const [messageError, setMessageErro] = useState('')
