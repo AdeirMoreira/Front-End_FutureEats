@@ -21,7 +21,7 @@
 
 <h2 id="link">🔗 Link surge: Link para visualização do site</h2>
 
-<a href="https://www.google.com/">FutureEats</a>
+<a href="https://futureeats2idp.surge.sh/">FutureEats</a>
 
 <h2 id="imagens">📱 Imagens do site</h2>
 
