@@ -1,11 +1,13 @@
-import { useEffect, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { gotoLogin } from "../routes/coordinators";
 
-export default function useProtectPage() {
-    const navigate = useNavigate()
-    useLayoutEffect(() => {
-        !localStorage.getItem('token') && gotoLogin(navigate)
-    })
-}
+export const useProtectPage = (navigate) => {
 
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            gotoLogin(navigate)
+        }
+    })
+
+}

@@ -1,9 +1,21 @@
 import axios from 'axios';
-import { baseURL, headers } from '../../constants/constants';
+
+const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
+
+const headers = {
+    headers: {
+        auth: window.localStorage.getItem('token')
+    }
+}
+
+export const setHeader = (response) => {
+    response && (headers.headers.auth = response.data.token)
+    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
+}
 
 export const getRestaurants = (setRest, setLoading) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     setLoading && setLoading(true)
-    console.log(headers)
     axios.get(`${baseURL}/restaurants`, headers
     ).then((res) => {
         setRest(res.data.restaurants)
@@ -11,17 +23,15 @@ export const getRestaurants = (setRest, setLoading) => {
     }).catch((err) => {
         console.log(err.response)
         setLoading && setLoading(false)
-        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 };
 
 export const getActiveOrder = (setOrder) => {
-    console.log(headers)
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     axios.get(`${baseURL}/active-order`, headers
     ).then((res) => {
         setOrder(res.data.order)
     }).catch((err) => {
-        console.log(err.response)
-        alert("Ocorreu um erro, por favor tente mais tarde.")
+        console.log(err.response.data)
     })
 };

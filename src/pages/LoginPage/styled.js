@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import splachScreen from '../../assets/Images/splachScreen.png'
 
 export const ScreenContainer = styled.div`
 display: flex;
@@ -33,4 +34,12 @@ export const ErrorMessageContainer = styled.div`
         font-size: 20px;
         margin-top: 5px;
     }
+`
+export const SplachScreen = styled.div`
+width: 100vw;
+height: 100vh;
+background-image: url(${splachScreen});
+background-size: cover;
+background-repeat: no-repeat;
+
 `

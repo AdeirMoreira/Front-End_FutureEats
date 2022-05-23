@@ -19,7 +19,7 @@ export default function SignUpPageAndress() {
 
     const preventDefault = (e) => {
         e.preventDefault()
-        SignUpRequestAndress(params.dataForm.andressData.form, navigate, setMessageErro)
+        SignUpRequestAndress(params.dataForm.andressData.form, navigate, setMessageErro, params.dataForm.andressData.cleanFields)
     }
 
     return (

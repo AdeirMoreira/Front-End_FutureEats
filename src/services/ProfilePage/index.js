@@ -1,23 +1,41 @@
 import axios from "axios";
-import { baseURL, headers } from "../../constants/constants";
+import { baseURL } from "../../constants/constants";
+import { goToProfile } from "../../routes/coordinators";
 
-export const getProfile = (setUser) => {
+const headers = {
+    headers: {
+        auth: window.localStorage.getItem('token')
+    }
+}
+
+export const setHeader = (response) => {
+    response && (headers.headers.auth = response.data.token)
+    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
+}
+
+export const getProfile = (setUser, setLoading) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    setLoading && setLoading(true)
     axios.get(`${baseURL}/profile`, headers
     ).then((res) => {
         setUser(res.data.user)
+        setLoading && setLoading(false)
     }).catch((err) => {
-        console.log(err.response)
-        alert("Ocorreu um erro, por favor tente mais tarde.")
+        console.log(err.response.data)
+        setLoading && setLoading(false)
     })
 }
 
-export const getOrdersHistory = (setHistory) => {
+export const getOrdersHistory = (setHistory, setLoading) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    setLoading(true)
     axios.get(`${baseURL}/orders/history`, headers
     ).then((res) => {
         setHistory(res.data.orders)
+        setLoading && setLoading(false)
     }).catch((err) => {
-        console.log(err.response)
-        alert("Ocorreu um erro, por favor tente mais tarde.")
+        console.log(err.response.data)
+        setLoading && setLoading(false)
     })
 }
 
@@ -27,19 +45,20 @@ export const getEditAddress = (setEditAddress, setForm) => {
         setEditAddress(res.data)
         setForm(res.data.address)
     }).catch((err) => {
-        console.log(err.response)
+        console.log(err.response.data)
         alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 }
 
-export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, cleanFields) => {
+export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, navigate, setMessageError) => {
     axios.put(`${baseURL}/profile`, form, headers
     ).then((res) => {
         setForm(setPersonalFormInputs(res.data))
-        cleanFields()
         setUser(setPersonalFormInputs(res.data))
+        goToProfile(navigate)
     }).catch((err) => {
         console.log(err.response)
+        setMessageError(err.response.data.message)
     })
 }
 

@@ -9,19 +9,19 @@ import {
 }
   from './styled';
 import { goToRestDetails } from '../../routes/coordinators';
-import { Box, Button, OutlinedInput, Tab, Tabs, TextField } from '@material-ui/core';
+import { Box, Tab, Tabs, TextField } from '@material-ui/core';
 import Footer from '../../Components/Footer/Footer'
 import Header from '../../Components/Header/Header';
 import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 import clock from '../../assets/Images/clock.png';
 import { getProfile } from '../../services/ProfilePage';
-import useProtectPage from '../../Hooks/useProtectedPage';
+import { useProtectPage } from '../../Hooks/useProtectedPage';
 import LoadingCompoent from '../../Components/Loading/loading';
 
 export default function FeedPage() {
-  useProtectPage()
   const navigate = useNavigate();
+  useProtectPage(navigate)
   const params = useContext(FutureEats);
   const [search, setSearch] = useState("");
   const [loading, setLoaging] = useState(false)
@@ -30,7 +30,6 @@ export default function FeedPage() {
     setSearch(event.target.value)
     console.log(search)
   };
-
   useEffect(() => {
     params.rest.length === 0 && getRestaurants(params.setRest, setLoaging)
     getActiveOrder(params.setOrder)
@@ -44,22 +43,24 @@ export default function FeedPage() {
   };
 
   const renderOrder = () => (
-    <ContainerOrderActive>
-      <ContainerPedido>
-        <h4>Pedido em andamento</h4>
-      </ContainerPedido>
-      <ContainerNome>
-        <h5>{params.order.restaurantName}</h5>
-      </ContainerNome>
-      <ContainerTotal>
-        {params.order.totalPrice &&
-          <h5>SUBTOTAL R${params.order.totalPrice.toFixed(2).replace('.', ',')}</h5>
-        }
-      </ContainerTotal>
-      <ContainerClock>
-        <img src={clock} />
-      </ContainerClock>
-    </ContainerOrderActive>
+    <div>
+      <ContainerOrderActive >
+        <ContainerPedido>
+          <h4>Pedido em andamento</h4>
+        </ContainerPedido>
+        <ContainerNome>
+          <h5>{params.order.restaurantName}</h5>
+        </ContainerNome>
+        <ContainerTotal>
+          {params.order.totalPrice &&
+            <h5>SUBTOTAL R${params.order.totalPrice.toFixed(2).replace('.', ',')}</h5>
+          }
+        </ContainerTotal>
+        <ContainerClock>
+          <img src={clock} />
+        </ContainerClock>
+      </ContainerOrderActive>
+    </div>
   )
 
   const navList = params.rest
@@ -91,6 +92,7 @@ export default function FeedPage() {
     })
     .map((restaurants) => {
       return (
+
         <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
           <ContainerImg>
             <img src={restaurants.logoUrl} alt="Logo restaurante" />
@@ -166,7 +168,6 @@ export default function FeedPage() {
           </>
 
       }
-
       <Footer />
     </div>
   )

@@ -7,6 +7,6 @@ export const PlaceOrder = async (id, body, cleanCart) => {
         console.log(response.data)
         cleanCart()
     } catch (err) {
-        console.log(err.response)
+        console.log(err.response.data)
     }
 } 

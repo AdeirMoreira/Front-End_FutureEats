@@ -59,6 +59,7 @@ grid-template:
 'cpf pencil' 1fr
 /1fr 3fr;
 margin-top: 25px;
+padding: 0px 8px 0px 8px;
 `
 
 export const ContainerName = styled.div`
@@ -85,11 +86,11 @@ margin: 0;
 }
 `
 
-export const Button = styled.div`
+export const ContainerButton = styled.div`
 grid-area: pencil;
 display: flex;
-justify-content: center;
-align-items: flex-end;
+justify-content: flex-end;
+align-items: flex-start;
 `
 
 export const ContainerEndereco = styled.div`
@@ -123,7 +124,35 @@ margin: 0;
 `
 
 export const ContainerTitulo = styled.div`
+width: 88vw;
+margin-bottom: 5px;
 p{
 font-weight: bold;
 }
+`
+export const Loading = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 30vh;
+`
+export const Line = styled.div`
+    height: 1px;
+    width: 100%;
+    background: black;
+`
+export const ErrorMessageContainer = styled.div`
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    img{
+        width: 40px;
+        height: 40px;
+    }
+    p{
+        font-size: 20px;
+        margin-top: 5px;
+    }
 `

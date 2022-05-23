@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { InputsContainer, ScreenContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
@@ -13,9 +13,11 @@ import { Toolbar } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
 
+
 const EditarEnderecoPage = () => {
   const navigate = useNavigate()
   const [editAddress, setEditAddress] = useState()
+
 
   useEffect(() => {
     getEditAddress(setEditAddress, setForm)
@@ -27,23 +29,23 @@ const EditarEnderecoPage = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    SignUpRequestAndress(form)
+    SignUpRequestAndress(form, navigate, undefined, cleanFields, 'adreess',)
   }
   return (
     <>
       {editAddress &&
         <ScreenContainer>
- 
-            <AppBar position="static" style={{ width: "100vw" }} >
-              <Toolbar variant="dense">
-                <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
-                  <ArrowBackIos />
-                </IconButton>
-                <Typography variant="h6" style={{ color: "black" }} >
-                  Endereço
-                </Typography>
-              </Toolbar>
-            </AppBar>
+
+          <AppBar position="static" style={{ width: "100vw" }} >
+            <Toolbar variant="dense">
+              <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                <ArrowBackIos />
+              </IconButton>
+              <Typography variant="h6" style={{ color: "black" }} >
+                Endereço
+              </Typography>
+            </Toolbar>
+          </AppBar>
 
           <InputsContainer>
             <form onSubmit={onSubmitForm}>
@@ -107,7 +109,7 @@ const EditarEnderecoPage = () => {
                 margin={"normal"}
                 required
               />
-              <Button style={{color:"black", textTransform:"none", marginTop:"15px"}}
+              <Button style={{ color: "black", textTransform: "none", marginTop: "15px" }}
                 type={"submit"}
                 fullWidth
                 variant={'contained'}
