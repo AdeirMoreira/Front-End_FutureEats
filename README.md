@@ -33,32 +33,35 @@
 <h2 id="features">✔️ Features</h2>
 
 👤 Login/Cadastro
-- [x] Login
-- [x] Cadastro (dados pessoais e endereço)
+- [x] O usuário deve ser capaz de criar uma conta, cadastrando seus dados pessoais e seu endereço
+- [x] Caso insira alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário deve receber uma mensagem de erro clara
+- [x] Após finalizar o cadastro, o usuário deve ser redirecionado para a tela de lista de restaurantes
 
 🔎 Busca e seleção de restaurantes
-- [x] Lista com todos os restaurantes
-- [x] Buscar um restaurante por nome
-- [x] Filtrar os restaurantes por categoria
-- [x] Clicar no card do restaurante para visualizar o seu cardápio
+- [x] O usuário deve ser capaz de visualizar uma lista com todos os restaurantes
+- [x] O usuário deve ser capaz de buscar um restaurante por nome
+- [x] O usuário deve ser capaz de filtrar os restaurantes por categoria
+- [x] O usuário deve ser capaz de clicar no card de um restaurante para visualizar a tela com seu cardápio
  
 🗒️ Cardápio do restaurante
-- [x] Informações do restaurante (foto, nome, tipo, tempo de entrega, frete e endereço)
-- [x] Visualizar os pratos do restaurante, divididos em categorias (exemplo: principais, acompanhamento, sobremesas, bebidas, etc)
-- [x] Visualizar as informações de cada prato (foto, nome, descrição e preço)
-- [x] Adicionar pratos no carrinho e selecionar a quantidade de cada item
+- [x] O usuário deve ser capaz de visualizar as informações do restaurante (foto, nome, tipo, tempo de entrega, frete, endereço)
+- [x] O usuário deve ser capaz de visualizar os pratos do restaurante, divididos em categorias (exemplo: principais, sobremesas, entradas, etc)
+- [x] O usuário deve ser capaz de visualizar as informações de cada prato (foto, nome, descrição, preço)
+- [x] O usuário deve ser capaz de adicionar pratos no carrinho e selecionar a quantidade de cada prato
+- [x] O usuário deve ser capaz de remover itens do carrinho
 
 🛒 Carrinho e finalizar compra
-- [x] Visualizar a lista de itens que adicionou ao carrinho
-- [x] Caso o usuário não tenha adicionado nenhum item, deverá ver a mensagem de "Carrinho vazio"
-- [x] Visualizar, no topo da tela, o endereço de entrega
-- [x] Visualizar o preço total da compra
-- [x] Selecionar uma forma de pagamento dentre as opções de dinheiro e cartão de crédito
-- [x] Concluir um pedido, um card de "Pedido em andamento" é aberto no final da página onde se encontra as listas de restaurantes
+- [x] O usuário deve ser capaz de visualizar a lista de itens que adicionou ao carrinho. Caso não tenha adicionado nenhum item, deverá ver uma mensagem de "Carrinho Vazio"
+- [x] O usuário deve visualizar, no topo da tela, o endereço de entrega
+- [x] O usuário deve visualizar o preço total da compra, que deve ser corretamente calculado de acordo com o preço e quantidade de cada item adicionado
+- [x] O usuário deve ser capaz de selecionar uma forma de pagamento dentre as opções de cartão e dinheiro
+- [x] O usuário deve ser capaz de concluir um pedido e, ao fazê-lo, deve ver um banner de "Pedido em Andamento" com os dados do pedido (esse banner fica ativo durante X minutos, sendo X o tempo de entrega do restaurante)
 
 ✏️ Perfil, editar perfil e histórico de pedidos
-- [x] Visualizar seus dados pessoais, endereço e editá-los
-- [x] Visualizar o seu histórico de pedidos concluídos
+- [x] O usuário deve ser capaz de visualizar seus dados pessoais e endereço
+- [x] O usuário deve ser capaz de editar seus dados pessoais e endereço
+- [x] Ao editar as informações, caso insira alguma informação incorreta ou deixe de inserir alguma informação obrigatória, o usuário deve receber uma mensagem de erro clara
+- [x] O usuário deve ser capaz de visualizar o seu histórico de pedidos concluídos (após o tempo de entrega do estabelecimento, o seu pedido aparece nessa lista?)
  
  <h2 id="tecnologias">🛠 Tecnologias</h2>
  
