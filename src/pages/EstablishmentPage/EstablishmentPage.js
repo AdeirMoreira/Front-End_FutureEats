@@ -115,13 +115,15 @@ export default function EstablishmentPage() {
 
   return (
     <>
+
       <Header
-        setUser={params.setUser}
-        setRestDetail={params.setRestDetail}
-        setHistory={params.setHistory}
-        setRest={params.setRest}
-        setOrder={params.setOrder}
-        setCart={params.setCart} />
+        setUser={detail.setUser}
+        setRestDetail={detail.setRestDetail}
+        setHistory={detail.setHistory}
+        setRest={detail.setRest}
+        setOrder={detail.setOrder}
+        setCart={detail.setCart} />
+
       <container.FullScreen>
         {
           loading ?

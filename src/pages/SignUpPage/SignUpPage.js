@@ -18,13 +18,9 @@ import { AppBar } from '@material-ui/core'
 import { goToBack } from "../../routes/coordinators"
 import alertImg from '../../assets/Images/alert.png'
 import { Typography } from '@material-ui/core'
-import { useNoProtectPage } from '../../Hooks/useNoProtectedPage'
-
-
 
 export default function SignUpPage() {
   const navigate = useNavigate()
-  useNoProtectPage(navigate)
   const [confirm, handleValue] = useInput('')
   const [showPassword, setShowPassword] = useState(false)
   const [messageError, setMessageErro] = useState('')

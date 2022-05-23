@@ -12,13 +12,11 @@ import { Toolbar } from "@material-ui/core"
 import { IconButton } from "@material-ui/core"
 import alertImg from '../../assets/Images/alert.png'
 import { Typography } from '@material-ui/core'
-import { useNoProtectPage } from "../../Hooks/useNoProtectedPage"
 
 export default function SignUpPageAndress() {
     const navigate = useNavigate()
-    useNoProtectPage(navigate)
     const params = useContext(FutureEats)
-    const [messageError, setMessageErro] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet')
+    const [messageError, setMessageErro] = useState('')
 
     const preventDefault = (e) => {
         e.preventDefault()

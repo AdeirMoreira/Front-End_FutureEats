@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { baseURL } from '../../constants/constants'
 import { goToFeedPage } from '../../routes/coordinators'
+
+const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
 
 const headers = {
     headers: {
@@ -13,8 +14,8 @@ export const setHeader = (response) => {
     !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
 }
 
-
 export const login = (form, navigate, setErrorMessage, cleanFields) => {
+    setErrorMessage('')
     axios.post(`${baseURL}/login`, form)
         .then((response) => {
             setHeader(response)

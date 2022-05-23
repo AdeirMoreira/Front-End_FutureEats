@@ -1,8 +1,21 @@
 import axios from "axios";
-import { baseURL, headers } from "../../constants/constants";
 import { goToFeedPage, goToProfile, goToSignUpAddress } from "../../routes/coordinators";
 
+const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
+
+const headers = {
+    headers: {
+        auth: window.localStorage.getItem('token')
+    }
+}
+
+const setHeader = (response) => {
+    response && (headers.headers.auth = response.data.token)
+    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
+}
+
 export const SignUpRequest = async (form, navigate, setErrorMessage, cleanFields) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     try {
         const response = await axios.post(`${baseURL}/signup`, form)
         window.localStorage.getItem('token') && window.localStorage.removeItem('token')
@@ -17,6 +30,7 @@ export const SignUpRequest = async (form, navigate, setErrorMessage, cleanFields
 }
 
 export const SignUpRequestAndress = async (form, navigate, setErrorMessage, cleanfields, address) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     try {
         const response = await axios.put(`${baseURL}/address`, form, headers)
         window.localStorage.getItem('token') && window.localStorage.removeItem('token')
