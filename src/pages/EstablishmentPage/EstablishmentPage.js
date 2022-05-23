@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FutureEats } from '../../globalState/Context'
 import { getRestaurantDetails } from '../../services/RestaurantDetails'
 import { useInput } from '../../Hooks/useInput'
@@ -11,8 +11,11 @@ import time from '../../assets/Images/time.png';
 import delivery from '../../assets/Images/delivery.png';
 import Footer from '../../Components/Footer/Footer'
 import LoadingCompoent from '../../Components/Loading/loading'
+import { useProtectPage } from '../../Hooks/useProtectedPage'
 
 export default function EstablishmentPage() {
+  const navigate = useNavigate()
+  useProtectPage(navigate)
   const params = useParams();
   const detail = useContext(FutureEats)
   const [quantidade, handleQuantidade, clearInput] = useInput('')
@@ -119,7 +122,6 @@ export default function EstablishmentPage() {
         setRest={params.setRest}
         setOrder={params.setOrder}
         setCart={params.setCart} />
-
       <container.FullScreen>
         {
           loading ?
@@ -135,8 +137,8 @@ export default function EstablishmentPage() {
                     <container.RestName>{detail.restDetail.restaurant.name}</container.RestName>
                     <container.Paragrafo>{detail.restDetail.restaurant.category}</container.Paragrafo>
                     <container.Freight>
-                      <container.Paragrafo><img src={time} /> {detail.restDetail.restaurant.deliveryTime} min</container.Paragrafo>
-                      <container.Paragrafo><img src={delivery} /> Frete R${detail.restDetail.restaurant.shipping}</container.Paragrafo>
+                      <container.Paragrafo><img src={time} alt={'icone de relógio'} /> {detail.restDetail.restaurant.deliveryTime} min</container.Paragrafo>
+                      <container.Paragrafo><img src={delivery} alt={'icone de moto'} /> Frete R${detail.restDetail.restaurant.shipping}</container.Paragrafo>
                     </container.Freight>
                     <container.Paragrafo>{detail.restDetail.restaurant.address}</container.Paragrafo>
                   </container.RestaurantData>
@@ -166,7 +168,6 @@ export default function EstablishmentPage() {
               }
             </>
         }
-
         {showPopUpFunction &&
           <PopUpQuantity
             displawPopUp={displawPopUp}

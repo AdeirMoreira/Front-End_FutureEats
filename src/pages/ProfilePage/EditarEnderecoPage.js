@@ -12,10 +12,12 @@ import { AppBar } from '@material-ui/core'
 import { Toolbar } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
+import { useProtectPage } from '../../Hooks/useProtectedPage'
 
 
 const EditarEnderecoPage = () => {
   const navigate = useNavigate()
+  useProtectPage(navigate)
   const [editAddress, setEditAddress] = useState()
 
 
@@ -42,7 +44,7 @@ const EditarEnderecoPage = () => {
                 <ArrowBackIos />
               </IconButton>
               <Typography variant="h6" style={{ color: "black" }} >
-                Endereço
+                Editar Endereço
               </Typography>
             </Toolbar>
           </AppBar>

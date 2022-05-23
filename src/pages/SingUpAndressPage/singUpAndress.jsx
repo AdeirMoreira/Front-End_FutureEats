@@ -11,11 +11,14 @@ import { goToBack } from "../../routes/coordinators"
 import { Toolbar } from "@material-ui/core"
 import { IconButton } from "@material-ui/core"
 import alertImg from '../../assets/Images/alert.png'
+import { Typography } from '@material-ui/core'
+import { useNoProtectPage } from "../../Hooks/useNoProtectedPage"
 
 export default function SignUpPageAndress() {
-    const params = useContext(FutureEats)
     const navigate = useNavigate()
-    const [messageError, setMessageErro] = useState('')
+    useNoProtectPage(navigate)
+    const params = useContext(FutureEats)
+    const [messageError, setMessageErro] = useState('Neque porro quisquam est qui dolorem ipsum quia dolor sit amet')
 
     const preventDefault = (e) => {
         e.preventDefault()
@@ -31,6 +34,9 @@ export default function SignUpPageAndress() {
                         <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
                             <ArrowBackIos />
                         </IconButton>
+                        <Typography variant="h6" style={{ color: "black" }} >
+                            Cadastro Endereço
+                        </Typography>
                     </Toolbar>
                 </AppBar>
             </div>
@@ -125,47 +131,6 @@ export default function SignUpPageAndress() {
                         color={'primary'}
                         margin={'normal'}
                     >Enviar</Button>
-                    {/* <label htmlFor='street'>Logadouro*
-                        <input
-                        id='street'
-                        name='street' value={params.dataForm.andressData.form.street}
-                        onChange={params.dataForm.andressData.onChange}
-                        placeholder='Rua / AV'
-                        required />
-                        </label>
-                        <label htmlFor='number'>Número*
-                        <input
-                        id='number'
-                        name='number' value={params.dataForm.andressData.form.number}
-                        onChange={params.dataForm.andressData.onChange}
-                        placeholder='Número'
-                        type="number"
-                        required />
-                        </label> 
-                        <label htmlFor='city'>Cidade*
-                        <input
-                        id='city'
-                        name='city' value={params.dataForm.andressData.form.city}
-                        onChange={params.dataForm.andressData.onChange}
-                        placeholder='Cidade'
-                        required />
-                        </label> 
-                        <label htmlFor='state'>Estado*
-                        <input
-                        id='state'
-                        name='state' value={params.dataForm.andressData.form.state}
-                        onChange={params.dataForm.andressData.onChange}
-                        placeholder='Estado'
-                        required />
-                        </label> 
-                         <label htmlFor='Complemento'>Complemento*
-                        <input
-                        id='complement'
-                        name='complement' value={params.dataForm.andressData.form.complement}
-                        onChange={params.dataForm.andressData.onChange}
-                        placeholder='Apto / Bloco' />
-                        </label> 
-                        <button>enviar</button> */}
 
                 </form>
             </InputsContainer>

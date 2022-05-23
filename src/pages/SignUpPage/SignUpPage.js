@@ -17,27 +17,46 @@ import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import { AppBar } from '@material-ui/core'
 import { goToBack } from "../../routes/coordinators"
 import alertImg from '../../assets/Images/alert.png'
+import { Typography } from '@material-ui/core'
+import { useNoProtectPage } from '../../Hooks/useNoProtectedPage'
 
 
 
 export default function SignUpPage() {
+  const navigate = useNavigate()
+  useNoProtectPage(navigate)
   const [confirm, handleValue] = useInput('')
   const [showPassword, setShowPassword] = useState(false)
   const [messageError, setMessageErro] = useState('')
   const params = useContext(FutureEats)
-  const navigate = useNavigate()
-
 
   const preventDefault = (event) => {
     event.preventDefault()
-    if (params.dataForm.personalData.form.password === confirm) {
+    const upDatedForm = updatedForm(params.dataForm.personalData.form)
+    if (upDatedForm.password === confirm) {
       messageError && setMessageErro('')
-      SignUpRequest(params.dataForm.personalData.form, navigate, setMessageErro, params.dataForm.personalData.cleanFields)
+      SignUpRequest(upDatedForm, navigate, setMessageErro, params.dataForm.personalData.cleanFields)
     } else {
       setMessageErro('A senha e a confirmação não são iguais')
     }
   }
 
+  const updatedForm = (form) => {
+    const updateForm = form
+    const checkedCPF = checkCPF(form.cpf)
+    updateForm.cpf = checkedCPF
+    return updateForm
+  }
+
+  const checkCPF = (CPF) => {
+    const array = CPF.split('')
+    const array2 = array.map(e => +e)
+    const array3 = array2.filter(e => !isNaN(e))
+    array3.splice(3, 0, '.')
+    array3.splice(7, 0, '.')
+    array3.splice(11, 0, '-')
+    return array3.join('')
+  }
 
   return (
     <>
@@ -48,6 +67,9 @@ export default function SignUpPage() {
               <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
                 <ArrowBackIos />
               </IconButton>
+              <Typography variant="h6" style={{ color: "black" }} >
+                Cadastro Perfil
+              </Typography>
             </Toolbar>
           </AppBar>
         </div>
@@ -63,7 +85,6 @@ export default function SignUpPage() {
         </ErrorMessageContainer>
 
         <InputsContainer>
-          <p>Cadastrar</p>
           <form onSubmit={preventDefault}>
 
             <TextField

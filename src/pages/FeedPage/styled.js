@@ -79,9 +79,6 @@ p{
 padding-bottom: 10px;
 }
 `
-export const ContainerRenderOrder = styled.div`
-    padding-bottom: 50px;
-`
 
 export const ContainerOrderActive = styled.div`
 display: grid;
@@ -91,6 +88,7 @@ grid-template:
 'clock total' 1fr
 /1fr 3fr;
 background-color: #5cb646;
+margin-top: 16px;
 `
 
 export const ContainerPedido = styled.div`
