@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
-import { InputsContainer, ScreenContainer, Header } from './styled'
+import { InputsContainer, ScreenContainer, Header, ErrorMessageContainer } from './styled'
 import { TextField, Button } from '@material-ui/core'
 import { goToBack } from '../../routes/coordinators'
 import useForm from '../../Hooks/useForm'
@@ -12,10 +12,12 @@ import { AppBar } from '@material-ui/core'
 import { Toolbar } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
+import alertImg from '../../assets/Images/alert.png'
 
 const EditarCadastroPage = () => {
   const navigate = useNavigate()
   const params = useContext(FutureEats)
+  const [messageError, setMessageErro] = useState('')
 
   const setPersonalFormInputs = (user) => {
     return {
@@ -30,7 +32,7 @@ const EditarCadastroPage = () => {
     params.user && setForm(setPersonalFormInputs(params.user))
   }, [params.user])
 
-  const { form, onChange, cleanFields, setForm } = useForm({
+  const { form, onChange, setForm } = useForm({
     name: "",
     email: "",
     cpf: ""
@@ -38,24 +40,24 @@ const EditarCadastroPage = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    updateProfile(form, setForm, setPersonalFormInputs, params.setUser)
+    updateProfile(form, setForm, setPersonalFormInputs, params.setUser, navigate, setMessageErro)
   }
   return (
     <>
       {params.user &&
         <ScreenContainer>
-        <Header>
-      <AppBar position="static" style={{width:"100vw"}} >
-        <Toolbar variant="dense">
-          <IconButton onClick={() => goToBack(navigate)} edge="start" style={{color:"black"}} aria-label="voltar">
-            <ArrowBackIos />
-          </IconButton>
-          <Typography variant="h6" style={{color:"black"}} >
-            Perfil
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </Header>
+          <Header>
+            <AppBar position="static" style={{ width: "100vw" }} >
+              <Toolbar variant="dense">
+                <IconButton onClick={() => goToBack(navigate)} edge="start" style={{ color: "black" }} aria-label="voltar">
+                  <ArrowBackIos />
+                </IconButton>
+                <Typography variant="h6" style={{ color: "black" }} >
+                  Perfil
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </Header>
           <InputsContainer>
             <form onSubmit={onSubmitForm}>
               <TextField
@@ -88,7 +90,7 @@ const EditarCadastroPage = () => {
                 margin={"normal"}
                 required
               />
-              <Button style={{color:"black", textTransform: 'none', marginTop:"15px"}}
+              <Button style={{ color: "black", textTransform: 'none', marginTop: "15px" }}
                 type={"submit"}
                 fullWidth
                 variant={'contained'}
@@ -97,6 +99,14 @@ const EditarCadastroPage = () => {
               >Salvar</Button>
             </form>
           </InputsContainer>
+          <ErrorMessageContainer>
+            {messageError &&
+              <>
+                <img src={alertImg} />
+                <p>{messageError}</p>
+              </>
+            }
+          </ErrorMessageContainer>
         </ScreenContainer>
       }</>
   )

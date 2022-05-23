@@ -32,7 +32,7 @@ export default function SignUpPage() {
     event.preventDefault()
     if (params.dataForm.personalData.form.password === confirm) {
       messageError && setMessageErro('')
-      SignUpRequest(params.dataForm.personalData.form, navigate, setMessageErro)
+      SignUpRequest(params.dataForm.personalData.form, navigate, setMessageErro, params.dataForm.personalData.cleanFields)
     } else {
       setMessageErro('A senha e a confirmação não são iguais')
     }

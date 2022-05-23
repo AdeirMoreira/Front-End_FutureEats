@@ -10,15 +10,16 @@ import { Button } from '@material-ui/core'
 import XButton from '../../assets/Images/xbox.png'
 import { getActiveOrder } from '../../services/FeedPage'
 import Header from '../../Components/Header/Header'
+import { useProtectPage } from '../../Hooks/useProtectedPage'
 
 
 export default function CartPage() {
+  useProtectPage()
   const parms = useContext(FutureEats)
   const [Price, setPrice] = useState()
   const [paymentMethod, handlePaymentMethod] = useInput('')
   const [showPopUp, setShowPopUp] = useState(false)
   const [popUp, setMessage] = useState('')
-  console.log(parms.cart)
   useEffect(() => getProfile(parms.setUser), [])
   useEffect(() => getActiveOrder(parms.setOrder), [])
   useEffect(() => activeOrderAlert(), [])
@@ -29,7 +30,6 @@ export default function CartPage() {
       parms.setCart([])
       setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
       quando seu pedido atual estiver concluído`)
-
       setShowPopUp(true)
     }
   }
@@ -49,7 +49,6 @@ export default function CartPage() {
         return { id: e.id, quantity: e.quantity }
       })
       const body = { products, paymentMethod }
-      console.log(body)
       PlaceOrder(parms.restDetail.restaurant.id, body, cleanCart)
     } else {
       noPaymentMethod()

@@ -28,6 +28,7 @@ export default function EstablishmentPage() {
     , [detail.restDetail])
 
   const addPropertyInCart = (array, cart) => {
+
     const anotherRestaurantProduct = cart.find(e => e.id !== detail.restDetail.restaurant.id)
     anotherRestaurantProduct && detail.setCart([])
     const newState = array.map(e => {
@@ -174,8 +175,8 @@ export default function EstablishmentPage() {
             twoFunction={twoFunctionClose}
           />
         }
-        <Footer />
       </container.FullScreen>
+      <Footer />
     </>
   )
 }
