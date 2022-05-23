@@ -9,13 +9,13 @@ export default function Header(props) {
   const navigate = useNavigate()
   const logOut = () => {
     window.localStorage.removeItem('token')
-    gotoLogin(navigate)
     props.setUser('')
     props.setRest([])
     props.setHistory()
     props.setRestDetail()
     props.setOrder()
     props.setCart([])
+    gotoLogin(navigate)
   }
   return (
     <ContainerHeader>

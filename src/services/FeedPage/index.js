@@ -8,7 +8,7 @@ const headers = {
     }
 }
 
-export const setHeader = (response) => {
+const setHeader = (response) => {
     response && (headers.headers.auth = response.data.token)
     !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
 }

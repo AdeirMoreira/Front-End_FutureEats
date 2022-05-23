@@ -42,8 +42,28 @@ const EditarCadastroPage = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault()
-    updateProfile(form, setForm, setPersonalFormInputs, params.setUser, navigate, setMessageErro)
+    const upDatedForm = updatedForm(form)
+    console.log(upDatedForm)
+    updateProfile(upDatedForm, setForm, setPersonalFormInputs, params.setUser, navigate, setMessageErro)
   }
+
+  const updatedForm = (form) => {
+    const updateForm = form
+    const checkedCPF = checkCPF(form.cpf)
+    updateForm.cpf = checkedCPF
+    return updateForm
+  }
+
+  const checkCPF = (CPF) => {
+    const array = CPF.split('')
+    const array2 = array.map(e => +e)
+    const array3 = array2.filter(e => !isNaN(e))
+    array3.splice(3, 0, '.')
+    array3.splice(7, 0, '.')
+    array3.splice(11, 0, '-')
+    return array3.join('')
+  }
+
   return (
     <>
       {params.user &&
@@ -77,6 +97,8 @@ const EditarCadastroPage = () => {
                 value={form.email}
                 onChange={onChange}
                 label={"E-mail"}
+                type={'email'}
+                placeholder={"email@email.com"}
                 variant={"outlined"}
                 fullWidth
                 margin={"normal"}
@@ -87,6 +109,8 @@ const EditarCadastroPage = () => {
                 value={form.cpf}
                 onChange={onChange}
                 label={"CPF"}
+                inputProps={{ pattern: "([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})" }}
+                placeholder={"000.000.000-00"}
                 variant={"outlined"}
                 fullWidth
                 margin={"normal"}

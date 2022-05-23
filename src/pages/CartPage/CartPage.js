@@ -17,20 +17,20 @@ import { useNavigate } from 'react-router-dom'
 export default function CartPage() {
   const navigate = useNavigate()
   useProtectPage(navigate)
-  const parms = useContext(FutureEats)
+  const params = useContext(FutureEats)
   const [Price, setPrice] = useState()
   const [paymentMethod, handlePaymentMethod] = useInput('')
   const [showPopUp, setShowPopUp] = useState(false)
   const [popUp, setMessage] = useState('')
 
-  useEffect(() => getProfile(parms.setUser), [])
-  useEffect(() => getActiveOrder(parms.setOrder), [])
+  useEffect(() => getProfile(params.setUser), [])
+  useEffect(() => getActiveOrder(params.setOrder), [])
   useEffect(() => activeOrderAlert(), [])
-  useEffect(() => calculePrice(parms.cart), [parms.cart])
+  useEffect(() => calculePrice(params.cart), [params.cart])
 
   const activeOrderAlert = () => {
-    if (parms.order) {
-      parms.setCart([])
+    if (params.order) {
+      params.setCart([])
       setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
       quando seu pedido atual estiver concluído`)
       setShowPopUp(true)
@@ -38,31 +38,31 @@ export default function CartPage() {
   }
 
   const calculePrice = () => {
-    const price = parms.cart.reduce((a, e) => a += e.price * e.quantity, 0)
+    const price = params.cart.reduce((a, e) => a += e.price * e.quantity, 0)
     setPrice(price)
   }
   const removeProducToCart = (product) => {
-    const newCart = parms.cart.filter(e => product.id !== e.id)
-    parms.setCart(newCart)
+    const newCart = params.cart.filter(e => product.id !== e.id)
+    params.setCart(newCart)
   }
 
   const buildBodyRequest = () => {
     if (paymentMethod) {
-      const products = parms.cart.map(e => {
+      const products = params.cart.map(e => {
         return { id: e.id, quantity: e.quantity }
       })
       const body = { products, paymentMethod }
-      PlaceOrder(parms.restDetail.restaurant.id, body, cleanCart)
+      PlaceOrder(params.restDetail.restaurant.id, body, cleanCart)
     } else {
       noPaymentMethod()
     }
   }
 
   const cleanCart = () => {
-    parms.setCart([])
+    params.setCart([])
     setMessage('Seu pedido está sendo preparado, em breve chegará na sua casa')
     setShowPopUp(true)
-    getActiveOrder(parms.setOrder)
+    getActiveOrder(params.setOrder)
   }
 
   const noPaymentMethod = () => {
@@ -71,10 +71,10 @@ export default function CartPage() {
   }
 
   const checkCart = () => {
-    if (parms.cart.length > 0) {
+    if (params.cart.length > 0) {
       buildBodyRequest()
-    } else if (parms.order) {
-      parms.setCart([])
+    } else if (params.order) {
+      params.setCart([])
       setMessage(`Desculpe, só é possível ter um pedido ativo por vez, tente novamente 
       quando seu pedido atual estiver concluído`)
       setShowPopUp(true)
@@ -87,29 +87,29 @@ export default function CartPage() {
   return (
     <container.FullScreen>
       <Header
-        setUser={parms.setUser}
-        setRestDetail={parms.setRestDetail}
-        setHistory={parms.setHistory}
-        setRest={parms.setRest}
-        setOrder={parms.setOrder}
-        setCart={parms.setCart} />
+        setUser={params.setUser}
+        setRestDetail={params.setRestDetail}
+        setHistory={params.setHistory}
+        setRest={params.setRest}
+        setOrder={params.setOrder}
+        setCart={params.setCart} />
 
-      {parms.user &&
+      {params.user &&
         <div style={{ padding: '16px' }}>
           <container.Address>
             <p>Endereço de entrega</p>
-            <p>{parms.user.address}</p>
+            <p>{params.user.address}</p>
           </container.Address>
-          {parms.cart.length > 0 ?
+          {params.cart.length > 0 ?
             <>
               <container.RestaurtData>
-                <p>{parms.restDetail.restaurant.name}</p>
-                <p>{parms.restDetail.restaurant.address}</p>
-                <p>{parms.restDetail.restaurant.deliveryTime} Minutos</p>
+                <p>{params.restDetail.restaurant.name}</p>
+                <p>{params.restDetail.restaurant.address}</p>
+                <p>{params.restDetail.restaurant.deliveryTime} Minutos</p>
               </container.RestaurtData>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <ProductsCard
-                  products={parms.cart}
+                  products={params.cart}
                   twoFunction={''}
                   category={'Pricipais'}
                   removeProduct={removeProducToCart}
@@ -120,8 +120,8 @@ export default function CartPage() {
         </div>
       }
       <container.Invoicing >
-        <container.Freight><b>Frete R${parms.cart.length === 0 ? '0,00' :
-          parms.restDetail.restaurant.shipping.toFixed(2).replace('.', ',')}</b>
+        <container.Freight><b>Frete R${params.cart.length === 0 ? '0,00' :
+          params.restDetail.restaurant.shipping.toFixed(2).replace('.', ',')}</b>
         </container.Freight>
         <container.TotalPrice>
           <span>SUBTOTAL</span>

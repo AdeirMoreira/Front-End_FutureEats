@@ -1,6 +1,7 @@
 import axios from "axios";
-import { baseURL } from "../../constants/constants";
 import { goToProfile } from "../../routes/coordinators";
+
+const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
 
 const headers = {
     headers: {
@@ -8,7 +9,7 @@ const headers = {
     }
 }
 
-export const setHeader = (response) => {
+const setHeader = (response) => {
     response && (headers.headers.auth = response.data.token)
     !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
 }
@@ -40,6 +41,7 @@ export const getOrdersHistory = (setHistory, setLoading) => {
 }
 
 export const getEditAddress = (setEditAddress, setForm) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     axios.get(`${baseURL}/profile/address`, headers
     ).then((res) => {
         setEditAddress(res.data)
@@ -51,6 +53,7 @@ export const getEditAddress = (setEditAddress, setForm) => {
 }
 
 export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, navigate, setMessageError) => {
+    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
     axios.put(`${baseURL}/profile`, form, headers
     ).then((res) => {
         setForm(setPersonalFormInputs(res.data))

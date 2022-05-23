@@ -28,6 +28,7 @@ export default function ProfilePage() {
   return (
     <div>
       <ScreenContainerProfile>
+
         <Header
           setUser={params.setUser}
           setRestDetail={params.setRestDetail}
@@ -35,6 +36,7 @@ export default function ProfilePage() {
           setRest={params.setRest}
           setOrder={params.setOrder}
           setCart={params.setCart} />
+
         {(loading && loading2) ?
           <Loading>
             <LoadingCompoent />
