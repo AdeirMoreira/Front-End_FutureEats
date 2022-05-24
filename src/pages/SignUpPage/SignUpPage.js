@@ -70,12 +70,13 @@ export default function SignUpPage() {
           </AppBar>
         </div>
 
-        <img src={logo} />
+        <img src={logo} alt='logo Future Eats' />
+
         <ErrorMessageContainer>
           {messageError &&
             <>
-              <img src={alertImg} />
-              <p>{messageError}</p>
+              <img src={alertImg} alt='ícone de alerta' />
+              <b><p>{messageError}</p></b>
             </>
           }
         </ErrorMessageContainer>

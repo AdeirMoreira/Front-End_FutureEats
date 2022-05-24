@@ -33,6 +33,5 @@ export const ErrorMessageContainer = styled.div`
     }
     p{
         font-size: 20px;
-        margin-top: 5px;
     }
 `

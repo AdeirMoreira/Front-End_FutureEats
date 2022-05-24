@@ -26,7 +26,7 @@ export default function EstablishmentPage() {
   const [category, setCategory] = useState('')
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id, setLoading), [])
+  useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id, setLoading), [detail.setRestDetail])
   useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products, detail.cart)
     , [detail.restDetail])
 

@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FutureEats } from '../../globalState/Context'
 import { getProfile, getOrdersHistory } from '../../services/ProfilePage';
 import {
@@ -20,10 +20,10 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false)
   const [loading2, setLoagding2] = useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getProfile(params.setUser, setLoading)
     getOrdersHistory(params.setHistory, setLoagding2)
-  }, []);
+  }, [params.setHistory, params.setUser]);
 
   return (
     <div>

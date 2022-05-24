@@ -142,7 +142,7 @@ export const Line = styled.div`
 `
 export const ErrorMessageContainer = styled.div`
     height: 40px;
-    width: 100%;
+    padding: 0px 20px 0px 20px;
     display: flex;
     flex-direction: row;
     gap: 5px;

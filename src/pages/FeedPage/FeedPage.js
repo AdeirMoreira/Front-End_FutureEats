@@ -56,7 +56,7 @@ export default function FeedPage() {
           }
         </ContainerTotal>
         <ContainerClock>
-          <img src={clock} />
+          <img src={clock} alt={'ícone de relógio'} />
         </ContainerClock>
       </ContainerOrderActive>
     </div>
@@ -94,15 +94,15 @@ export default function FeedPage() {
 
         <ListRestaurants onClick={() => goToRestDetails(navigate, restaurants.id)} key={restaurants.id}>
           <ContainerImg>
-            <img src={restaurants.logoUrl} alt="Logo restaurante" />
+            <img src={restaurants.logoUrl} alt="ícone restaurante" />
           </ContainerImg>
           <ContainerName>{restaurants.name}</ContainerName>
           <ContainerEntrega>
             <DeliveryTime>
-              <img src={time} /><p>{restaurants.deliveryTime}min</p>
+              <img src={time} alt={'ícone de relógio'} /><p>{restaurants.deliveryTime}min</p>
             </DeliveryTime>
             <Shipping>
-              <img src={delivery} /><p>Frete R${restaurants.shipping}</p>
+              <img src={delivery} alt={'ícone de delivery'} /><p>Frete R${restaurants.shipping}</p>
             </Shipping>
           </ContainerEntrega>
         </ListRestaurants>
