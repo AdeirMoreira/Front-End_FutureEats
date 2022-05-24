@@ -23,8 +23,8 @@ export default function CartPage() {
   const [showPopUp, setShowPopUp] = useState(false)
   const [popUp, setMessage] = useState('')
 
-  useEffect(() => getProfile(params.setUser), [])
-  useEffect(() => getActiveOrder(params.setOrder), [])
+  useEffect(() => getProfile(params.setUser), [params.setUser])
+  useEffect(() => getActiveOrder(params.setOrder), [params.setOrder])
   useEffect(() => activeOrderAlert(), [])
   useEffect(() => calculePrice(params.cart), [params.cart])
 
@@ -146,7 +146,7 @@ export default function CartPage() {
       {showPopUp &&
         <container.PopUp>
           <container.MessagePopUP>
-            <button onClick={() => setShowPopUp(false)}><img src={XButton} /></button>
+            <button onClick={() => setShowPopUp(false)}><img src={XButton} alt='ícone de X' /></button>
             <p>{popUp}</p>
           </container.MessagePopUP>
         </container.PopUp>

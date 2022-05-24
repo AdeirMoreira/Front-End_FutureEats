@@ -1,17 +1,6 @@
 import axios from "axios";
+import { baseURL, headers, setHeader } from "../../constants/constants";
 
-const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
-
-const headers = {
-    headers: {
-        auth: window.localStorage.getItem('token')
-    }
-}
-
-const setHeader = (response) => {
-    response && (headers.headers.auth = response.data.token)
-    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
-}
 
 export const getRestaurantDetails = (setRestDetail, id, setLoading) => {
     (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()

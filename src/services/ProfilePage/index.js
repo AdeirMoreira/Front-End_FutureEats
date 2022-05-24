@@ -1,18 +1,7 @@
 import axios from "axios";
 import { goToProfile } from "../../routes/coordinators";
+import { baseURL, headers, setHeader } from "../../constants/constants";
 
-const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
-
-const headers = {
-    headers: {
-        auth: window.localStorage.getItem('token')
-    }
-}
-
-const setHeader = (response) => {
-    response && (headers.headers.auth = response.data.token)
-    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
-}
 
 export const getProfile = (setUser, setLoading) => {
     (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
@@ -48,7 +37,6 @@ export const getEditAddress = (setEditAddress, setForm) => {
         setForm(res.data.address)
     }).catch((err) => {
         console.log(err.response.data)
-        alert("Ocorreu um erro, por favor tente mais tarde.")
     })
 }
 
@@ -60,7 +48,7 @@ export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, nav
         setUser(setPersonalFormInputs(res.data))
         goToProfile(navigate)
     }).catch((err) => {
-        console.log(err.response)
+        console.log(err.response.data)
         setMessageError(err.response.data.message)
     })
 }

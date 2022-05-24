@@ -1,17 +1,6 @@
 import axios from 'axios';
+import { baseURL, headers, setHeader } from '../../constants/constants';
 
-const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
-
-const headers = {
-    headers: {
-        auth: window.localStorage.getItem('token')
-    }
-}
-
-const setHeader = (response) => {
-    response && (headers.headers.auth = response.data.token)
-    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
-}
 
 export const getRestaurants = (setRest, setLoading) => {
     (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
@@ -21,7 +10,7 @@ export const getRestaurants = (setRest, setLoading) => {
         setRest(res.data.restaurants)
         setLoading && setLoading(false)
     }).catch((err) => {
-        console.log(err.response)
+        console.log(err.response.data)
         setLoading && setLoading(false)
     })
 };

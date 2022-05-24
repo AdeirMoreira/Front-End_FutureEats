@@ -13,12 +13,9 @@ import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { goToCadastro } from '../../routes/coordinators'
 import alertImg from '../../assets/Images/alert.png'
-import { useNoProtectPage } from '../../Hooks/useNoProtectedPage'
-
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  useNoProtectPage(navigate)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -35,14 +32,14 @@ export default function LoginPage() {
   }
   return (
     <>
-      {loading ? <SplachScreen /> :
+      {(loading && !window.localStorage.getItem('token')) ? <SplachScreen /> :
         <ScreenContainer>
-          <img src={logo} />
+          <img src={logo} alt={'futureEats logo'} />
           <ErrorMessageContainer>
             {messageError &&
               <>
-                <img src={alertImg} />
-                <p>{messageError}</p>
+                <img src={alertImg} alt={'alet Logo'} />
+                <b><p>{messageError}</p></b>
               </>
             }
           </ErrorMessageContainer>
@@ -58,7 +55,6 @@ export default function LoginPage() {
                 placeholder='email@email.com'
                 fullWidth
                 margin={"normal"}
-              // inputProps={{ pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$' }}
               />
 
               <FormControl variant="outlined" style={{ width: '100%', marginTop: '15px', marginBottom: '15px' }}>
@@ -102,7 +98,6 @@ export default function LoginPage() {
             ><b>Não possui cadastro? Clique aqui.</b></Button>
           </InputsContainer>
         </ScreenContainer>
-
       }
     </>
   )

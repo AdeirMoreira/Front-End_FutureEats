@@ -1,18 +1,7 @@
 import axios from 'axios'
-import { goToFeedPage } from '../../routes/coordinators'
+import { goToFeedPage, goToSignUpAddress } from '../../routes/coordinators'
+import { baseURL, setHeader } from '../../constants/constants'
 
-const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
-
-const headers = {
-    headers: {
-        auth: window.localStorage.getItem('token')
-    }
-}
-
-export const setHeader = (response) => {
-    response && (headers.headers.auth = response.data.token)
-    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
-}
 
 export const login = (form, navigate, setErrorMessage, cleanFields) => {
     setErrorMessage('')
@@ -20,7 +9,7 @@ export const login = (form, navigate, setErrorMessage, cleanFields) => {
         .then((response) => {
             setHeader(response)
             window.localStorage.setItem('token', response.data.token)
-            goToFeedPage(navigate);
+            response.data.user.hasAddress ? goToFeedPage(navigate) : goToSignUpAddress(navigate)
             cleanFields()
         })
         .catch((error) => {

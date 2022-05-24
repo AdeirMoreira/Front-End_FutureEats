@@ -42,7 +42,7 @@ export default function SignUpPageAndress() {
             <ErrorMessageContainer>
                 {messageError &&
                     <>
-                        <img src={alertImg} />
+                        <img src={alertImg} alt='ícone de alerta' />
                         <p>{messageError}</p>
                     </>
                 }

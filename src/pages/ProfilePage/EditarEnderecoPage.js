@@ -20,14 +20,15 @@ const EditarEnderecoPage = () => {
   useProtectPage(navigate)
   const [editAddress, setEditAddress] = useState()
 
-
-  useEffect(() => {
-    getEditAddress(setEditAddress, setForm)
-  }, [])
-
   const { form, onChange, cleanFields, setForm } = useForm({
     street: "", number: "", neighbourhood: "", city: "", state: "", complement: ""
   })
+
+  useEffect(() => {
+    getEditAddress(setEditAddress, setForm)
+  }, [setForm])
+
+
 
   const onSubmitForm = (event) => {
     event.preventDefault()

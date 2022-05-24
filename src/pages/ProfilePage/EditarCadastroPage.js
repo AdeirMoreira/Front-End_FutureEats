@@ -32,7 +32,7 @@ const EditarCadastroPage = () => {
   useEffect(() => {
     !params.user && getProfile(params.setUser)
     params.user && setForm(setPersonalFormInputs(params.user))
-  }, [params.user])
+  }, [params.user, params.setUser])
 
   const { form, onChange, setForm } = useForm({
     name: "",
@@ -43,7 +43,6 @@ const EditarCadastroPage = () => {
   const onSubmitForm = (event) => {
     event.preventDefault()
     const upDatedForm = updatedForm(form)
-    console.log(upDatedForm)
     updateProfile(upDatedForm, setForm, setPersonalFormInputs, params.setUser, navigate, setMessageErro)
   }
 
@@ -128,8 +127,8 @@ const EditarCadastroPage = () => {
           <ErrorMessageContainer>
             {messageError &&
               <>
-                <img src={alertImg} />
-                <p>{messageError}</p>
+                <img src={alertImg} alt={'alet Logo'} />
+                <b><p>{messageError}</p></b>
               </>
             }
           </ErrorMessageContainer>
