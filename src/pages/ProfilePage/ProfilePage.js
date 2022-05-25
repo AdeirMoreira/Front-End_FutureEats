@@ -13,9 +13,11 @@ import { goToEditarCadastroPage, goToEditarEndereçoPage } from '../../routes/co
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
 import LoadingCompoent from '../../Components/Loading/loading';
+import { useProtectPage } from '../../Hooks/useProtectedPage';
 
 export default function ProfilePage() {
   const navigate = useNavigate()
+  useProtectPage(navigate)
   const params = useContext(FutureEats)
   const [loading, setLoading] = useState(false)
   const [loading2, setLoagding2] = useState(false)
