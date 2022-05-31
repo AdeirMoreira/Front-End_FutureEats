@@ -7,7 +7,7 @@ export const login = (form, navigate, setErrorMessage, cleanFields) => {
     setErrorMessage('')
     axios.post(`${baseURL}/login`, form)
         .then((response) => {
-            setHeader(response)
+            setHeader(response.data.token)
             window.localStorage.setItem('token', response.data.token)
             response.data.user.hasAddress ? goToFeedPage(navigate) : goToSignUpAddress(navigate)
             cleanFields()
@@ -16,3 +16,4 @@ export const login = (form, navigate, setErrorMessage, cleanFields) => {
             setErrorMessage(error.response.data.message)
         })
 }
+

@@ -6,7 +6,7 @@ export const headers = {
     }
 }
 
-export const setHeader = (response) => {
-    response && (headers.headers.auth = response.data.token)
+export const setHeader = (token) => {
+    token && (headers.headers.auth = token)
     !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
 }
