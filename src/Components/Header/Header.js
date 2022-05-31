@@ -9,7 +9,7 @@ export default function Header(props) {
   const navigate = useNavigate()
   const logOut = () => {
     window.localStorage.removeItem('token')
-    props.setUser('')
+    props.setUser()
     props.setRest([])
     props.setHistory()
     props.setRestDetail()

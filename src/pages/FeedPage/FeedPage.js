@@ -27,7 +27,6 @@ export default function FeedPage() {
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
-    console.log(search)
   };
 
   useEffect(() => {
