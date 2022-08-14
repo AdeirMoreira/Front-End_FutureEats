@@ -4,9 +4,9 @@ import { baseURL, headers, setHeader } from "../../constants/constants";
 
 
 export const getProfile = (setUser, setLoading) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
     setLoading && setLoading(true)
-    axios.get(`${baseURL}/profile`, headers
+    axios.get(`${baseURL}/user/profile`, headers
     ).then((res) => {
         setUser(res.data.user)
         setLoading && setLoading(false)
@@ -17,9 +17,9 @@ export const getProfile = (setUser, setLoading) => {
 }
 
 export const getOrdersHistory = (setHistory, setLoading) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
     setLoading(true)
-    axios.get(`${baseURL}/orders/history`, headers
+    axios.get(`${baseURL}/order/history`, headers
     ).then((res) => {
         setHistory(res.data.orders)
         setLoading && setLoading(false)
@@ -30,8 +30,8 @@ export const getOrdersHistory = (setHistory, setLoading) => {
 }
 
 export const getEditAddress = (setEditAddress, setForm) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
-    axios.get(`${baseURL}/profile/address`, headers
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
+    axios.get(`${baseURL}/address/full`, headers
     ).then((res) => {
         setEditAddress(res.data)
         setForm(res.data.address)
@@ -41,8 +41,8 @@ export const getEditAddress = (setEditAddress, setForm) => {
 }
 
 export const updateProfile = (form, setForm, setPersonalFormInputs, setUser, navigate, setMessageError) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
-    axios.put(`${baseURL}/profile`, form, headers
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
+    axios.put(`${baseURL}/user/update`, form, headers
     ).then((res) => {
         setForm(setPersonalFormInputs(res.data))
         setUser(setPersonalFormInputs(res.data))

@@ -5,7 +5,7 @@ import { baseURL, setHeader } from '../../constants/constants'
 
 export const login = (form, navigate, setErrorMessage, cleanFields) => {
     setErrorMessage('')
-    axios.post(`${baseURL}/login`, form)
+    axios.post(`${baseURL}/user/login`, form)
         .then((response) => {
             setHeader(response.data.token)
             window.localStorage.setItem('token', response.data.token)

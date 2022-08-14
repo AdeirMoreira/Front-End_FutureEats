@@ -3,9 +3,9 @@ import { baseURL, headers, setHeader } from "../../constants/constants";
 
 
 export const getRestaurantDetails = (setRestDetail, id, setLoading) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
     setLoading(true)
-    axios.get(`${baseURL}/restaurants/${id}`, headers)
+    axios.get(`${baseURL}/restaurant/detail/${id}`, headers)
         .then((response) => {
             setRestDetail(response.data)
         })

@@ -3,9 +3,9 @@ import { goToFeedPage, goToProfile, goToSignUpAddress } from "../../routes/coord
 import { baseURL, headers, setHeader } from "../../constants/constants";
 
 export const SignUpRequest = async (form, navigate, setErrorMessage, cleanFields) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
     try {
-        const response = await axios.post(`${baseURL}/signup`, form)
+        const response = await axios.post(`${baseURL}/user/signup`, form)
         setHeader(response.data.token)
         window.localStorage.setItem('token', response.data.token)
         goToSignUpAddress(navigate)
@@ -17,7 +17,7 @@ export const SignUpRequest = async (form, navigate, setErrorMessage, cleanFields
 }
 
 export const SignUpRequestAndress = async (form, navigate, setErrorMessage, cleanfields, address) => {
-    (window.localStorage.getItem('token') && !headers.headers.auth) && setHeader()
+    (window.localStorage.getItem('token') && !headers.headers.authorization) && setHeader()
     try {
         const response = await axios.put(`${baseURL}/address`, form, headers)
         setHeader(response.data.token)

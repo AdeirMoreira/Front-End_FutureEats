@@ -1,12 +1,12 @@
-export const baseURL = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
+export const baseURL = 'https://futureeats-backend.herokuapp.com'
 
 export const headers = {
     headers: {
-        auth: localStorage.getItem('token')
+        authorization: localStorage.getItem('token')
     }
 }
 
 export const setHeader = (token) => {
-    token && (headers.headers.auth = token)
-    !headers.headers.auth && (headers.headers.auth = window.localStorage.getItem('token'))
+    token && (headers.headers.authorization = token)
+    !headers.headers.authorization && (headers.headers.authorization = window.localStorage.getItem('token'))
 }
