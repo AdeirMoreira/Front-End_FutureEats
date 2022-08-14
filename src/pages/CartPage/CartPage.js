@@ -39,7 +39,9 @@ export default function CartPage() {
 
   const calculePrice = () => {
     const price = params.cart.reduce((a, e) => a += e.price * e.quantity, 0)
-    setPrice(price)
+  
+    const totalPrice = price + ((price > 0 && (params.restDetail && params.restDetail.restaurant.shipping)) || 0)
+    setPrice(totalPrice)
   }
   const removeProducToCart = (product) => {
     const newCart = params.cart.filter(e => product.id !== e.id)

@@ -130,7 +130,7 @@ export default function SignUpPage() {
                 value={params.dataForm.personalData.form.password}
                 onChange={params.dataForm.personalData.onChange}
                 required
-                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                inputProps={{ pattern: '(^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$)' }}
                 placeholder={'Mínimo 6 caracteres entre letras e números'}
                 endAdornment={
                   <InputAdornment position="end">
@@ -155,7 +155,7 @@ export default function SignUpPage() {
                 value={confirm}
                 onChange={handleValue}
                 required
-                inputProps={{ pattern: '^[a-zA-Z0-9]{6,}$' }}
+                inputProps={{ pattern: "(^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$)" }}
                 placeholder={'Confirme a senha anterior'}
                 endAdornment={
                   <InputAdornment position="end">

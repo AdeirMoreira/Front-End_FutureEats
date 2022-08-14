@@ -18,7 +18,7 @@ export default function EstablishmentPage() {
   useProtectPage(navigate)
   const params = useParams();
   const detail = useContext(FutureEats)
-  const [quantidade, handleQuantidade, clearInput] = useInput('')
+  const [quantidade, handleQuantidade, clearInput] = useInput(0)
   const [displawPopUp, setPopUp] = useState(false)
   const [productId, setProductid] = useState()
   const [Principais, setPrincipais] = useState([])
@@ -27,12 +27,11 @@ export default function EstablishmentPage() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => getRestaurantDetails(detail.setRestDetail, params.id, setLoading), [detail.setRestDetail])
-  useEffect(() => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products, detail.cart)
+  useEffect( () => detail.restDetail && addPropertyInCart(detail.restDetail.restaurant.products, detail.cart)
     , [detail.restDetail])
 
   const addPropertyInCart = (array, cart) => {
-
-    const anotherRestaurantProduct = cart.find(e => e.id !== detail.restDetail.restaurant.id)
+    const anotherRestaurantProduct = cart.find(e => e.restaurantId !== params.id)
     anotherRestaurantProduct && detail.setCart([])
     const newState = array.map(e => {
       const alreadyInCart = cart.find(a => a.id === e.id)
@@ -95,7 +94,7 @@ export default function EstablishmentPage() {
         productId === e.id ? { ...e, inCart: e.inCart ? false : true, quantity: quantidade } : e)
       setAcompanhamento(newAcompanhamento)
     }
-    const newCart = detail.cart.map(e => productId === e.id ? { ...e, quantity: quantidade, inCart: true } : e)
+    const newCart = detail.cart.map(e => productId === e.id ? { ...e, quantity: +quantidade, inCart: true } : e)
     detail.setCart(newCart)
   }
 
