@@ -10,9 +10,9 @@
 <a href="#desenvolvedores">Desenvolvedores</a> |
 </p>
 
-<h1 id="sobre">🍴 Projeto final do front-end: FutureEats</h1>
+<h1 id="sobre">🍴 Front-End FutureEats</h1>
 
-<p>FutureEats é uma aplicação para mobile inspirada no aplicativo UberEats, uma plataforma de entrega de pedidos de comida, que conecta restaurantes e consumidores.</p>
+Desenvolvido em grupo durante o módulo front-end do Bootcamp Full-Stack da Labenu, FutureEats é uma recriação da interface do app de delivery UberEats utilizando as tecnologias **REACT, JAVASCRIPT, HTML, CSS** e as bibliotecas **AXIOS e MATERIAL-UI**. A Aplicação conta com sistema de cadastro de novos clientes e Login autenticado por token JWT. No App é possível ver uma lista de restaurantes, escolher produtos, adiciona-los ao carrinho e realizar o pedido. Também é possível visualizar seu histórico de pedidos além de editar seu perfil
 
 <h2 id="orientacoes">🚨 Orientações para acesso</h2>
 
