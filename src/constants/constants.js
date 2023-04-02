@@ -1,4 +1,4 @@
-export const baseURL = 'https://futureeats-backend.herokuapp.com'
+export const baseURL = 'https://back-end-future-eats.onrender.com'
 
 export const headers = {
     headers: {
